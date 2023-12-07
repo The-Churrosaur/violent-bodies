@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d33xgs6swlxjo"
+path="res://.godot/imported/cockpit.obj-69c3c79d915d3cf2534c83ae83c35872.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cockpit.obj-69c3c79d915d3cf2534c83ae83c35872.mesh"]
+
+source_file="res://assets/cockpit.obj"
+dest_files=["res://.godot/imported/cockpit.obj-69c3c79d915d3cf2534c83ae83c35872.mesh", "res://.godot/imported/cockpit.obj-69c3c79d915d3cf2534c83ae83c35872.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d36fshnmb3ppv"]
+
+[ext_resource type="Material" uid="uid://dmrgpj2mpj5jt" path="res://materials/test_outline_shader.tres" id="1_wa2dh"]
+
+[resource]
+next_pass = ExtResource("1_wa2dh")
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true

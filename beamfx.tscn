@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://snurtgs2paqi"]
+
+[ext_resource type="Material" uid="uid://cyp6f6hs8t5rv" path="res://materials/sword_material.tres" id="1_s3udk"]
+[ext_resource type="Material" uid="uid://cj7hotheanjxq" path="res://particles/bean_particle_process_material.tres" id="2_d0mfa"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_u688p"]
+material = ExtResource("1_s3udk")
+top_radius = 0.01
+bottom_radius = 0.05
+radial_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8oipd"]
+vertex_color_use_as_albedo = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 4.01
+
+[sub_resource type="SphereMesh" id="SphereMesh_3yuae"]
+material = SubResource("StandardMaterial3D_8oipd")
+radius = 0.01
+height = 0.02
+radial_segments = 4
+rings = 2
+
+[node name="beamfx" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_s3udk")
+mesh = SubResource("CylinderMesh_u688p")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0760949, 0)
+amount = 15
+lifetime = 0.24
+visibility_aabb = AABB(-4, -3.18469, -4, 8, 8, 8)
+process_material = ExtResource("2_d0mfa")
+draw_pass_1 = SubResource("SphereMesh_3yuae")
+
+[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="MeshInstance3D/GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.1123, 0)
+strength = 23.85
+attenuation = 0.143587
+size = Vector3(2, 2, 4)

@@ -1,0 +1,58 @@
+[gd_scene load_steps=14 format=3 uid="uid://mktno0wfl5yk"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_y613h"]
+[ext_resource type="Texture2D" uid="uid://da1hy6tl7ybba" path="res://assets/Stars.png" id="2_qkt5t"]
+[ext_resource type="ArrayMesh" uid="uid://chx0afiwsqpj" path="res://assets/cruiser.obj" id="3_bc1wl"]
+[ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="4_5et6i"]
+[ext_resource type="Script" path="res://spinner.gd" id="4_jaagw"]
+[ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://explosion_fx.tscn" id="6_hm7qd"]
+[ext_resource type="PackedScene" uid="uid://dlsarb7iw7bpi" path="res://test_player.tscn" id="8_2g6xy"]
+[ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="8_ne7mg"]
+[ext_resource type="PackedScene" uid="uid://dxqrsjvj1edek" path="res://cockpit_test/handles.tscn" id="9_w8a51"]
+[ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="10_sdr8d"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_phhxq"]
+panorama = ExtResource("2_qkt5t")
+
+[sub_resource type="Sky" id="Sky_lkh6y"]
+sky_material = SubResource("PanoramaSkyMaterial_phhxq")
+
+[sub_resource type="Environment" id="Environment_axxl0"]
+background_mode = 2
+sky = SubResource("Sky_lkh6y")
+glow_enabled = true
+glow_intensity = 2.85
+glow_strength = 0.89
+glow_bloom = 0.14
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_y613h")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_axxl0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0602297, -0.587268, 0.807149, 0, 0.808617, 0.588336, -0.998185, 0.0354353, -0.0487028, 0, 0, 0)
+light_color = Color(1, 0.85098, 0.65098, 1)
+
+[node name="Cruiser2" type="MeshInstance3D" parent="."]
+transform = Transform3D(7.49902, 0, 0, 0, 7.49902, 0, 0, 0, 7.49902, -1.20121, 2.37178, -43.2949)
+mesh = ExtResource("3_bc1wl")
+surface_material_override/0 = ExtResource("4_5et6i")
+script = ExtResource("4_jaagw")
+
+[node name="explosionFX" parent="Cruiser2" instance=ExtResource("6_hm7qd")]
+
+[node name="GunmechActual" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.5996, 37.214, 165.33)
+mesh = ExtResource("8_ne7mg")
+surface_material_override/0 = ExtResource("4_5et6i")
+
+[node name="Node3D" parent="." instance=ExtResource("8_2g6xy")]
+
+[node name="Handles" parent="." instance=ExtResource("9_w8a51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9649, -0.175204)
+
+[node name="Cockpit" parent="." instance=ExtResource("10_sdr8d")]
+
+[node name="XROrigin3D" parent="Cockpit" instance=ExtResource("8_2g6xy")]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://11c031wphmm0"]
+
+[ext_resource type="ArrayMesh" uid="uid://d33xgs6swlxjo" path="res://assets/cockpit.obj" id="2_by6e6"]
+[ext_resource type="PackedScene" uid="uid://c6mitjbba156w" path="res://cockpit_test/handles_ik.tscn" id="3_x8qfj"]
+
+[node name="Cockpit" type="Node3D"]
+
+[node name="Cockpit" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.030304, 0.0598179, -0.0602231)
+mesh = ExtResource("2_by6e6")
+
+[node name="handles" parent="." instance=ExtResource("3_x8qfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384, 0.649, 1)
+
+[node name="handles2" parent="." instance=ExtResource("3_x8qfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.374306, 0.651538, 1.0079)

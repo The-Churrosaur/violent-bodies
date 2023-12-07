@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6mitjbba156w"]
+
+[ext_resource type="PackedScene" uid="uid://dsoibkdj8wrds" path="res://assets/handles.blend" id="1_wlk0w"]
+[ext_resource type="PackedScene" uid="uid://dxqrsjvj1edek" path="res://cockpit_test/handles.tscn" id="2_cw8gw"]
+[ext_resource type="Script" path="res://cockpit_test/handles_ik.gd" id="2_ju0p0"]
+[ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="3_rjvdk"]
+
+[node name="handles" node_paths=PackedStringArray("IK") instance=ExtResource("1_wlk0w")]
+script = ExtResource("2_ju0p0")
+IK = NodePath("Armature/Skeleton3D/SkeletonIK3D")
+
+[node name="Cylinder_001" parent="." index="0"]
+transform = Transform3D(-1.03608e-08, -0.0402078, 0, 0.173825, -2.39657e-09, 0, 0, 0, -0.173825, -0.00111014, -0.119562, -1.58504)
+surface_material_override/0 = ExtResource("3_rjvdk")
+
+[node name="Cylinder_004" parent="." index="1"]
+transform = Transform3D(0.103373, -2.17249e-08, 0, 1.56088e-08, 0.143878, 0, 0, 0, -0.103373, -0.00111014, -0.157827, -1.58348)
+surface_material_override/0 = ExtResource("3_rjvdk")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/rotation = Quaternion(-2.18557e-08, -1.11022e-16, -1.11022e-16, 1)
+bones/2/rotation = Quaternion(-0.714464, -1.56984e-16, 1.65924e-18, 0.699673)
+bones/3/rotation = Quaternion(0.0104586, 1.12177e-16, 1.09831e-16, 0.999945)
+bones/4/rotation = Quaternion(-0.707107, -1.08123e-23, -1.87108e-23, 0.707107)
+bones/5/scale = Vector3(0.0961825, 0.150641, 0.50493)
+bones/6/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
+
+[node name="Cube" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.76951e-08, -0.0418429, -5.624e-18, 0.0895613, 8.44011e-09, 4.47967e-16, 2.12213, -0.0846465)
+
+[node name="Cube" parent="Armature/Skeleton3D/Cube" index="0"]
+transform = Transform3D(1, -3.69116e-24, 5.29396e-23, -5.68532e-25, 1, 0, 2.64698e-23, 5.68434e-14, 1, 0.0691351, -0.0357925, 0.0291414)
+surface_material_override/0 = ExtResource("3_rjvdk")
+
+[node name="Cube_001" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.118076, 2.6218e-17, 8.89721e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90053e-16, 1.30188, -0.00440489)
+
+[node name="Cube_001" parent="Armature/Skeleton3D/Cube_001" index="0"]
+transform = Transform3D(1, 9.70588e-24, -1.05879e-22, 9.70587e-24, 1, 2.84217e-14, 1.32349e-23, 0, 1, -0.00318538, 0.0198464, -0.00950456)
+surface_material_override/0 = ExtResource("3_rjvdk")
+
+[node name="Cube_002" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
+
+[node name="Cube_002" parent="Armature/Skeleton3D/Cube_002" index="0"]
+transform = Transform3D(1, 4.49615e-23, 2.11758e-22, -2.87074e-23, 1, 2.27374e-13, -3.30872e-24, 2.13163e-14, 1, -0.0182057, -0.0212798, 0.0024147)
+surface_material_override/0 = ExtResource("3_rjvdk")
+
+[node name="Cylinder_002" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(9.16045e-09, -0.145023, 4.58022e-09, -4.58022e-09, 0, -0.0768434, -0.0768434, -8.64402e-09, 9.16045e-09, 2.23246e-16, 1.00273, -0.00268012)
+
+[node name="Cylinder_002" parent="Armature/Skeleton3D/Cylinder_002" index="0"]
+transform = Transform3D(1, 0, 0, 1.88248e-15, 1, 0, 0, 0, 1, 0.0417161, 0.0120745, 0.0158672)
+surface_material_override/0 = ExtResource("3_rjvdk")
+
+[node name="Cube_004" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00175107, -0.00121927, -0.00320561)
+surface_material_override/0 = ExtResource("3_rjvdk")
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
+process_priority = 1
+root_bone = &"Bone"
+tip_bone = &"Bone.003"
+use_magnet = true
+magnet = Vector3(0, 10, 10)
+target_node = NodePath("../../../Handles")
+
+[node name="Handles" parent="." index="3" instance=ExtResource("2_cw8gw")]
+transform = Transform3D(1, 0, 0, 0, 0.9563, 0.292388, 0, -0.292388, 0.9563, 0, -0.0185545, -1.19753)

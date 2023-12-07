@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://t06cj015rp63"]
+
+[ext_resource type="Material" uid="uid://dmrgpj2mpj5jt" path="res://materials/test_outline_shader.tres" id="1_ii3x6"]
+[ext_resource type="Shader" path="res://shaders/cel-shader-base.gdshader" id="1_nqbj6"]
+[ext_resource type="Texture2D" uid="uid://ctn6q2p4ft56d" path="res://assets/shiptex.png" id="3_wgn0r"]
+
+[sub_resource type="Gradient" id="Gradient_qhv8g"]
+colors = PackedColorArray(0, 0, 0, 1, 0.259294, 0.259294, 0.259294, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3txtc"]
+gradient = SubResource("Gradient_qhv8g")
+
+[resource]
+render_priority = 0
+next_pass = ExtResource("1_ii3x6")
+shader = ExtResource("1_nqbj6")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/specular = Color(0.317647, 0.298039, 0.309804, 0.501961)
+shader_parameter/fresnel = Color(0.568627, 0.568627, 0.568627, 0.301961)
+shader_parameter/base_texture = ExtResource("3_wgn0r")
+shader_parameter/specular_texture = SubResource("GradientTexture1D_3txtc")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)

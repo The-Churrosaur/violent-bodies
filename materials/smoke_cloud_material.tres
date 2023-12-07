@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://byl3yi4rdb1c0"]
+
+[ext_resource type="Material" uid="uid://dmrgpj2mpj5jt" path="res://materials/test_outline_shader.tres" id="1_aboyx"]
+
+[resource]
+next_pass = ExtResource("1_aboyx")
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.772549, 0.709804, 0.729412, 1)

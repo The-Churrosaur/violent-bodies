@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://dlsarb7iw7bpi"]
+
+[ext_resource type="Shader" path="res://shaders/embyr_outline.gdshader" id="1_iu4kd"]
+[ext_resource type="Script" path="res://testcontrollerinput.gd" id="2_018qw"]
+[ext_resource type="PackedScene" uid="uid://bak1wwgkoec2" path="res://beamfx2.tscn" id="3_vas5e"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_mcp2j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gajeu"]
+render_priority = 0
+shader = ExtResource("1_iu4kd")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kwj0y"]
+material = SubResource("ShaderMaterial_gajeu")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cbxeg"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.2
+
+[node name="XROrigin3D" type="XROrigin3D"]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XRCamera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.28403)
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_kwj0y")
+
+[node name="XRController3D" type="XRController3D" parent="." node_paths=PackedStringArray("label", "sword")]
+tracker = &"right_hand"
+pose = &"aim"
+script = ExtResource("2_018qw")
+label = NodePath("../XRController3D2/MeshInstance3D/Label3D")
+sword = NodePath("MeshInstance3D/beamfx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XRController3D"]
+mesh = SubResource("CylinderMesh_cbxeg")
+
+[node name="beamfx" parent="XRController3D/MeshInstance3D" instance=ExtResource("3_vas5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.38826e-05, 0.10804, -0.000127792)
+
+[node name="FunctionPickup" parent="XRController3D" instance=ExtResource("4_mcp2j")]
+
+[node name="XRController3D2" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43259, 0, 0)
+tracker = &"left_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XRController3D2"]
+mesh = SubResource("CylinderMesh_cbxeg")
+
+[node name="Label3D" type="Label3D" parent="XRController3D2/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.216598, 0)
+visible = false
+text = "AAAAAAAAAA"
+
+[node name="FunctionPickup" parent="XRController3D2" instance=ExtResource("4_mcp2j")]
+
+[connection signal="button_pressed" from="XRController3D" to="XRController3D" method="_on_button_pressed"]
+[connection signal="button_released" from="XRController3D" to="XRController3D/MeshInstance3D/beamfx" method="process_controller_input"]
+[connection signal="input_float_changed" from="XRController3D" to="XRController3D" method="_on_input_float_changed"]
+[connection signal="input_vector2_changed" from="XRController3D" to="XRController3D" method="_on_input_vector_2_changed"]
