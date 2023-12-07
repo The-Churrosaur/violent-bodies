@@ -4,7 +4,7 @@ extends Node3D
 
 @export var particles :Array[GPUParticles3D]
 
-var powered = true
+var powered = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

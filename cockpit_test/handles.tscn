@@ -33,6 +33,7 @@ albedo_color = Color(0.803922, 0.956863, 1, 1)
 [node name="Handles" instance=ExtResource("1_etuxx")]
 gravity_scale = 0.0
 freeze = true
+ranged_grab_method = 2
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("CylinderShape3D_d5pdd")

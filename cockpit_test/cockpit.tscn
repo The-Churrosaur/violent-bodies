@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://11c031wphmm0"]
+[gd_scene load_steps=5 format=3 uid="uid://11c031wphmm0"]
 
 [ext_resource type="ArrayMesh" uid="uid://d33xgs6swlxjo" path="res://assets/cockpit.obj" id="2_by6e6"]
+[ext_resource type="PackedScene" uid="uid://clqdxr8l7x1fu" path="res://cockpit_test/arm_target.tscn" id="3_8jnlr"]
 [ext_resource type="PackedScene" uid="uid://c6mitjbba156w" path="res://cockpit_test/handles_ik.tscn" id="3_x8qfj"]
+[ext_resource type="PackedScene" uid="uid://bak1wwgkoec2" path="res://beamfx2.tscn" id="4_d5uj4"]
 
 [node name="Cockpit" type="Node3D"]
 
@@ -9,8 +11,40 @@
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.030304, 0.0598179, -0.0602231)
 mesh = ExtResource("2_by6e6")
 
-[node name="handles" parent="." instance=ExtResource("3_x8qfj")]
+[node name="handlesRight" parent="." instance=ExtResource("3_x8qfj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384, 0.649, 1)
 
-[node name="handles2" parent="." instance=ExtResource("3_x8qfj")]
+[node name="handlesLeft" parent="." instance=ExtResource("3_x8qfj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.374306, 0.651538, 1.0079)
+
+[node name="ArmTargetRight" parent="." node_paths=PackedStringArray("control_hand", "control_origin") instance=ExtResource("3_8jnlr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.885667, -2.31788)
+control_hand = NodePath("../handlesRight/Handles")
+control_origin = NodePath("../ArmOrigin")
+control_scaling = 4.0
+
+[node name="beamfx" parent="ArmTargetRight" instance=ExtResource("4_d5uj4")]
+transform = Transform3D(1, 0, 0, 0, 0.923465, 0.383683, 0, -0.383683, 0.923465, 5.38826e-05, 0.10804, -0.000127792)
+
+[node name="MeshInstance3D" parent="ArmTargetRight/beamfx" index="0"]
+transform = Transform3D(0.996603, 0.0594275, 0.0570103, -0.0569815, 0.997422, -0.0436117, -0.059455, 0.040215, 0.997421, 0, 0, 0)
+
+[node name="GPUParticles3D" parent="ArmTargetRight/beamfx/MeshInstance3D" index="0"]
+emitting = false
+
+[node name="GPUParticles3D2" parent="ArmTargetRight/beamfx/MeshInstance3D" index="1"]
+emitting = false
+
+[node name="GPUParticles3D3" parent="ArmTargetRight/beamfx/MeshInstance3D" index="2"]
+emitting = false
+
+[node name="ArmTargetLeft" parent="." node_paths=PackedStringArray("control_hand", "control_origin") instance=ExtResource("3_8jnlr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.81777, -2.37804)
+control_hand = NodePath("../handlesLeft/Handles")
+control_origin = NodePath("../ArmOrigin")
+control_scaling = 4.0
+
+[node name="ArmOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77636, 0.194409)
+
+[editable path="ArmTargetRight/beamfx"]
