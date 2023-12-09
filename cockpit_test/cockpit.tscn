@@ -18,8 +18,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384, 0.649, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.374306, 0.651538, 1.0079)
 
 [node name="ArmTargetRight" parent="." node_paths=PackedStringArray("control_hand", "control_origin") instance=ExtResource("3_8jnlr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.885667, -2.31788)
-control_hand = NodePath("../handlesRight/Handles")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.818, -2.318)
+control_hand = NodePath("../handlesRight")
 control_origin = NodePath("../ArmOrigin")
 control_scaling = 4.0
 
@@ -40,7 +40,7 @@ emitting = false
 
 [node name="ArmTargetLeft" parent="." node_paths=PackedStringArray("control_hand", "control_origin") instance=ExtResource("3_8jnlr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.81777, -2.37804)
-control_hand = NodePath("../handlesLeft/Handles")
+control_hand = NodePath("../handlesLeft")
 control_origin = NodePath("../ArmOrigin")
 control_scaling = 4.0
 

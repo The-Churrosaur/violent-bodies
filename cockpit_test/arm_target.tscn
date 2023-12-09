@@ -27,4 +27,8 @@ top_level = true
 [node name="SkeletonIK3D" parent="arm/Armature/Skeleton3D" index="5"]
 target_node = NodePath("../../../..")
 
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762005, -0.647871)
+text = "guygugkuyg"
+
 [editable path="arm"]

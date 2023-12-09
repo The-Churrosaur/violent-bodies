@@ -55,6 +55,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9649, -0.175204)
 
 [node name="Cockpit" parent="." instance=ExtResource("10_sdr8d")]
 
+[node name="handlesRight" parent="Cockpit" index="1" node_paths=PackedStringArray("headset")]
+headset = NodePath("../XROrigin3D/XRCamera3D")
+
+[node name="handlesLeft" parent="Cockpit" index="2" node_paths=PackedStringArray("headset")]
+headset = NodePath("../XROrigin3D/XRCamera3D")
+
 [node name="XROrigin3D" parent="Cockpit" instance=ExtResource("8_2g6xy")]
 
 [node name="XRController3D" parent="Cockpit/XROrigin3D" index="1" node_paths=PackedStringArray("sword", "explosion")]
@@ -62,4 +68,5 @@ sword = NodePath("../../ArmTargetRight/beamfx")
 explosion = NodePath("../../../Cruiser2/explosionFX")
 
 [editable path="Cockpit"]
+[editable path="Cockpit/ArmTargetRight/beamfx"]
 [editable path="Cockpit/XROrigin3D"]

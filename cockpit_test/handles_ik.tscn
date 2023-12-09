@@ -1,14 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6mitjbba156w"]
+[gd_scene load_steps=7 format=3 uid="uid://c6mitjbba156w"]
 
 [ext_resource type="PackedScene" uid="uid://dsoibkdj8wrds" path="res://assets/handles.blend" id="1_wlk0w"]
 [ext_resource type="PackedScene" uid="uid://dxqrsjvj1edek" path="res://cockpit_test/handles.tscn" id="2_cw8gw"]
 [ext_resource type="Script" path="res://cockpit_test/handles_ik.gd" id="2_ju0p0"]
 [ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="3_rjvdk"]
 
-[node name="Handle_Arms" node_paths=PackedStringArray("IK", "mech_target") instance=ExtResource("1_wlk0w")]
+[sub_resource type="SphereMesh" id="SphereMesh_nnrrh"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2daur"]
+albedo_color = Color(1, 0.341176, 1, 1)
+
+[node name="Handle_Arms" node_paths=PackedStringArray("IK", "mech_target", "target_reference", "handle") instance=ExtResource("1_wlk0w")]
 script = ExtResource("2_ju0p0")
 IK = NodePath("Armature/Skeleton3D/SkeletonIK3D")
-mech_target = NodePath("MechTarget")
+mech_target = NodePath("Handles/MechTarget")
+target_reference = NodePath("Handles/MechTargetReference")
+handle = NodePath("Handles")
 
 [node name="Cylinder_001" parent="." index="0"]
 transform = Transform3D(-1.03608e-08, -0.0402078, 0, 0.173825, -2.39657e-09, 0, 0, 0, -0.173825, -0.00111014, -0.119562, -1.58504)
@@ -69,5 +78,19 @@ target_node = NodePath("../../../Handles")
 [node name="Handles" parent="." index="3" instance=ExtResource("2_cw8gw")]
 transform = Transform3D(1, 0, 0, 0, 0.9563, 0.292388, 0, -0.292388, 0.9563, 0, -0.0185545, -1.19753)
 
-[node name="MechTarget" type="Node3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.66994)
+[node name="MechTarget" type="Node3D" parent="Handles" index="4"]
+transform = Transform3D(1, 0, 0, 0, 0.9563, -0.292388, 0, 0.292388, 0.9563, 0, 0.740646, -2.35894)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Handles/MechTarget" index="0"]
+mesh = SubResource("SphereMesh_nnrrh")
+
+[node name="MechTargetReference" type="Node3D" parent="Handles" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.389074, -2.12916)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Handles/MechTargetReference" index="0"]
+mesh = SubResource("SphereMesh_nnrrh")
+surface_material_override/0 = SubResource("StandardMaterial3D_2daur")
+
+[node name="Label3D" type="Label3D" parent="Handles/MechTargetReference" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9563, -0.292388, 0, 0.292388, 0.9563, 0, 0.79533, 0.236934)
+visible = false
