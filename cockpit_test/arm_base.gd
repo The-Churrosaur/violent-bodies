@@ -1,8 +1,9 @@
 
 # holds and acts as base for arm nodes
 
-# takes handle target and arm center 
+# takes handle target and shoulder position
 # sets a position for armtarget to move to
+# (set relative to shoulder)
 # ik arms track off of arm target 
 
 
@@ -13,17 +14,12 @@ extends Node3D
 
 # to calculate target
 @export var handle_target : HandleTarget
-@export var arm_center : Node3D
 @export var scaling = 8.0
 
 @onready var arm = $ShoulderJoint/arm
 @onready var initial_target = $InitialTarget # desired arm target
+@onready var shoulder = $ShoulderJoint
 
-
-func _ready():
-	
-	# for transform reference from parent
-	arm_center.add_child(initial_target)
 
 
 func _process(delta):

@@ -1,6 +1,6 @@
-# set as child of clavicle
+# set as child of Shoulder
 # takes handle
-# follows handle's transform relative to clavicle 
+# follows handle's transform relative to shoulder 
 
 # this node's transform will be copied and scaled by the arm
 

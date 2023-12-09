@@ -26,21 +26,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.374306, 0.651538, 1.0079)
 [node name="handlesRight" parent="." instance=ExtResource("3_x8qfj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384, 0.649, 1)
 
-[node name="Clavicle" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0.98, 0.101)
+[node name="ClavicleLeft" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.98, 0.101)
 script = ExtResource("3_wixsj")
 
-[node name="HandleTargetLeft" parent="Clavicle" node_paths=PackedStringArray("handle_arm") instance=ExtResource("5_rtvdc")]
+[node name="HandleTargetLeft" parent="ClavicleLeft" node_paths=PackedStringArray("handle_arm") instance=ExtResource("5_rtvdc")]
 handle_arm = NodePath("../../handlesLeft")
 
-[node name="HandleTargetRight" parent="Clavicle" node_paths=PackedStringArray("handle_arm") instance=ExtResource("5_rtvdc")]
-handle_arm = NodePath("../../handlesRight")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Clavicle"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ClavicleLeft"]
 visible = false
 mesh = SubResource("BoxMesh_3fqtn")
 
-[node name="Label3D" type="Label3D" parent="Clavicle"]
+[node name="Label3D" type="Label3D" parent="ClavicleLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145661, -0.25648)
+
+[node name="ClavicleRight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.98, 0.101)
+script = ExtResource("3_wixsj")
+
+[node name="HandleTargetRight" parent="ClavicleRight" node_paths=PackedStringArray("handle_arm") instance=ExtResource("5_rtvdc")]
+handle_arm = NodePath("../../handlesRight")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ClavicleRight"]
+visible = false
+mesh = SubResource("BoxMesh_3fqtn")
+
+[node name="Label3D" type="Label3D" parent="ClavicleRight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145661, -0.25648)
 
 [node name="beamfx" parent="." instance=ExtResource("4_d5uj4")]
@@ -58,21 +69,17 @@ emitting = false
 [node name="GPUParticles3D3" parent="beamfx/MeshInstance3D" index="2"]
 emitting = false
 
-[node name="ArmBaseLeft" parent="." node_paths=PackedStringArray("handle_target", "arm_center") instance=ExtResource("4_k5xln")]
+[node name="ArmBaseLeft" parent="." node_paths=PackedStringArray("handle_target") instance=ExtResource("4_k5xln")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
-handle_target = NodePath("../Clavicle/HandleTargetLeft")
-arm_center = NodePath("../ArmCenter")
+handle_target = NodePath("../ClavicleLeft/HandleTargetLeft")
 
-[node name="ArmBaseRight2" parent="." node_paths=PackedStringArray("handle_target", "arm_center") instance=ExtResource("4_k5xln")]
+[node name="ArmBaseRight2" parent="." node_paths=PackedStringArray("handle_target") instance=ExtResource("4_k5xln")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
-handle_target = NodePath("../Clavicle/HandleTargetRight")
-arm_center = NodePath("../ArmCenter")
+handle_target = NodePath("../ClavicleRight/HandleTargetRight")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="ArmBaseRight2/ArmTarget" index="3"]
 transform = Transform3D(1, 8.74228e-08, 8.74228e-08, -8.74228e-08, 1.31134e-07, 1, 8.74228e-08, -1, 1.31134e-07, 7.15256e-07, 0, -16.5356)
 mesh = SubResource("CylinderMesh_e86kw")
-
-[node name="ArmCenter" type="Node3D" parent="."]
 
 [editable path="handlesLeft"]
 [editable path="handlesRight"]
