@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://clqdxr8l7x1fu"]
+[gd_scene load_steps=4 format=3 uid="uid://clqdxr8l7x1fu"]
 
 [ext_resource type="Script" path="res://cockpit_test/arm_target.gd" id="1_1kwca"]
-[ext_resource type="PackedScene" uid="uid://bg8wacgshd3r1" path="res://cockpit_test/mech_arm_temp.tscn" id="2_6fd88"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xpoam"]
 
@@ -20,15 +19,6 @@ shape = SubResource("SphereShape3D_xpoam")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("TextMesh_0okf1")
 
-[node name="arm" parent="." instance=ExtResource("2_6fd88")]
-transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0.0175546, -0.768186)
-top_level = true
-
-[node name="SkeletonIK3D" parent="arm/Armature/Skeleton3D" index="5"]
-target_node = NodePath("../../../..")
-
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762005, -0.647871)
 text = "guygugkuyg"
-
-[editable path="arm"]

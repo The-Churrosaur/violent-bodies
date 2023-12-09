@@ -23,5 +23,4 @@ process_priority = 1
 root_bone = &"Bone"
 tip_bone = &"Bone.003"
 use_magnet = true
-magnet = Vector3(0, 10, 10)
-target_node = NodePath("../../../Handles")
+magnet = Vector3(0, 0, 100)

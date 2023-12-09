@@ -36,7 +36,7 @@ transform = Transform3D(-0.0602297, -0.587268, 0.807149, 0, 0.808617, 0.588336, 
 light_color = Color(1, 0.85098, 0.65098, 1)
 
 [node name="Cruiser2" type="MeshInstance3D" parent="."]
-transform = Transform3D(7.49902, 0, 0, 0, 7.49902, 0, 0, 0, 7.49902, -1.20121, 2.37178, -43.2949)
+transform = Transform3D(7.49902, 0, 0, 0, 7.49902, 0, 0, 0, 7.49902, -1.20121, 2.37178, -234.025)
 mesh = ExtResource("3_bc1wl")
 surface_material_override/0 = ExtResource("4_5et6i")
 script = ExtResource("4_jaagw")
@@ -44,7 +44,7 @@ script = ExtResource("4_jaagw")
 [node name="explosionFX" parent="Cruiser2" instance=ExtResource("6_hm7qd")]
 
 [node name="GunmechActual" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.5996, 37.214, 165.33)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8744, -25.672, 175.586)
 mesh = ExtResource("8_ne7mg")
 surface_material_override/0 = ExtResource("4_5et6i")
 
@@ -55,18 +55,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9649, -0.175204)
 
 [node name="Cockpit" parent="." instance=ExtResource("10_sdr8d")]
 
-[node name="handlesRight" parent="Cockpit" index="1" node_paths=PackedStringArray("headset")]
-headset = NodePath("../XROrigin3D/XRCamera3D")
-
-[node name="handlesLeft" parent="Cockpit" index="2" node_paths=PackedStringArray("headset")]
-headset = NodePath("../XROrigin3D/XRCamera3D")
-
 [node name="XROrigin3D" parent="Cockpit" instance=ExtResource("8_2g6xy")]
 
-[node name="XRController3D" parent="Cockpit/XROrigin3D" index="1" node_paths=PackedStringArray("sword", "explosion")]
-sword = NodePath("../../ArmTargetRight/beamfx")
+[node name="XRController3D" parent="Cockpit/XROrigin3D" index="2" node_paths=PackedStringArray("explosion")]
 explosion = NodePath("../../../Cruiser2/explosionFX")
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.892814, 0.450426, 0, -0.450426, 0.892814, 0, 1.99404, 0)
+
 [editable path="Cockpit"]
-[editable path="Cockpit/ArmTargetRight/beamfx"]
+[editable path="Cockpit/handlesLeft"]
+[editable path="Cockpit/handlesRight"]
+[editable path="Cockpit/beamfx"]
+[editable path="Cockpit/ArmBaseRight2"]
+[editable path="Cockpit/ArmBaseRight2/ShoulderJoint/arm"]
 [editable path="Cockpit/XROrigin3D"]

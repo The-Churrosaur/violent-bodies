@@ -12,11 +12,9 @@ height = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2daur"]
 albedo_color = Color(1, 0.341176, 1, 1)
 
-[node name="Handle_Arms" node_paths=PackedStringArray("IK", "mech_target", "target_reference", "handle") instance=ExtResource("1_wlk0w")]
+[node name="Handle_Arms" node_paths=PackedStringArray("IK", "handle") instance=ExtResource("1_wlk0w")]
 script = ExtResource("2_ju0p0")
 IK = NodePath("Armature/Skeleton3D/SkeletonIK3D")
-mech_target = NodePath("Handles/MechTarget")
-target_reference = NodePath("Handles/MechTargetReference")
 handle = NodePath("Handles")
 
 [node name="Cylinder_001" parent="." index="0"]

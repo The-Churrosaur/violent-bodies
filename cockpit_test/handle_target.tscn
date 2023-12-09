@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5b5yftl46vrj"]
+
+[ext_resource type="Script" path="res://cockpit_test/handle_target.gd" id="1_w4rsg"]
+
+[node name="HandleTarget" type="Node3D"]
+script = ExtResource("1_w4rsg")
+
+[node name="Label3D" type="Label3D" parent="."]
+visible = false
+text = "HANDLE 
+TARGET"

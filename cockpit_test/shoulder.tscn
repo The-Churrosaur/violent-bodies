@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3j4nhu3sca27"]
+
+[ext_resource type="Script" path="res://cockpit_test/shoulder.gd" id="1_72bkx"]
+
+[node name="Shoulder" type="Node3D"]
+script = ExtResource("1_72bkx")
