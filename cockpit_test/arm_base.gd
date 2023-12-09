@@ -9,6 +9,8 @@
 class_name ArmBase
 extends Node3D
 
+@export var calibrate = false
+
 # to calculate target
 @export var handle_target : HandleTarget
 @export var arm_center : Node3D
@@ -25,8 +27,9 @@ func _ready():
 
 
 func _process(delta):
-	var stick_vec = XRPlayerGlobals.rhand.get_vector2("primary")
-	scaling += stick_vec.x * 5 * delta 
+	if calibrate:
+		var stick_vec = XRPlayerGlobals.rhand.get_vector2("primary")
+		scaling += stick_vec.x * 5 * delta 
 
 
 func _physics_process(delta):
