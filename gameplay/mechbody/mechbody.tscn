@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsh7i4eks64gc"]
+[gd_scene load_steps=6 format=3 uid="uid://dsh7i4eks64gc"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_ifmva"]
+[ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="2_gumoi"]
+[ext_resource type="PackedScene" uid="uid://cddnr57mbx6f0" path="res://gameplay/mechbody/velocity_indicator.tscn" id="3_h412r"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g8pff"]
 height = 1.0
@@ -12,11 +14,29 @@ bottom_radius = 1.0
 height = 1.0
 
 [node name="Mechbody" type="RigidBody3D"]
-mass = 200.0
+mass = 1000.0
+gravity_scale = 0.0
+angular_damp = 1.085
 script = ExtResource("1_ifmva")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
 shape = SubResource("CylinderShape3D_g8pff")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
 mesh = SubResource("CylinderMesh_4co0s")
+
+[node name="Cockpit" parent="." instance=ExtResource("2_gumoi")]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+text = "adsf"
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50374, -1.01823)
+text = "asdf"
+
+[node name="Indicator" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("3_h412r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.901351, -0.496)
+ship = NodePath("..")

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dlsarb7iw7bpi" path="res://test_player.tscn" id="8_2g6xy"]
 [ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="8_ne7mg"]
 [ext_resource type="PackedScene" uid="uid://dxqrsjvj1edek" path="res://cockpit_test/handles.tscn" id="9_w8a51"]
-[ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="10_sdr8d"]
+[ext_resource type="PackedScene" uid="uid://dsh7i4eks64gc" path="res://gameplay/mechbody/mechbody.tscn" id="10_yegbs"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_phhxq"]
 panorama = ExtResource("2_qkt5t")
@@ -48,61 +48,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8744, -25.672, 175.586)
 mesh = ExtResource("8_ne7mg")
 surface_material_override/0 = ExtResource("4_5et6i")
 
-[node name="Node3D" parent="." instance=ExtResource("8_2g6xy")]
-
 [node name="Handles" parent="." instance=ExtResource("9_w8a51")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9649, -0.175204)
-
-[node name="Cockpit" parent="." instance=ExtResource("10_sdr8d")]
-
-[node name="Cube" parent="Cockpit/handlesLeft/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
-
-[node name="Cube_001" parent="Cockpit/handlesLeft/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="Cockpit/handlesLeft/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="Cockpit/handlesLeft/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="Cube" parent="Cockpit/handlesRight/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
-
-[node name="Cube_001" parent="Cockpit/handlesRight/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="Cockpit/handlesRight/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="Cockpit/handlesRight/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="Cube" parent="Cockpit/ArmBaseRight2/ShoulderJoint/arm/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.80444e-08, -0.0418429, -5.624e-18, 0.0895613, 8.61473e-09, 4.47967e-16, 2.12213, -0.0846465)
-
-[node name="Cube_001" parent="Cockpit/ArmBaseRight2/ShoulderJoint/arm/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.62181e-17, 8.89721e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.62181e-17, -0.118076, -1.75149e-08, 2.90053e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="Cockpit/ArmBaseRight2/ShoulderJoint/arm/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="Cockpit/ArmBaseRight2/ShoulderJoint/arm/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-4.58022e-09, -0.145023, 0, -6.87033e-09, 0, -0.0768434, -0.0768434, 1.2966e-08, 9.16045e-09, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="XROrigin3D" parent="Cockpit" instance=ExtResource("8_2g6xy")]
-
-[node name="XRController3D" parent="Cockpit/XROrigin3D" index="2" node_paths=PackedStringArray("explosion")]
-explosion = NodePath("../../../Cruiser2/explosionFX")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.892814, 0.450426, 0, -0.450426, 0.892814, 0, 1.99404, 0)
 
-[editable path="Cockpit"]
-[editable path="Cockpit/handlesLeft"]
-[editable path="Cockpit/handlesRight"]
-[editable path="Cockpit/beamfx"]
-[editable path="Cockpit/ArmBaseRight2"]
-[editable path="Cockpit/ArmBaseRight2/ShoulderJoint/arm"]
-[editable path="Cockpit/XROrigin3D"]
+[node name="Mechbody" parent="." instance=ExtResource("10_yegbs")]
+
+[node name="player" parent="Mechbody" instance=ExtResource("8_2g6xy")]

@@ -1,4 +1,4 @@
-[gd_resource type="OpenXRActionMap" load_steps=197 format=3 uid="uid://dh33j4j6wdjyf"]
+[gd_resource type="OpenXRActionMap" load_steps=200 format=3 uid="uid://dh33j4j6wdjyf"]
 
 [sub_resource type="OpenXRAction" id="OpenXRAction_jcrtj"]
 resource_name = "trigger"
@@ -360,23 +360,35 @@ paths = PackedStringArray("/user/hand/left/input/squeeze/value", "/user/hand/rig
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_n6y07"]
 action = SubResource("OpenXRAction_r67vw")
-paths = PackedStringArray("/user/hand/left/input/thumbstick", "/user/hand/right/input/thumbstick")
+paths = PackedStringArray("/user/hand/right/input/thumbstick")
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_3uptc"]
 action = SubResource("OpenXRAction_ncunc")
-paths = PackedStringArray("/user/hand/left/input/thumbstick/click", "/user/hand/right/input/thumbstick/click")
+paths = PackedStringArray("/user/hand/right/input/thumbstick/click")
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_34ymb"]
 action = SubResource("OpenXRAction_dlihs")
-paths = PackedStringArray("/user/hand/left/input/thumbstick/touch", "/user/hand/right/input/thumbstick/touch")
+paths = PackedStringArray("/user/hand/right/input/thumbstick/touch")
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_83qkm"]
 action = SubResource("OpenXRAction_3pq8h")
 paths = PackedStringArray("/user/hand/left/output/haptic", "/user/hand/right/output/haptic")
 
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_1ow8k"]
+action = SubResource("OpenXRAction_12o7q")
+paths = PackedStringArray("/user/hand/left/input/thumbstick")
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_08t7q"]
+action = SubResource("OpenXRAction_42r61")
+paths = PackedStringArray("/user/hand/left/input/thumbstick/click")
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_x277s"]
+action = SubResource("OpenXRAction_0on7i")
+paths = PackedStringArray("/user/hand/left/input/thumbstick/touch")
+
 [sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_253mc"]
 interaction_profile_path = "/interaction_profiles/oculus/touch_controller"
-bindings = [SubResource("OpenXRIPBinding_0do77"), SubResource("OpenXRIPBinding_vy4oa"), SubResource("OpenXRIPBinding_lcg2h"), SubResource("OpenXRIPBinding_fvtaf"), SubResource("OpenXRIPBinding_iinbi"), SubResource("OpenXRIPBinding_n4867"), SubResource("OpenXRIPBinding_pq3nt"), SubResource("OpenXRIPBinding_83ly2"), SubResource("OpenXRIPBinding_rhtbh"), SubResource("OpenXRIPBinding_nc0gr"), SubResource("OpenXRIPBinding_7rgni"), SubResource("OpenXRIPBinding_fhcfs"), SubResource("OpenXRIPBinding_48hik"), SubResource("OpenXRIPBinding_ibgr1"), SubResource("OpenXRIPBinding_n6y07"), SubResource("OpenXRIPBinding_3uptc"), SubResource("OpenXRIPBinding_34ymb"), SubResource("OpenXRIPBinding_83qkm")]
+bindings = [SubResource("OpenXRIPBinding_0do77"), SubResource("OpenXRIPBinding_vy4oa"), SubResource("OpenXRIPBinding_lcg2h"), SubResource("OpenXRIPBinding_fvtaf"), SubResource("OpenXRIPBinding_iinbi"), SubResource("OpenXRIPBinding_n4867"), SubResource("OpenXRIPBinding_pq3nt"), SubResource("OpenXRIPBinding_83ly2"), SubResource("OpenXRIPBinding_rhtbh"), SubResource("OpenXRIPBinding_nc0gr"), SubResource("OpenXRIPBinding_7rgni"), SubResource("OpenXRIPBinding_fhcfs"), SubResource("OpenXRIPBinding_48hik"), SubResource("OpenXRIPBinding_ibgr1"), SubResource("OpenXRIPBinding_n6y07"), SubResource("OpenXRIPBinding_3uptc"), SubResource("OpenXRIPBinding_34ymb"), SubResource("OpenXRIPBinding_83qkm"), SubResource("OpenXRIPBinding_1ow8k"), SubResource("OpenXRIPBinding_08t7q"), SubResource("OpenXRIPBinding_x277s")]
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_e303j"]
 action = SubResource("OpenXRAction_r2qoa")
@@ -455,7 +467,7 @@ action = SubResource("OpenXRAction_3pq8h")
 paths = PackedStringArray("/user/hand/left/output/haptic", "/user/hand/right/output/haptic")
 
 [sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_3p161"]
-interaction_profile_path = "/interaction_profiles/pico/neo3_controller"
+interaction_profile_path = "/interaction_profiles/bytedance/pico_neo3_controller"
 bindings = [SubResource("OpenXRIPBinding_e303j"), SubResource("OpenXRIPBinding_06yy7"), SubResource("OpenXRIPBinding_3iqkl"), SubResource("OpenXRIPBinding_ui3yq"), SubResource("OpenXRIPBinding_rludc"), SubResource("OpenXRIPBinding_b2vk7"), SubResource("OpenXRIPBinding_ro1wm"), SubResource("OpenXRIPBinding_akecw"), SubResource("OpenXRIPBinding_2nv1q"), SubResource("OpenXRIPBinding_lp50n"), SubResource("OpenXRIPBinding_rkhgc"), SubResource("OpenXRIPBinding_wylgy"), SubResource("OpenXRIPBinding_s20lp"), SubResource("OpenXRIPBinding_xqrny"), SubResource("OpenXRIPBinding_r2wdr"), SubResource("OpenXRIPBinding_8ekis"), SubResource("OpenXRIPBinding_bdkoa"), SubResource("OpenXRIPBinding_3is4p"), SubResource("OpenXRIPBinding_l2kii")]
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_7xrim"]
