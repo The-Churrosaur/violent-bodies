@@ -91,7 +91,7 @@ toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
 resource_name = "ax_button"
 localized_name = "A/X button"
 action_type = 0
-toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+toplevel_paths = PackedStringArray("/user/hand/right", "/user/hand/left")
 
 [sub_resource type="OpenXRAction" id="OpenXRAction_begi4"]
 resource_name = "ax_touch"
@@ -103,7 +103,7 @@ toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
 resource_name = "by_button"
 localized_name = "B/Y button"
 action_type = 0
-toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+toplevel_paths = PackedStringArray("/user/hand/right", "/user/hand/left")
 
 [sub_resource type="OpenXRAction" id="OpenXRAction_byog0"]
 resource_name = "by_touch"
@@ -324,7 +324,7 @@ paths = PackedStringArray("/user/hand/left/input/menu/click", "/user/hand/right/
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_n4867"]
 action = SubResource("OpenXRAction_n3j8u")
-paths = PackedStringArray("/user/hand/left/input/x/click", "/user/hand/right/input/a/click")
+paths = PackedStringArray("/user/hand/right/input/a/click", "/user/hand/left/input/x/click")
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_pq3nt"]
 action = SubResource("OpenXRAction_begi4")
@@ -332,7 +332,7 @@ paths = PackedStringArray("/user/hand/left/input/x/touch", "/user/hand/right/inp
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_83ly2"]
 action = SubResource("OpenXRAction_pbryi")
-paths = PackedStringArray("/user/hand/left/input/y/click", "/user/hand/right/input/b/click")
+paths = PackedStringArray("/user/hand/right/input/b/click", "/user/hand/left/input/y/click")
 
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_rhtbh"]
 action = SubResource("OpenXRAction_byog0")

@@ -31,10 +31,12 @@ mesh = SubResource("CylinderMesh_4co0s")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+visible = false
 text = "adsf"
 
 [node name="Label3D2" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50374, -1.01823)
+visible = false
 text = "asdf"
 
 [node name="Indicator" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("3_h412r")]

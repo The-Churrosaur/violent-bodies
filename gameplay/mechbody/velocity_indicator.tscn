@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cddnr57mbx6f0"]
+[gd_scene load_steps=6 format=3 uid="uid://cddnr57mbx6f0"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/velocity_indicator.gd" id="1_bnhoa"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_ivpsf"]
 radius = 0.05
 height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaqe5"]
+transparency = 1
+albedo_color = Color(0.682353, 0.682353, 0.682353, 0.419608)
 
 [sub_resource type="SphereMesh" id="SphereMesh_fq2sp"]
 radius = 0.02
@@ -18,6 +22,7 @@ script = ExtResource("1_bnhoa")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_ivpsf")
+surface_material_override/0 = SubResource("StandardMaterial3D_yaqe5")
 
 [node name="Dial" type="Node3D" parent="."]
 
