@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfm5v38inyif1"]
+
+[ext_resource type="Script" path="res://gameplay/controls/input_manager_yoke.gd" id="1_0g14y"]
+
+[node name="InputManagerYoke" type="Node3D"]
+script = ExtResource("1_0g14y")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.954853, 0)
+visible = false
+text = "fffffffasdf"

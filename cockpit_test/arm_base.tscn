@@ -6,8 +6,9 @@
 
 [sub_resource type="PrismMesh" id="PrismMesh_bcxlx"]
 
-[node name="ArmBase" type="Node3D"]
+[node name="ArmBase" type="Node3D" node_paths=PackedStringArray("hand_parent")]
 script = ExtResource("1_tk250")
+hand_parent = NodePath("ArmTarget/HandParent")
 scaling = 16.0
 
 [node name="ShoulderJoint" type="Node3D" parent="."]
@@ -40,6 +41,10 @@ mesh = SubResource("PrismMesh_bcxlx")
 [node name="ArmTarget" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("3_pnddb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.07456)
 target_node = NodePath("../InitialTarget")
+
+[node name="HandParent" type="Node3D" parent="ArmTarget"]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="ArmTarget/HandParent"]
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(0.711658, 0, -0.702526, 0, 1, 0, 0.702526, 0, 0.711658, 0.0076685, 2.36722, -0.00635481)

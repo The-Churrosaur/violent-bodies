@@ -4,7 +4,7 @@ class_name MechBody
 extends RigidBody3D
 
 @export var thrust_power = 500000.0
-@export var torque_power = 50000.0
+@export var torque_power = 90000.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,13 +39,13 @@ func _physics_process(delta):
 		apply_central_force(up * -thrust_power * delta)
 	
 	# pitch
-	apply_torque(up * -torque_power * delta * primary.x)
+	apply_torque(right * -torque_power * delta * primary.y)
 	
-	# if lx is pressed, py is roll, else yaw
+	# if lx is pressed, py is yaw, else eoll
 	if (lx):
-		apply_torque(fore * -torque_power * delta * primary.x)
+		apply_torque(up * -torque_power * delta * primary.x)
 	else:
-		apply_torque(right * -torque_power * delta * primary.y)
+		apply_torque(fore * -torque_power * delta * primary.x)
 	
 	
 	$Label3D.text = str(linear_velocity)

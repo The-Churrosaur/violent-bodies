@@ -1,6 +1,6 @@
 
 class_name Sword
-extends Node3D
+extends MechTool
 
 @export var particles :Array[GPUParticles3D]
 
@@ -11,9 +11,9 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func trigger():
+	super.trigger()
+	toggle()
 
 
 

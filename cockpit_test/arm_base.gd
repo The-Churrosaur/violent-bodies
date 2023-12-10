@@ -11,6 +11,9 @@ class_name ArmBase
 extends Node3D
 
 @export var calibrate = false
+# for access by others
+@export var hand_parent : Node3D
+
 
 # to calculate target
 @export var handle_target : HandleTarget

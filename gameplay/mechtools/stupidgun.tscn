@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7dfxmp5k4sa3"]
+
+[ext_resource type="Script" path="res://gameplay/mechtools/stupidgun.gd" id="1_jkqyc"]
+
+[node name="stupidgun" type="Node3D"]
+script = ExtResource("1_jkqyc")
+
+[node name="ShotTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.156072, 0)
+text = "adfad"
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

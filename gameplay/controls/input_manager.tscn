@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsethweiej3tx"]
+
+[ext_resource type="Script" path="res://gameplay/controls/input_manager.gd" id="1_7plkm"]
+
+[node name="InputManager" type="Node3D"]
+script = ExtResource("1_7plkm")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74824, 0)
+text = "afea"

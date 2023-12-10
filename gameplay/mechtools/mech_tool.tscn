@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fk6g4bxa483y"]
+
+[ext_resource type="Script" path="res://gameplay/mechtools/mech_tool.gd" id="1_asry5"]
+
+[node name="MechTool" type="Node3D"]
+script = ExtResource("1_asry5")

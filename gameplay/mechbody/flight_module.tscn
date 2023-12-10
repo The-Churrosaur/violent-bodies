@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bln8cdsrflypy"]
+
+[ext_resource type="Script" path="res://gameplay/mechbody/flight_module.gd" id="1_bx6jp"]
+
+[node name="FlightModule" type="Node3D"]
+script = ExtResource("1_bx6jp")
