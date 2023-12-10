@@ -17,10 +17,10 @@ height = 1.0
 [node name="Mechbody" type="RigidBody3D"]
 mass = 100.0
 gravity_scale = 0.0
-linear_damp = 1.0
+linear_damp = 0.1
 angular_damp = 2.0
 script = ExtResource("1_ifmva")
-torque_power = 5000.0
+torque_power = 9000.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
@@ -47,5 +47,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.901351, -0.496)
 ship = NodePath("..")
 
 [node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_wgapf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0422812, 0.0477576, 0.0106616)
 mechbody = NodePath("..")
+coefficient = 0.4
 enabled = true
+
+[node name="Label3D3" type="Label3D" parent="FlightModule"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0515402, 0.76512, -0.201944)
+text = "adsfe"
