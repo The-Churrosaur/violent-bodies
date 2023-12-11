@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsh7i4eks64gc"]
+[gd_scene load_steps=11 format=3 uid="uid://dsh7i4eks64gc"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_ifmva"]
 [ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="2_gumoi"]
 [ext_resource type="PackedScene" uid="uid://cddnr57mbx6f0" path="res://gameplay/mechbody/velocity_indicator.tscn" id="3_h412r"]
 [ext_resource type="PackedScene" uid="uid://bln8cdsrflypy" path="res://gameplay/mechbody/flight_module.tscn" id="4_wgapf"]
+[ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="5_3oo3b"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g8pff"]
 height = 1.0
@@ -13,6 +14,29 @@ radius = 1.0
 top_radius = 1.0
 bottom_radius = 1.0
 height = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eelx1"]
+particle_flag_align_y = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 73.5
+angle_max = 73.5
+direction = Vector3(0, 0, 1)
+spread = 8.182
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_64itd"]
+transparency = 1
+albedo_color = Color(0.631373, 0.631373, 0.631373, 0.282353)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4akwj"]
+material = SubResource("StandardMaterial3D_64itd")
+radius = 0.02
+radial_segments = 4
+rings = 3
 
 [node name="Mechbody" type="RigidBody3D"]
 mass = 100.0
@@ -32,6 +56,9 @@ mesh = SubResource("CylinderMesh_4co0s")
 
 [node name="Cockpit" parent="." instance=ExtResource("2_gumoi")]
 
+[node name="Stupidgun2" parent="Cockpit/RHandParent/MechHand" index="1" node_paths=PackedStringArray("launching_rigidbody")]
+launching_rigidbody = NodePath("../../../..")
+
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 visible = false
@@ -46,12 +73,37 @@ text = "asdf"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.901351, -0.496)
 ship = NodePath("..")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -7.12, 10.6366)
+mesh = ExtResource("5_3oo3b")
+
 [node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_wgapf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0422812, 0.0477576, 0.0106616)
 mechbody = NodePath("..")
-coefficient = 0.4
+coefficient = 1.0
 enabled = true
 
 [node name="Label3D3" type="Label3D" parent="FlightModule"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0515402, 0.76512, -0.201944)
 text = "adsfe"
+
+[node name="wingfx" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="wingfx"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11827, -1.57225)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_eelx1")
+draw_pass_1 = SubResource("SphereMesh_4akwj")
+
+[connection signal="dropped" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_released"]
+[connection signal="grabbed" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_grabbed"]
+[connection signal="dropped" from="Cockpit/handlesRight/Handles" to="Cockpit/InputManagerYokeRight" method="_on_released"]
+[connection signal="grabbed" from="Cockpit/handlesRight/Handles" to="Cockpit/InputManagerYokeRight" method="_on_grabbed"]
+
+[editable path="Cockpit"]
+[editable path="Cockpit/handlesLeft"]
+[editable path="Cockpit/handlesRight"]
+[editable path="Cockpit/ArmBaseLeft"]
+[editable path="Cockpit/ArmBaseLeft/ShoulderJoint/arm"]
+[editable path="Cockpit/ArmBaseRight"]
+[editable path="Cockpit/ArmBaseRight/ShoulderJoint/arm"]

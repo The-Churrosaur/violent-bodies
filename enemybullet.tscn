@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://pomw230pn714"]
+
+[ext_resource type="PackedScene" uid="uid://d1dyiu4yccxjx" path="res://gameplay/mechtools/stupidbullet.tscn" id="1_y7wpg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lppqe"]
+albedo_color = Color(0.301961, 1, 0.337255, 1)
+emission_enabled = true
+emission = Color(0, 0.756863, 0, 1)
+emission_energy_multiplier = 4.43
+
+[sub_resource type="SphereMesh" id="SphereMesh_vyqpj"]
+material = SubResource("StandardMaterial3D_lppqe")
+radius = 1.0
+height = 11.634
+radial_segments = 16
+rings = 8
+
+[node name="StupidBullet" instance=ExtResource("1_y7wpg")]
+
+[node name="MeshInstance3D" parent="Stupidbullet" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00377226, -0.000808955, -0.0062592)
+mesh = SubResource("SphereMesh_vyqpj")

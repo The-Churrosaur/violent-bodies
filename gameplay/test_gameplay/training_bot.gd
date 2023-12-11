@@ -9,7 +9,7 @@ extends RigidBody3D
 
 @onready var jitter_timer = $Timer
 @onready var shoot_timer = $Timer2
-@onready var gun = $lasergun
+@onready var gun = $enemygun
 
 var r = RandomNumberGenerator.new()
 
@@ -24,6 +24,8 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
+	
+	if player == null : return
 	
 	$looker.look_at(player.global_position)
 	
@@ -42,16 +44,18 @@ func _on_timer_timeout():
 
 func _on_shooter_timer_timeout():
 	gun.trigger()
-	apply_impulse(-transform.basis.z * impulse)
+	apply_impulse(-transform.basis.z * impulse * 2)
 	shoot_timer.start(1 + r.randf())
 
 
 func _on_area_3d_area_entered(area):
-	if area.is_in_group("laser"): explode()
+	$Label3D.text = str(area)
+	if area.is_in_group("laser"): 
+		$Label3D.text = "hit by laser"
+		explode()
 
 
 func explode():
-	$GPUParticles3D.emitting = true
 	freeze = true
 	gun.safety = true
 	$explosionFX.start_explosion_sequence()

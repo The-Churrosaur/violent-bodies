@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://mktno0wfl5yk"]
+[gd_scene load_steps=18 format=3 uid="uid://mktno0wfl5yk"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_y613h"]
 [ext_resource type="ArrayMesh" uid="uid://chx0afiwsqpj" path="res://assets/cruiser.obj" id="3_bc1wl"]
@@ -6,9 +6,10 @@
 [ext_resource type="Script" path="res://spinner.gd" id="4_jaagw"]
 [ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://explosion_fx.tscn" id="6_hm7qd"]
 [ext_resource type="PackedScene" uid="uid://dlsarb7iw7bpi" path="res://test_player.tscn" id="8_2g6xy"]
-[ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="8_ne7mg"]
 [ext_resource type="PackedScene" uid="uid://c38fl22da0jew" path="res://gameplay/test_gameplay/training_bot.tscn" id="9_2ppjb"]
+[ext_resource type="PackedScene" uid="uid://bdhc7mn7fx7jt" path="res://gameplay/test_gameplay/bot_spawner.tscn" id="10_4e2ph"]
 [ext_resource type="PackedScene" uid="uid://dsh7i4eks64gc" path="res://gameplay/mechbody/mechbody.tscn" id="10_yegbs"]
+[ext_resource type="ArrayMesh" uid="uid://cl7snahl1dxqk" path="res://assets/terrain_ex.obj" id="11_flred"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_opudn"]
 
@@ -24,11 +25,17 @@ glow_intensity = 2.85
 glow_strength = 0.89
 glow_bloom = 0.14
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nfpfe"]
+radius = 1.43949
+height = 10.3948
+
 [sub_resource type="BoxMesh" id="BoxMesh_i47ny"]
 size = Vector3(100, 100, 100)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5qg64"]
-size = Vector2(1000, 1000)
+size = Vector2(2000, 2000)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hwcv2"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_y613h")
@@ -41,12 +48,18 @@ transform = Transform3D(-0.0602297, -0.587268, 0.807149, 0, 0.808617, 0.588336, 
 light_color = Color(1, 0.85098, 0.65098, 1)
 
 [node name="Cruiser2" type="MeshInstance3D" parent="."]
-transform = Transform3D(40.0114, 0, 0, 0, 40.0114, 0, 0, 0, 40.0114, -1.20121, 2.37178, -234.025)
+transform = Transform3D(-6.40465, 0, 39.4955, 0, 40.0114, 0, -39.4955, 0, -6.40465, -1634.32, 222.346, -671.572)
 mesh = ExtResource("3_bc1wl")
 surface_material_override/0 = ExtResource("4_5et6i")
 script = ExtResource("4_jaagw")
 
 [node name="explosionFX" parent="Cruiser2" instance=ExtResource("6_hm7qd")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cruiser2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cruiser2/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
+shape = SubResource("CapsuleShape3D_nfpfe")
 
 [node name="Cruiser3" type="MeshInstance3D" parent="."]
 transform = Transform3D(33.6361, 8.13637, -20.083, -6.9859, 39.1754, 4.17105, 20.5115, 0, 34.3539, 387.291, 69.6044, 387.702)
@@ -55,6 +68,12 @@ surface_material_override/0 = ExtResource("4_5et6i")
 
 [node name="explosionFX" parent="Cruiser3" instance=ExtResource("6_hm7qd")]
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Cruiser3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cruiser3/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
+shape = SubResource("CapsuleShape3D_nfpfe")
+
 [node name="Cruiser4" type="MeshInstance3D" parent="."]
 transform = Transform3D(37.8122, -2.03012, -12.9239, 2.48261, 39.922, 0.992468, 12.8447, -1.73981, 37.8537, -374.522, 69.6044, 703.847)
 mesh = ExtResource("3_bc1wl")
@@ -62,57 +81,71 @@ surface_material_override/0 = ExtResource("4_5et6i")
 
 [node name="explosionFX" parent="Cruiser4" instance=ExtResource("6_hm7qd")]
 
-[node name="GunmechActual" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8744, -25.672, 175.586)
-mesh = ExtResource("8_ne7mg")
-surface_material_override/0 = ExtResource("4_5et6i")
+[node name="StaticBody3D" type="StaticBody3D" parent="Cruiser4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cruiser4/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
+shape = SubResource("CapsuleShape3D_nfpfe")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.268, -58.733)
+transform = Transform3D(0.843316, 0.537417, 0, -0.428012, 0.671638, -0.604738, -0.324997, 0.509986, 0.796424, -31.7603, 80.3797, 250.799)
 mesh = SubResource("BoxMesh_i47ny")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -312.541, 118.268, 390.192)
-mesh = SubResource("BoxMesh_i47ny")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -325.67, -148.137, 23.8691)
+transform = Transform3D(2.24306, -1.03536, 1.00545, 1.3971, 2.02375, -1.03285, -0.361952, 1.39524, 2.24422, -1116.33, 164.778, 645.332)
 mesh = SubResource("BoxMesh_i47ny")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -196.294, 0)
+transform = Transform3D(8.36433, 0, 4.10696, -2.51556, 3.19175, 1.09066, -8.53833, -0.940351, 3.70193, 1067.67, -468.469, 529.275)
+mesh = SubResource("BoxMesh_i47ny")
+
+[node name="plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1096.58, 0)
 mesh = SubResource("PlaneMesh_5qg64")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="plane"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="plane/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_hwcv2")
 
 [node name="Mechbody" parent="." instance=ExtResource("10_yegbs")]
 
 [node name="XROrigin3D" parent="Mechbody" instance=ExtResource("8_2g6xy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.407531, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509861, 0)
 
 [node name="TrainingBot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(0.233042, -0.32965, 0.914889, 0.816561, 0.577259, 0, -0.528128, 0.747063, 0.403705, 0, 0, -108.393)
+transform = Transform3D(0.233042, -0.32965, 0.914889, 0.816561, 0.577259, 0, -0.528128, 0.747063, 0.403705, 406.23, 0, -108.393)
 impulse = 0.0
 player = NodePath("../Mechbody")
 
 [node name="TrainingBot2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 41.2669, -112.603)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -382.59, 41.2669, -112.603)
 player = NodePath("../Mechbody")
 
 [node name="TrainingBot3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -71.7672, -112.603)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 389.235, -71.7672, 226.159)
 player = NodePath("../Mechbody")
 
 [node name="TrainingBot4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -112.603)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 309.137)
 player = NodePath("../Mechbody")
 
 [node name="TrainingBot5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22.0907)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 204.625, -22.0907)
 player = NodePath("../Mechbody")
 
 [node name="TrainingBot6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.4318, -81.2646)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -263.713, -81.2646)
 player = NodePath("../Mechbody")
 
 [node name="TrainingBot7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 10, -23.6213)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 10, -250.361)
 player = NodePath("../Mechbody")
+
+[node name="BotSpawner" parent="." node_paths=PackedStringArray("bot_target") instance=ExtResource("10_4e2ph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 342.113, 404.051)
+bot_target = NodePath("../Mechbody")
+
+[node name="TerrainEx" type="MeshInstance3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, -200, 3.01992e-05, 0, -3.01992e-05, -200, -528.204, 762.742, 445.669)
+mesh = ExtResource("11_flred")

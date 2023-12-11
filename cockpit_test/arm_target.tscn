@@ -12,6 +12,7 @@ font_size = 30
 freeze = true
 freeze_mode = 1
 script = ExtResource("1_1kwca")
+lerp_amount = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xpoam")

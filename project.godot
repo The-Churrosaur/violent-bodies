@@ -30,7 +30,7 @@ import/fbx/enabled=false
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
+renderer/rendering_method="mobile"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 
@@ -38,7 +38,7 @@ textures/vram_compression/import_etc2_astc=true
 
 outline_width={
 "type": "float",
-"value": 5.0
+"value": 1.0
 }
 outline_color={
 "type": "color",

@@ -84,3 +84,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.77433, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_41j2q")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

@@ -2,12 +2,12 @@ extends StupidGun
 
 @onready var area : Area3D = $laser/Area3D
 
+var laser
 
 func _set_projectile():
-	$laser.visible = true
-	area.collision_mask = 1
+	laser = bullet_scene.instantiate()
+	add_child(laser)
 
 func _on_shot_timer_timeout():
 	current_state = gun_state.BATTERY
-	$laser.visible = false
-	area.collision_mask = 0
+	if laser != null: laser.queue_free()

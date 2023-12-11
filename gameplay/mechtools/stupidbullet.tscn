@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1dyiu4yccxjx"]
+[gd_scene load_steps=6 format=3 uid="uid://d1dyiu4yccxjx"]
+
+[ext_resource type="Script" path="res://gameplay/mechtools/stupidbullet.gd" id="1_enmy5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cmcgd"]
 radius = 0.1
@@ -10,12 +12,17 @@ emission = Color(0.894118, 0.701961, 0.913725, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_e3dnt"]
 material = SubResource("StandardMaterial3D_hfkbo")
-radius = 0.1
-height = 3.0
+radius = 0.3
+height = 6.0
+rings = 8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m2j2d"]
 
 [node name="StupidBullet" type="RigidBody3D"]
 gravity_scale = 0.0
+freeze_mode = 1
 linear_velocity = Vector3(0, 0, -20)
+script = ExtResource("1_enmy5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_cmcgd")
@@ -25,3 +32,15 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stupidbullet"]
 mesh = SubResource("SphereMesh_e3dnt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="." groups=["laser"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_m2j2d")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

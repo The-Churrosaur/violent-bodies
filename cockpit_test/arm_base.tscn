@@ -40,6 +40,9 @@ mesh = SubResource("PrismMesh_bcxlx")
 
 [node name="ArmTarget" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("3_pnddb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.07456)
+collision_layer = 0
+collision_mask = 0
+freeze_mode = 0
 target_node = NodePath("../InitialTarget")
 
 [node name="HandParent" type="Node3D" parent="ArmTarget"]

@@ -1,20 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://c38fl22da0jew"]
+[gd_scene load_steps=17 format=3 uid="uid://c38fl22da0jew"]
 
 [ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="1_jp8id"]
 [ext_resource type="Script" path="res://gameplay/test_gameplay/training_bot.gd" id="1_qefqv"]
 [ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://explosion_fx.tscn" id="2_771qq"]
-[ext_resource type="PackedScene" uid="uid://canlurq7heofm" path="res://gameplay/mechtools/laserstupidgun.tscn" id="3_3hpoh"]
+[ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="3_pxub6"]
 [ext_resource type="Material" uid="uid://byl3yi4rdb1c0" path="res://smoke_cloud_material.tres" id="4_w4uku"]
+[ext_resource type="PackedScene" uid="uid://bln8cdsrflypy" path="res://gameplay/mechbody/flight_module.tscn" id="6_f3m75"]
+[ext_resource type="Material" uid="uid://cyp6f6hs8t5rv" path="res://materials/sword_material.tres" id="7_2pl0l"]
+[ext_resource type="PackedScene" uid="uid://bisjoacj4bgel" path="res://gameplay/mechtools/enemystupidgun.tscn" id="8_62xk6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2g2oc"]
-radius = 3.0
+radius = 5.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_3p5f2"]
-material = ExtResource("1_jp8id")
-radius = 3.0
-height = 6.0
-radial_segments = 16
-rings = 8
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22cga"]
+shading_mode = 2
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wigt3"]
 inherit_velocity_ratio = 0.818
@@ -27,7 +26,27 @@ scale_min = 0.5
 [sub_resource type="SphereMesh" id="SphereMesh_ciiej"]
 material = ExtResource("4_w4uku")
 
+[sub_resource type="BoxMesh" id="BoxMesh_w2qw1"]
+material = ExtResource("1_jp8id")
+size = Vector3(1, 0.5, 20)
+
+[sub_resource type="Curve" id="Curve_jiovf"]
+_data = [Vector2(0.180556, 0.908451), 0.0, 0.0, 0, 0, Vector2(0.965278, 0.0676943), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ti20o"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_pru78"]
+material = ExtResource("1_jp8id")
+radius = 3.0
+height = 6.0
+radial_segments = 16
+rings = 8
+
 [node name="TrainingBot" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 2
 mass = 100.0
 gravity_scale = 0.0
 can_sleep = false
@@ -40,16 +59,15 @@ boom_delay = 0.0
 shape = SubResource("SphereShape3D_2g2oc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_3p5f2")
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 3.73162)
+mesh = ExtResource("3_pxub6")
+surface_material_override/0 = SubResource("StandardMaterial3D_22cga")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="lasergun" parent="." instance=ExtResource("3_3hpoh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.35263)
-
 [node name="Timer2" type="Timer" parent="."]
-wait_time = 1.6
+wait_time = 0.5
 autostart = true
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -67,6 +85,44 @@ process_material = SubResource("ParticleProcessMaterial_wigt3")
 draw_pass_1 = SubResource("SphereMesh_ciiej")
 
 [node name="looker" type="Node3D" parent="."]
+
+[node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("6_f3m75")]
+mechbody = NodePath("..")
+enabled = true
+
+[node name="Label3D3" type="Label3D" parent="FlightModule"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.540324, 0.456125, 0, 0.645058, 0.764134, -0.707107, -0.540324, 0.456125, 6.90655, 10.9964, 5.729)
+mesh = SubResource("BoxMesh_w2qw1")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 0.540324, -0.456125, 0, 0.645058, 0.764134, 0.707107, -0.540324, 0.456125, -6.99798, 11.0365, 5.75041)
+mesh = SubResource("BoxMesh_w2qw1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -5.96046e-08, -5.96046e-08, 8.9407e-08, -0.645058, -0.764134, 0, -0.764134, 0.645058, 0, -10.5336, 8.65653)
+mesh = SubResource("BoxMesh_w2qw1")
+
+[node name="TrailEmitter" type="TrailEmitter" parent="."]
+material = ExtResource("7_2pl0l")
+curve = SubResource("Curve_jiovf")
+gradient = SubResource("Gradient_ti20o")
+geometry_nodepath = NodePath("..")
+size = 5.0
+
+[node name="enemygun" parent="." node_paths=PackedStringArray("launching_rigidbody") instance=ExtResource("8_62xk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+launching_rigidbody = NodePath("..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.91674)
+mesh = SubResource("SphereMesh_pru78")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 8.67582, -3.72842)
+text = "dasfe"
+font_size = 200
 
 [connection signal="explosion_ended" from="explosionFX" to="." method="_on_explosion_fx_explosion_ended"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

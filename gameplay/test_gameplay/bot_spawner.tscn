@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdhc7mn7fx7jt"]
+
+[ext_resource type="Script" path="res://gameplay/test_gameplay/bot_spawner.gd" id="1_t5bl3"]
+[ext_resource type="PackedScene" uid="uid://c38fl22da0jew" path="res://gameplay/test_gameplay/training_bot.tscn" id="2_qsxsv"]
+
+[node name="BotSpawner" type="Node3D"]
+script = ExtResource("1_t5bl3")
+bot_template = ExtResource("2_qsxsv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
