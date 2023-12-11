@@ -113,27 +113,6 @@ shape = SubResource("WorldBoundaryShape3D_hwcv2")
 [node name="XROrigin3D" parent="Mechbody" instance=ExtResource("8_2g6xy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509861, 0)
 
-[node name="TrainingBot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(0.233042, -0.32965, 0.914889, 0.816561, 0.577259, 0, -0.528128, 0.747063, 0.403705, 406.23, 0, -108.393)
-impulse = 0.0
-player = NodePath("../Mechbody")
-
-[node name="TrainingBot2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -382.59, 41.2669, -112.603)
-player = NodePath("../Mechbody")
-
-[node name="TrainingBot3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 389.235, -71.7672, 226.159)
-player = NodePath("../Mechbody")
-
-[node name="TrainingBot4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 309.137)
-player = NodePath("../Mechbody")
-
-[node name="TrainingBot5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 204.625, -22.0907)
-player = NodePath("../Mechbody")
-
 [node name="TrainingBot6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -263.713, -81.2646)
 player = NodePath("../Mechbody")

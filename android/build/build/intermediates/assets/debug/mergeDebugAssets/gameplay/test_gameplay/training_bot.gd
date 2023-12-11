@@ -25,6 +25,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	
+	
 	if player == null : return
 	
 	$looker.look_at(player.global_position)
