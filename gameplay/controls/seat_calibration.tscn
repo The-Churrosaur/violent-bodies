@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://d26k2y5i1upl1"]
+
+[ext_resource type="PackedScene" uid="uid://bsethweiej3tx" path="res://gameplay/controls/input_manager.tscn" id="1_y2you"]
+[ext_resource type="Script" path="res://gameplay/controls/seat_calibration.gd" id="2_jwxnj"]
+[ext_resource type="PackedScene" uid="uid://dglogyr3g15gb" path="res://gameplay/controls/seatmover_handle.tscn" id="3_gf1wy"]
+
+[node name="seatcalibrator" instance=ExtResource("1_y2you")]
+script = ExtResource("2_jwxnj")
+move_scale = 0.1
+
+[node name="seatmover" parent="." index="1" instance=ExtResource("3_gf1wy")]
+freeze_mode = 0
+
+[connection signal="dropped" from="seatmover" to="." method="_on_released"]
+[connection signal="grabbed" from="seatmover" to="." method="_on_grabbed"]

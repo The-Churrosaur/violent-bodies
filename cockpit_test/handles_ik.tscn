@@ -76,6 +76,7 @@ target_node = NodePath("../../../Handles")
 [node name="Handles" parent="." index="3" instance=ExtResource("2_cw8gw")]
 transform = Transform3D(1, 0, 0, 0, 0.9563, 0.292388, 0, -0.292388, 0.9563, 0, -0.0185545, -1.19753)
 mass = 0.01
+freeze_mode = 0
 
 [node name="MechTarget" type="Node3D" parent="Handles" index="4"]
 transform = Transform3D(1, 0, 0, 0, 0.9563, -0.292388, 0, 0.292388, 0.9563, 0, 0.740646, -2.35894)

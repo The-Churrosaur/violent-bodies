@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://c38fl22da0jew"]
+
+[ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="1_jp8id"]
+[ext_resource type="Script" path="res://gameplay/test_gameplay/training_bot.gd" id="1_qefqv"]
+[ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://explosion_fx.tscn" id="2_771qq"]
+[ext_resource type="PackedScene" uid="uid://canlurq7heofm" path="res://gameplay/mechtools/laserstupidgun.tscn" id="3_3hpoh"]
+[ext_resource type="Material" uid="uid://byl3yi4rdb1c0" path="res://smoke_cloud_material.tres" id="4_w4uku"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2g2oc"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_3p5f2"]
+material = ExtResource("1_jp8id")
+radius = 1.0
+height = 2.0
+radial_segments = 16
+rings = 8
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wigt3"]
+inherit_velocity_ratio = 0.818
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_ciiej"]
+material = ExtResource("4_w4uku")
+
+[node name="TrainingBot" type="RigidBody3D"]
+mass = 100.0
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource("1_qefqv")
+
+[node name="explosionFX" parent="." instance=ExtResource("2_771qq")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_2g2oc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3p5f2")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="lasergun" parent="." instance=ExtResource("3_3hpoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1814)
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 1.6
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_2g2oc")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00523853, 0.00969791, 0.0013938)
+emitting = false
+amount = 20
+explosiveness = 1.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_wigt3")
+draw_pass_1 = SubResource("SphereMesh_ciiej")
+
+[node name="looker" type="Node3D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_shooter_timer_timeout"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

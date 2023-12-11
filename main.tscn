@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://mktno0wfl5yk"]
+[gd_scene load_steps=14 format=3 uid="uid://mktno0wfl5yk"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_y613h"]
 [ext_resource type="ArrayMesh" uid="uid://chx0afiwsqpj" path="res://assets/cruiser.obj" id="3_bc1wl"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://explosion_fx.tscn" id="6_hm7qd"]
 [ext_resource type="PackedScene" uid="uid://dlsarb7iw7bpi" path="res://test_player.tscn" id="8_2g6xy"]
 [ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="8_ne7mg"]
-[ext_resource type="PackedScene" uid="uid://dxqrsjvj1edek" path="res://cockpit_test/handles.tscn" id="9_w8a51"]
 [ext_resource type="PackedScene" uid="uid://dsh7i4eks64gc" path="res://gameplay/mechbody/mechbody.tscn" id="10_yegbs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_opudn"]
@@ -67,16 +66,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8744, -25.672, 175.586)
 mesh = ExtResource("8_ne7mg")
 surface_material_override/0 = ExtResource("4_5et6i")
 
-[node name="Handles" parent="." instance=ExtResource("9_w8a51")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9649, -0.175204)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.892814, 0.450426, 0, -0.450426, 0.892814, 0, 1.99404, 0)
-
-[node name="Mechbody" parent="." instance=ExtResource("10_yegbs")]
-
-[node name="player" parent="Mechbody" instance=ExtResource("8_2g6xy")]
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 118.268, -58.733)
 mesh = SubResource("BoxMesh_i47ny")
@@ -92,3 +81,7 @@ mesh = SubResource("BoxMesh_i47ny")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -196.294, 0)
 mesh = SubResource("PlaneMesh_5qg64")
+
+[node name="Mechbody" parent="." instance=ExtResource("10_yegbs")]
+
+[node name="XROrigin3D" parent="Mechbody" instance=ExtResource("8_2g6xy")]
