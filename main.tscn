@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://mktno0wfl5yk"]
+[gd_scene load_steps=15 format=3 uid="uid://mktno0wfl5yk"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_y613h"]
 [ext_resource type="ArrayMesh" uid="uid://chx0afiwsqpj" path="res://assets/cruiser.obj" id="3_bc1wl"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://explosion_fx.tscn" id="6_hm7qd"]
 [ext_resource type="PackedScene" uid="uid://dlsarb7iw7bpi" path="res://test_player.tscn" id="8_2g6xy"]
 [ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="8_ne7mg"]
+[ext_resource type="PackedScene" uid="uid://c38fl22da0jew" path="res://gameplay/test_gameplay/training_bot.tscn" id="9_2ppjb"]
 [ext_resource type="PackedScene" uid="uid://dsh7i4eks64gc" path="res://gameplay/mechbody/mechbody.tscn" id="10_yegbs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_opudn"]
@@ -85,3 +86,33 @@ mesh = SubResource("PlaneMesh_5qg64")
 [node name="Mechbody" parent="." instance=ExtResource("10_yegbs")]
 
 [node name="XROrigin3D" parent="Mechbody" instance=ExtResource("8_2g6xy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.407531, 0)
+
+[node name="TrainingBot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+transform = Transform3D(0.233042, -0.32965, 0.914889, 0.816561, 0.577259, 0, -0.528128, 0.747063, 0.403705, 0, 0, -108.393)
+impulse = 0.0
+player = NodePath("../Mechbody")
+
+[node name="TrainingBot2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 41.2669, -112.603)
+player = NodePath("../Mechbody")
+
+[node name="TrainingBot3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -71.7672, -112.603)
+player = NodePath("../Mechbody")
+
+[node name="TrainingBot4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -112.603)
+player = NodePath("../Mechbody")
+
+[node name="TrainingBot5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22.0907)
+player = NodePath("../Mechbody")
+
+[node name="TrainingBot6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.4318, -81.2646)
+player = NodePath("../Mechbody")
+
+[node name="TrainingBot7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 10, -23.6213)
+player = NodePath("../Mechbody")

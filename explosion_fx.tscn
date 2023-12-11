@@ -115,4 +115,7 @@ radius = 22.63
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="end" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="end" to="." method="_on_end_timeout"]

@@ -10,6 +10,7 @@ enum gun_state {EMPTY, CYCLING, BATTERY}
 @export var launch_force = 10000.0
 @export var cycle_time = 0.2
 
+@onready var safety = false
 @onready var shot_timer = $ShotTimer
 
 var current_state : gun_state = gun_state.BATTERY
@@ -25,6 +26,7 @@ func trigger():
 
 # cycles the gun
 func _fire():
+	if safety : return
 	_set_projectile()
 	shot_timer.start(cycle_time)
 	current_state = gun_state.CYCLING

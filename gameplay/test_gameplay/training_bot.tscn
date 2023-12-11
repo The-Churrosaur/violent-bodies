@@ -7,12 +7,12 @@
 [ext_resource type="Material" uid="uid://byl3yi4rdb1c0" path="res://smoke_cloud_material.tres" id="4_w4uku"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2g2oc"]
-radius = 1.0
+radius = 3.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_3p5f2"]
 material = ExtResource("1_jp8id")
-radius = 1.0
-height = 2.0
+radius = 3.0
+height = 6.0
 radial_segments = 16
 rings = 8
 
@@ -34,6 +34,7 @@ can_sleep = false
 script = ExtResource("1_qefqv")
 
 [node name="explosionFX" parent="." instance=ExtResource("2_771qq")]
+boom_delay = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_2g2oc")
@@ -67,6 +68,7 @@ draw_pass_1 = SubResource("SphereMesh_ciiej")
 
 [node name="looker" type="Node3D" parent="."]
 
+[connection signal="explosion_ended" from="explosionFX" to="." method="_on_explosion_fx_explosion_ended"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_shooter_timer_timeout"]
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

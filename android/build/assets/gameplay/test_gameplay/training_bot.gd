@@ -5,7 +5,7 @@ extends RigidBody3D
 
 @export var impulse = 500.0
 @export var player : Node3D
-@export var slerp_speed = 0.5 # per second
+@export var slerp_speed = 2 # per second
 
 @onready var jitter_timer = $Timer
 @onready var shoot_timer = $Timer2
@@ -28,7 +28,7 @@ func _physics_process(delta):
 	$looker.look_at(player.global_position)
 	
 	var a = Quaternion(transform.basis)
-	var b = Quaternion($looker.transform.basis)
+	var b = Quaternion($looker.global_transform.basis)
 	var c = a.slerp(b, slerp_speed * delta)
 	transform.basis = Basis(c)
 	
@@ -54,4 +54,8 @@ func explode():
 	$GPUParticles3D.emitting = true
 	freeze = true
 	gun.safety = true
-	$explosionFX.emitting = true
+	$explosionFX.start_explosion_sequence()
+
+
+func _on_explosion_fx_explosion_ended():
+	queue_free()
