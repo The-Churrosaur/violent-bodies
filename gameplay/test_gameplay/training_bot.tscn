@@ -46,7 +46,7 @@ mesh = SubResource("SphereMesh_3p5f2")
 autostart = true
 
 [node name="lasergun" parent="." instance=ExtResource("3_3hpoh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1814)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.35263)
 
 [node name="Timer2" type="Timer" parent="."]
 wait_time = 1.6
