@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://byul3rfe4u44s"]
+
+[ext_resource type="Script" path="res://gameplay/controls/xr_input_processor.gd" id="1_v6xxx"]
+
+[node name="XRInputProcessor" type="Node3D"]
+script = ExtResource("1_v6xxx")

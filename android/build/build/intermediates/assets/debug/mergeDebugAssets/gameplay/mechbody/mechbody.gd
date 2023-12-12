@@ -1,4 +1,5 @@
-# testing input and movement
+# physical movement of the mech
+# set input attributes with controller
 
 class_name MechBody
 extends RigidBody3D
@@ -6,91 +7,51 @@ extends RigidBody3D
 @export var thrust_power = 500000.0
 @export var torque_power = 180000.0
 
-var wing_mode = false
+# set by controller
+# assume 0-1 but it's multiplicative
+var pitch_input = 0
+var roll_input = 0
+var yaw_input = 0
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var front_input = 0
+var strafe_input = 0
+var climb_input = 0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
+var fore
+var right
+var up
 
 func _physics_process(delta):
 	
-	var trigger = XRPlayerGlobals.lhand.get_input("trigger_click")
-	if trigger: 
-		var trackers = XRServer.get_trackers(2)
-		trackers[0].set_input("haptic", 0.5)
+	fore = transform.basis.z
+	right = transform.basis.x 
+	up = transform.basis.y
 	
-	var primary = XRPlayerGlobals.rhand.get_vector2("primary")
-	var secondary = XRPlayerGlobals.lhand.get_vector2("secondary")
-	
-	var rx = XRPlayerGlobals.rhand.get_input("ax_button")
-	var ry = XRPlayerGlobals.rhand.get_input("by_button")
-	
-	var lx = XRPlayerGlobals.lhand.get_input("ax_button")
-	var ly = XRPlayerGlobals.lhand.get_input("by_button")
-	
-	var fore = transform.basis.z
-	var right = transform.basis.x 
-	var up = transform.basis.y
-	
-	apply_central_force(right * thrust_power * delta * secondary.x)
-	apply_central_force(fore * -thrust_power * delta * secondary.y)
-	if rx:
-		apply_central_force(up * thrust_power * delta)
-	if ry:
-		apply_central_force(up * -thrust_power * delta)
+	# strafe
+	apply_central_force(right * thrust_power * delta * strafe_input)
+	# fore/reverse
+	apply_central_force(fore * -thrust_power * delta * front_input)
+	# climb
+	apply_central_force(up * thrust_power * delta * climb_input)
 	
 	# pitch
-	apply_torque(right * -torque_power * delta * primary.y)
-	
-	# plane mode
-	if ly:
-		# stick is roll
-		apply_torque(fore * -torque_power * delta * primary.x)
-		$wingfx.visible = true
-		apply_central_force(fore * -thrust_power * delta)
-		if !wing_mode: apply_central_impulse(-fore * 10000)
-		wing_mode = true
-		
-	
-	# normal
-	else:
-		# if ly is pressed, py is roll, else yaw
-		if (lx):
-			apply_torque(fore * -torque_power * delta * primary.x)
-		else:
-			apply_torque(up * -torque_power * delta * primary.x)
-		
-		$wingfx.visible = false
-		wing_mode = false
-	
-	
-	# trying head rotation
-	
-	# pitch
-	var head = XRPlayerGlobals.headset
-	
-	$headrot.text = str(head.rotation.y)
-	
-	# pitch
-	var pitch_angle = PI/6
-	
-	if head.rotation.x > pitch_angle:
-		apply_torque(right * torque_power * delta)
-	if head.rotation.x < -pitch_angle:
-		apply_torque(right * -torque_power * delta)
-	
+	apply_torque(right * -torque_power * delta * pitch_input)
+	# roll
+	apply_torque(fore * -torque_power * delta * roll_input)
 	# yaw
-	var yaw_angle = PI/4
-	if head.rotation.y > yaw_angle:
-		apply_torque(up * torque_power * delta)
-	if head.rotation.y < - yaw_angle:
-		apply_torque(up * -torque_power * delta)
+	apply_torque(up * -torque_power * delta * yaw_input)
+
+
+func boost_forwards(mult = 1.0):
+	apply_central_impulse(fore * -thrust_power * mult)
+
+
+func clear_inputs():
 	
-	$Label3D.text = str(linear_velocity)
-	$Label3D2.text = str(secondary)
+	pitch_input = 0
+	roll_input = 0
+	yaw_input = 0
+	
+	front_input = 0
+	strafe_input = 0
+	climb_input = 0

@@ -18,7 +18,7 @@ extends Node3D
 # to calculate target
 @export var handle_target : HandleTarget
 @export var scaling = 8.0
-@export var shoulder_lerp = 20
+@export var shoulder_lerp = 5
 
 @onready var arm = $ShoulderJoint/arm
 @onready var initial_target = $InitialTarget # desired arm target

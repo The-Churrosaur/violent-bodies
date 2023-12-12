@@ -17,4 +17,4 @@ func _on_timer_timeout():
 
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("laser"):
-		queue_free()
+		linear_velocity = -linear_velocity

@@ -13,8 +13,6 @@ extends XROrigin3D
 func _ready():
 	
 	# populate globals
-	XRPlayerGlobals.lhand = lhand
-	XRPlayerGlobals.rhand = rhand
-	XRPlayerGlobals.headset = headset
+	XRPlayerGlobals.set_xr_nodes(lhand, rhand, headset)
 	
 	print("globals populated")

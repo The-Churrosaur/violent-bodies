@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvg5e6hisacwi"]
+
+[ext_resource type="PackedScene" uid="uid://byul3rfe4u44s" path="res://gameplay/controls/xr_input_processor.tscn" id="1_4agol"]
+[ext_resource type="Script" path="res://mechbody_controller.gd" id="2_r8ium"]
+
+[node name="MechbodyController" instance=ExtResource("1_4agol")]
+script = ExtResource("2_r8ium")
+look_rotation = true
+look_pitch = 0.523599
+look_yaw = 0.785398

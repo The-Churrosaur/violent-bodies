@@ -1,6 +1,6 @@
 
 
-# input management for a particular pickable
+# ONE HAND input management for a particular pickable
 # just for organization
 
 class_name InputManager
