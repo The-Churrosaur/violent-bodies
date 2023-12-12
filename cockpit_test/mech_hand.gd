@@ -20,6 +20,6 @@ func _physics_process(delta):
 
 
 func trigger_tool():
-	$Label3D.text = "mech hanc activating tool"
+	$Label3D.text = "mech hand activating tool"
 	if current_tool != null:
 		current_tool.trigger()

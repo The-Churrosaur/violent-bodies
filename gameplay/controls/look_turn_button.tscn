@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://berwu0ktv5bjm"]
+[gd_scene load_steps=6 format=3 uid="uid://berwu0ktv5bjm"]
 
 [ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="1_xx66b"]
 
@@ -16,6 +16,10 @@ top_radius = 0.02
 bottom_radius = 0.02
 height = 0.02
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_iuvvq"]
+height = 0.02
+radius = 0.02
+
 [node name="LookTurnButton" instance=ExtResource("1_xx66b")]
 button = NodePath("StaticBody3D")
 
@@ -30,4 +34,7 @@ skeleton = NodePath("../..")
 
 [node name="Label3D" type="Label3D" parent="StaticBody3D" index="1"]
 transform = Transform3D(0.129011, 0, 0, 0, 0.0333905, 0.965926, 0, -0.124615, 0.258819, 0, 0, -0.0391664)
-text = "ENABLE GAZE ROTATION"
+text = "DISABLE GAZE ROTATION"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="2"]
+shape = SubResource("CylinderShape3D_iuvvq")

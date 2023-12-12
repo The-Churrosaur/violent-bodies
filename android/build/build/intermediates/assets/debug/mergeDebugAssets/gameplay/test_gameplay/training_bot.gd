@@ -10,6 +10,7 @@ extends RigidBody3D
 @onready var jitter_timer = $Timer
 @onready var shoot_timer = $Timer2
 @onready var gun = $enemygun
+@onready var health = $HealthModule
 
 var r = RandomNumberGenerator.new()
 
@@ -53,7 +54,13 @@ func _on_area_3d_area_entered(area):
 	$Label3D.text = str(area)
 	if area.is_in_group("laser"): 
 		$Label3D.text = "hit by laser"
-		explode()
+		if area is DamageArea : 
+			health.change_health(-area.damage)
+		else:
+			health.change_health(-1)
+		
+		$DamageFx.play()
+		
 
 
 func explode():
@@ -64,3 +71,7 @@ func explode():
 
 func _on_explosion_fx_explosion_ended():
 	queue_free()
+
+
+func _on_health_module_health_zero():
+	explode()

@@ -7,3 +7,5 @@ func _on_interact_button_pressed(button):
 	mechcontroller.look_rotation = !mechcontroller.look_rotation
 	if mechcontroller.look_rotation : 
 		$LookTurnButton/Label3D.text = "DISABLE GAZE ROTATION"
+	else:
+		$LookTurnButton/Label3D.text = "ENABLE GAZE ROTATION"

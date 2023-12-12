@@ -16,6 +16,7 @@ extends XRInputProcessor
 
 func _physics_process(delta):
 	super._physics_process(delta)
+	if !active: return
 	if headset == null: return # TODO
 	
 	# reset inputs
@@ -49,9 +50,16 @@ func _physics_process(delta):
 	if lx : body.yaw_input += primary.x
 	else : body.roll_input += primary.x
 	
+	
+	# FLIGHT MODE
+	
+	if flight_controller.enabled:
+		body.front_input = 1
+	
+	
 	# LOOK ROTATION
 	
-	if look_rotation:
+	if look_rotation and !flight_controller.enabled:
 		
 		# get angles from cockpit to headset
 		# I'll think of how to use the proper node later TODO
@@ -65,11 +73,6 @@ func _physics_process(delta):
 		
 		if y > look_yaw : body.yaw_input -= 1
 		if y < -look_pitch : body.yaw_input += 1
-	
-	# FLIGHT MODE
-	
-	if flight_controller.enabled:
-		body.front_input = 1
 
 
 func _on_left_input_down(action):
@@ -77,7 +80,7 @@ func _on_left_input_down(action):
 	
 	# FLIGHT MODE
 	if action == "by_button":
-		body.boost_forwards(0.05)
+		body.boost_forwards(0.02)
 		flight_effects.visible = true
 		flight_controller.enabled = true
 

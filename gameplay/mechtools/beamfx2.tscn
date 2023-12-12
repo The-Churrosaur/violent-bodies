@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bak1wwgkoec2"]
+[gd_scene load_steps=11 format=3 uid="uid://bak1wwgkoec2"]
 
 [ext_resource type="Script" path="res://beamfx.gd" id="1_5g7rs"]
 [ext_resource type="Material" uid="uid://cyp6f6hs8t5rv" path="res://materials/sword_material.tres" id="2_p8msy"]
 [ext_resource type="Material" uid="uid://cj7hotheanjxq" path="res://particles/bean_particle_process_material.tres" id="3_4f6wc"]
+[ext_resource type="Script" path="res://gameplay/mechtools/damage_area.gd" id="4_rf3xd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktnmc"]
 shading_mode = 0
@@ -79,10 +80,12 @@ draw_pass_1 = SubResource("SphereMesh_6mowl")
 [node name="Label3D" type="Label3D" parent="."]
 visible = false
 
-[node name="Area3D" type="Area3D" parent="." groups=["laser"]]
+[node name="DamageArea" type="Area3D" parent="." groups=["laser"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.77433, 0)
+script = ExtResource("4_rf3xd")
+damage = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageArea"]
 shape = SubResource("CapsuleShape3D_41j2q")
 
-[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="DamageArea" to="." method="_on_area_3d_area_entered"]

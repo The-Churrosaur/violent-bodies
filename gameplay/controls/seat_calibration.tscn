@@ -13,7 +13,6 @@ transform = Transform3D(0.236848, 0, 0, 0, 0.236848, 0, 0, 0, 1, 0, 0.0846521, 0
 text = "GRAB TO MOVE SEAT"
 
 [node name="seatmover" parent="." index="1" instance=ExtResource("3_gf1wy")]
-freeze_mode = 0
 
 [connection signal="dropped" from="seatmover" to="." method="_on_released"]
 [connection signal="grabbed" from="seatmover" to="." method="_on_grabbed"]

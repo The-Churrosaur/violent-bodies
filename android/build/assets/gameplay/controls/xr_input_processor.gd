@@ -1,6 +1,6 @@
 
 # API for controller inputs
-# inherit this to get input logic where you need it
+# inherit this or plug in to get input logic where you need it
 # can be set active / inactive
 
 class_name XRInputProcessor

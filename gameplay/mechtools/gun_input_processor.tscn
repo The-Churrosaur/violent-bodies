@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk57ccrojdqh1"]
+
+[ext_resource type="PackedScene" uid="uid://byul3rfe4u44s" path="res://gameplay/controls/xr_input_processor.tscn" id="1_odfcv"]
+[ext_resource type="Script" path="res://gameplay/mechtools/gun_input_processor.gd" id="2_83to2"]
+
+[node name="GunInput" instance=ExtResource("1_odfcv")]
+script = ExtResource("2_83to2")

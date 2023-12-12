@@ -18,4 +18,4 @@ func _on_timer_timeout():
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("laser"):
 		linear_velocity = -linear_velocity
-		position += linear_velocity * 10
+		position += linear_velocity * 0.01
