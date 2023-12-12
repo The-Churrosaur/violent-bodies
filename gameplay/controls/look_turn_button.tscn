@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://berwu0ktv5bjm"]
+
+[ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="1_xx66b"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sbtij"]
+margin = 0.01
+height = 0.02
+radius = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjtmk"]
+albedo_color = Color(0.423529, 0.423529, 0.423529, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7aoaa"]
+material = SubResource("StandardMaterial3D_mjtmk")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.02
+
+[node name="LookTurnButton" instance=ExtResource("1_xx66b")]
+button = NodePath("StaticBody3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("CylinderShape3D_sbtij")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="0"]
+mesh = SubResource("CylinderMesh_7aoaa")
+skeleton = NodePath("../..")
+
+[node name="Label3D" type="Label3D" parent="StaticBody3D" index="1"]
+transform = Transform3D(0.129011, 0, 0, 0, 0.0333905, 0.965926, 0, -0.124615, 0.258819, 0, 0, -0.0391664)
+text = "ENABLE GAZE ROTATION"

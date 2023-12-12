@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct1mqoq7ffeph"]
+
+[ext_resource type="Script" path="res://gameplay/controls/flight_module_panel.gd" id="1_8mucq"]
+
+[node name="FlightPanel" type="Label3D"]
+transform = Transform3D(0.244102, 0, 0, 0, 0.231611, -0.673907, 0, 0.0770828, 2.02489, -0.0845021, 1.5498, -0.131881)
+text = "FLIGHT MODULE"
+script = ExtResource("1_8mucq")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.179915, 0)
+text = "adfs"
+
+[node name="ENABLED" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.207429, -2.98023e-08)
+text = "ENABLED"

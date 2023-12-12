@@ -2,6 +2,7 @@ extends InputManager
 
 @export var cockpit : Node3D
 @export var move_scale = 0.1 #m/s
+@export var disable_controller : MechbodyController
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +13,12 @@ func _ready():
 func _process(delta):
 	super._process(delta)
 	
-	if !active : return
+	if !active : 
+		disable_controller.active = true
+		return
+	
+	# eh
+	disable_controller.active = false
 	
 	var axis = controller.get_vector2("primary")
 	

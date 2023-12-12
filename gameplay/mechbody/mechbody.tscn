@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsh7i4eks64gc"]
+[gd_scene load_steps=16 format=3 uid="uid://dsh7i4eks64gc"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_ifmva"]
 [ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="2_gumoi"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bln8cdsrflypy" path="res://gameplay/mechbody/flight_module.tscn" id="4_wgapf"]
 [ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="5_3oo3b"]
 [ext_resource type="PackedScene" uid="uid://dvg5e6hisacwi" path="res://mechbody_controller.tscn" id="6_gk30v"]
+[ext_resource type="PackedScene" uid="uid://ct1mqoq7ffeph" path="res://gameplay/controls/flight_module_panel.tscn" id="6_jyua8"]
 [ext_resource type="Script" path="res://gameplay/mechbody/windparticles.gd" id="6_tf5xd"]
+[ext_resource type="PackedScene" uid="uid://f0sl8gvyo7an" path="res://gameplay/controls/look_turn_panel.tscn" id="9_gn4jr"]
+[ext_resource type="PackedScene" uid="uid://d26k2y5i1upl1" path="res://gameplay/controls/seat_calibration.tscn" id="10_plbo3"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g8pff"]
 height = 1.0
@@ -23,7 +26,7 @@ emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 angle_min = 73.5
 angle_max = 73.5
-inherit_velocity_ratio = 0.755
+inherit_velocity_ratio = 0.869
 direction = Vector3(0, 0, 1)
 spread = 8.182
 initial_velocity_min = 5.0
@@ -86,9 +89,8 @@ mechbody = NodePath("..")
 coefficient = 1.0
 enabled = true
 
-[node name="Label3D3" type="Label3D" parent="FlightModule"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0515402, 0.76512, -0.201944)
-text = "adsfe"
+[node name="Label3D3" parent="FlightModule" node_paths=PackedStringArray("flight_module") instance=ExtResource("6_jyua8")]
+flight_module = NodePath("..")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." node_paths=PackedStringArray("body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11827, -1.57225)
@@ -101,11 +103,22 @@ body = NodePath("..")
 
 [node name="headrot" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.978566, -0.358034)
+visible = false
 text = "asdf"
 
-[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_effects") instance=ExtResource("6_gk30v")]
+[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_effects", "flight_controller") instance=ExtResource("6_gk30v")]
 body = NodePath("..")
 flight_effects = NodePath("../wingfx")
+flight_controller = NodePath("../FlightModule")
+
+[node name="LookTurnPanel" parent="." node_paths=PackedStringArray("mechcontroller") instance=ExtResource("9_gn4jr")]
+transform = Transform3D(1, 0, 0, 0, 0.274446, -0.961603, 0, 0.961603, 0.274446, 0.0802011, 0.635256, -0.354815)
+mechcontroller = NodePath("../MechbodyController")
+
+[node name="seatcalibrator" parent="." node_paths=PackedStringArray("cockpit", "disable_controller") instance=ExtResource("10_plbo3")]
+transform = Transform3D(0.767781, 0, 0.640713, 0, 1, 0, -0.640713, 0, 0.767781, 0.378891, 0.708426, 0.355719)
+cockpit = NodePath("../Cockpit")
+disable_controller = NodePath("../MechbodyController")
 
 [connection signal="dropped" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_released"]
 [connection signal="grabbed" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_grabbed"]

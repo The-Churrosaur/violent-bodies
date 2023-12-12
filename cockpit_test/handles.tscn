@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_2pxa1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_d5pdd"]
-margin = 0.01
+margin = 0.002
 height = 0.1
 radius = 0.1
 

@@ -5,7 +5,7 @@ extends Node3D
 
 
 @export var ship : RigidBody3D
-@export var mult = 0.02
+@export var mult = 0.002
 
 @onready var dial = $Dial
 
@@ -24,4 +24,6 @@ func _physics_process(delta):
 	var target = ship.global_position + ship.linear_velocity
 	look_at(target)
 	
-	dial.position.z *= -target.length_squared() * mult
+	var speed = ship.linear_velocity.length()
+	dial.position.z *= speed * mult
+	$speed.text = str(int(speed))

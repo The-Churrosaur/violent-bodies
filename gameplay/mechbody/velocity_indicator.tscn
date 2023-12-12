@@ -31,3 +31,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
 mesh = SubResource("SphereMesh_fq2sp")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ftu82")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.0755991, 0, 0, 0, 0.0755991, 0, 0, 0, 1, 0, 0.059417, 0)
+text = "VELOCITY VECTOR"
+
+[node name="speed" type="Label3D" parent="."]
+transform = Transform3D(0.140793, 0, 0, 0, 0.140793, 0, 0, 0, 1, 0, -0.0672095, 0)
+text = "342"

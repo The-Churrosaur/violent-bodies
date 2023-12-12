@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlsarb7iw7bpi"]
+[gd_scene load_steps=10 format=3 uid="uid://dlsarb7iw7bpi"]
 
 [ext_resource type="Script" path="res://test_player.gd" id="1_bbutg"]
 [ext_resource type="Shader" path="res://shaders/embyr_outline.gdshader" id="1_iu4kd"]
 [ext_resource type="Script" path="res://linputtest.gd" id="3_egsgs"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_mcp2j"]
+[ext_resource type="PackedScene" uid="uid://bx1xdisoqo1f6" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_tac_glove_low.tscn" id="5_tncjn"]
+[ext_resource type="PackedScene" uid="uid://chumpejwiub7f" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_tac_glove_low.tscn" id="6_nr3qn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gajeu"]
 render_priority = 0
@@ -14,10 +16,9 @@ material = SubResource("ShaderMaterial_gajeu")
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_cbxeg"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.2
+[sub_resource type="SphereShape3D" id="SphereShape3D_fq2hl"]
+margin = 0.005
+radius = 0.01
 
 [node name="XROrigin3D" type="XROrigin3D" node_paths=PackedStringArray("lhand", "rhand", "headset")]
 script = ExtResource("1_bbutg")
@@ -38,25 +39,23 @@ tracker = &"left_hand"
 pose = &"aim"
 script = ExtResource("3_egsgs")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XRController3D2"]
-mesh = SubResource("CylinderMesh_cbxeg")
-
-[node name="Label3D" type="Label3D" parent="XRController3D2/MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.216598, 0)
-visible = false
-text = "AAAAAAAAAA"
-
 [node name="FunctionPickup" parent="XRController3D2" instance=ExtResource("4_mcp2j")]
+
+[node name="LeftHand" parent="XRController3D2" instance=ExtResource("5_tncjn")]
 
 [node name="XRController3D" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75625, 0, 0)
 tracker = &"right_hand"
 pose = &"aim"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XRController3D"]
-mesh = SubResource("CylinderMesh_cbxeg")
-
 [node name="FunctionPickup" parent="XRController3D" instance=ExtResource("4_mcp2j")]
+
+[node name="RightHand" parent="XRController3D" instance=ExtResource("6_nr3qn")]
+
+[node name="Area3D" type="Area3D" parent="XRController3D/RightHand"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XRController3D/RightHand/Area3D"]
+shape = SubResource("SphereShape3D_fq2hl")
 
 [connection signal="button_pressed" from="XRController3D2" to="XRController3D2" method="_on_button_pressed"]
 [connection signal="input_float_changed" from="XRController3D2" to="XRController3D2" method="_on_input_float_changed"]

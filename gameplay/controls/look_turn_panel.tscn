@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://f0sl8gvyo7an"]
+
+[ext_resource type="Script" path="res://gameplay/controls/look_turn_panel.gd" id="1_jf30l"]
+[ext_resource type="PackedScene" uid="uid://berwu0ktv5bjm" path="res://gameplay/controls/look_turn_button.tscn" id="1_seim2"]
+
+[node name="LookTurnPanel" type="Node3D"]
+script = ExtResource("1_jf30l")
+
+[node name="LookTurnButton" parent="." instance=ExtResource("1_seim2")]
+
+[connection signal="button_pressed" from="LookTurnButton" to="." method="_on_interact_button_pressed"]

@@ -5,6 +5,7 @@ extends XRInputProcessor
 
 @export var body : MechBody
 @export var flight_effects : Node3D
+@export var flight_controller : FlightModule
 
 # look rotation / movement is in relation to this node 
 @export var cockpit_headset_reference : Node3D
@@ -64,15 +65,21 @@ func _physics_process(delta):
 		
 		if y > look_yaw : body.yaw_input -= 1
 		if y < -look_pitch : body.yaw_input += 1
+	
+	# FLIGHT MODE
+	
+	if flight_controller.enabled:
+		body.front_input = 1
 
 
 func _on_left_input_down(action):
 	super._on_left_input_down(action)
 	
-	# boost
+	# FLIGHT MODE
 	if action == "by_button":
 		body.boost_forwards(0.05)
 		flight_effects.visible = true
+		flight_controller.enabled = true
 
 
 func _on_left_input_up(action):
@@ -81,6 +88,7 @@ func _on_left_input_up(action):
 	# flight mode
 	if action == "by_button":
 		flight_effects.visible = false
+		flight_controller.enabled = false
 
 
 func _on_right_input_down(action):

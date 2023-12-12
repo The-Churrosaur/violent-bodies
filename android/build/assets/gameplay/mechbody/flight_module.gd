@@ -11,6 +11,8 @@ extends Node3D
 @export var max_aoa = PI / 2
 @export var enabled = false
 
+var data : String
+
 
 func _physics_process(delta):
 	if !enabled: return
@@ -20,16 +22,16 @@ func _physics_process(delta):
 	var alpha = fore.signed_angle_to(vel, -global_transform.basis.x)
 	
 	if alpha > max_aoa: 
-		$Label3D3.text = "stalls"
+		data = "stalls"
 		return
 	if vel.dot(fore) < 0: 
-		$Label3D3.text = "vectors opposite"
+		data = "vectors opposite"
 		return 
 	
 	var lift = global_transform.basis.y * alpha * coefficient * vel.length_squared()
 	mechbody.apply_central_force(lift)
 	
 	var length = lift.length()
-	$Label3D3.text = str(length)
+	data = str(int(length))
 	
 	
