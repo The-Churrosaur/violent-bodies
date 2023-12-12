@@ -143,6 +143,10 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_eelx1")
 draw_pass_1 = SubResource("SphereMesh_4akwj")
 
+[node name="headrot" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.978566, -0.358034)
+text = "asdf"
+
 [editable path="Cockpit"]
 [editable path="Cockpit/handlesLeft"]
 [editable path="Cockpit/handlesRight"]

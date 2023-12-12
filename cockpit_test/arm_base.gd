@@ -18,10 +18,12 @@ extends Node3D
 # to calculate target
 @export var handle_target : HandleTarget
 @export var scaling = 8.0
+@export var shoulder_lerp = 20
 
 @onready var arm = $ShoulderJoint/arm
 @onready var initial_target = $InitialTarget # desired arm target
 @onready var shoulder = $ShoulderJoint
+@onready var shoulder_target = $ShoulderTarget
 
 
 
@@ -38,6 +40,10 @@ func _physics_process(delta):
 	initial_target.position = initial_target.position * scaling
 	
 	# rotate shoulder joint
-	$ShoulderJoint.global_rotation = initial_target.global_rotation
+	# move shoulder target then lerp shoulder
+	shoulder_target.global_rotation = initial_target.global_rotation
+	shoulder.global_transform = shoulder.global_transform.interpolate_with(shoulder_target.global_transform, shoulder_lerp * delta)
+	
+	
 	
 	$Label3D.text = str(scaling)

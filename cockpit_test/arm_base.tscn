@@ -55,4 +55,6 @@ text = "asdf"
 
 [node name="InitialTarget" type="Node3D" parent="."]
 
+[node name="ShoulderTarget" type="Node3D" parent="."]
+
 [editable path="ShoulderJoint/arm"]

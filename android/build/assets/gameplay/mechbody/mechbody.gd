@@ -71,12 +71,26 @@ func _physics_process(delta):
 	
 	
 	# trying head rotation
+	
+	# pitch
 	var head = XRPlayerGlobals.headset
-	if head.rotation.x > PI/4:
+	
+	$headrot.text = str(head.rotation.y)
+	
+	# pitch
+	var pitch_angle = PI/6
+	
+	if head.rotation.x > pitch_angle:
 		apply_torque(right * torque_power * delta)
-	if head.rotation.x < -PI/4:
+	if head.rotation.x < -pitch_angle:
 		apply_torque(right * -torque_power * delta)
 	
+	# yaw
+	var yaw_angle = PI/4
+	if head.rotation.y > yaw_angle:
+		apply_torque(up * torque_power * delta)
+	if head.rotation.y < - yaw_angle:
+		apply_torque(up * -torque_power * delta)
 	
 	$Label3D.text = str(linear_velocity)
 	$Label3D2.text = str(secondary)
