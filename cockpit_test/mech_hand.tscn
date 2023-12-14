@@ -4,7 +4,3 @@
 
 [node name="MechHand" type="Node3D"]
 script = ExtResource("1_v30vb")
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14514, 0)
-text = "handssss"

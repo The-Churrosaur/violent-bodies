@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dlsarb7iw7bpi"]
+[gd_scene load_steps=9 format=3 uid="uid://dlsarb7iw7bpi"]
 
 [ext_resource type="Script" path="res://test_player.gd" id="1_bbutg"]
 [ext_resource type="Shader" path="res://shaders/embyr_outline.gdshader" id="1_iu4kd"]
-[ext_resource type="Script" path="res://linputtest.gd" id="3_egsgs"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_mcp2j"]
 [ext_resource type="PackedScene" uid="uid://bx1xdisoqo1f6" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_tac_glove_low.tscn" id="5_tncjn"]
 [ext_resource type="PackedScene" uid="uid://chumpejwiub7f" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_tac_glove_low.tscn" id="6_nr3qn"]
@@ -37,7 +36,6 @@ mesh = SubResource("QuadMesh_kwj0y")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43259, 0, 0)
 tracker = &"left_hand"
 pose = &"aim"
-script = ExtResource("3_egsgs")
 
 [node name="FunctionPickup" parent="XRController3D2" instance=ExtResource("4_mcp2j")]
 

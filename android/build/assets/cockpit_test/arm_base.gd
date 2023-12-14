@@ -44,6 +44,3 @@ func _physics_process(delta):
 	shoulder_target.global_rotation = initial_target.global_rotation
 	shoulder.global_transform = shoulder.global_transform.interpolate_with(shoulder_target.global_transform, shoulder_lerp * delta)
 	
-	
-	
-	$Label3D.text = str(scaling)

@@ -62,55 +62,7 @@ mesh = SubResource("CylinderMesh_4co0s")
 
 [node name="Cockpit" parent="." instance=ExtResource("2_gumoi")]
 
-[node name="Cube" parent="Cockpit/handlesLeft/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
-
-[node name="Cube_001" parent="Cockpit/handlesLeft/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="Cockpit/handlesLeft/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="Cockpit/handlesLeft/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="Cube" parent="Cockpit/handlesRight/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
-
-[node name="Cube_001" parent="Cockpit/handlesRight/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="Cockpit/handlesRight/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="Cockpit/handlesRight/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="Cube" parent="Cockpit/ArmBaseLeft/ShoulderJoint/arm/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.80444e-08, -0.0418429, -5.624e-18, 0.0895613, 8.61473e-09, 4.47967e-16, 2.12213, -0.0846465)
-
-[node name="Cube_001" parent="Cockpit/ArmBaseLeft/ShoulderJoint/arm/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.62181e-17, 8.89721e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.62181e-17, -0.118076, -1.75149e-08, 2.90053e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="Cockpit/ArmBaseLeft/ShoulderJoint/arm/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="Cockpit/ArmBaseLeft/ShoulderJoint/arm/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-4.58022e-09, -0.145023, 0, -6.87033e-09, 0, -0.0768434, -0.0768434, 1.2966e-08, 9.16045e-09, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="Cube" parent="Cockpit/ArmBaseRight/ShoulderJoint/arm/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.80444e-08, -0.0418429, -5.624e-18, 0.0895613, 8.61473e-09, 4.47967e-16, 2.12213, -0.0846465)
-
-[node name="Cube_001" parent="Cockpit/ArmBaseRight/ShoulderJoint/arm/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.62181e-17, 8.89721e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.62181e-17, -0.118076, -1.75149e-08, 2.90053e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="Cockpit/ArmBaseRight/ShoulderJoint/arm/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="Cockpit/ArmBaseRight/ShoulderJoint/arm/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-4.58022e-09, -0.145023, 0, -6.87033e-09, 0, -0.0768434, -0.0768434, 1.2966e-08, 9.16045e-09, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="Stupidgun2" parent="Cockpit/RHandParent/MechHand" index="1" node_paths=PackedStringArray("launching_rigidbody")]
+[node name="Stupidgun2" parent="Cockpit/RHandParent/MechHand" index="0" node_paths=PackedStringArray("launching_rigidbody")]
 launching_rigidbody = NodePath("../../../..")
 
 [node name="Indicator" parent="Cockpit" node_paths=PackedStringArray("ship") instance=ExtResource("3_h412r")]
@@ -122,7 +74,7 @@ transform = Transform3D(0.244102, 0, 0, 0, 0.231611, -0.673907, 0, 0.0770828, 2.
 flight_module = NodePath("../../FlightModule")
 
 [node name="LookTurnPanel" parent="Cockpit" node_paths=PackedStringArray("mechcontroller") instance=ExtResource("9_gn4jr")]
-transform = Transform3D(1, 0, 0, 0, 0.274446, -0.961603, 0, 0.961603, 0.274446, 0.0802011, 0.635256, -0.354815)
+transform = Transform3D(1, 0, 0, 0, 0.274446, -0.961603, 0, 0.961603, 0.274446, 0.0802011, 0.639585, -0.339646)
 mechcontroller = NodePath("../../MechbodyController")
 
 [node name="Label3D" type="Label3D" parent="."]
@@ -168,6 +120,11 @@ flight_controller = NodePath("../FlightModule")
 transform = Transform3D(0.767781, 0, 0.640713, 0, 1, 0, -0.640713, 0, 0.767781, 0.378891, 0.708426, 0.355719)
 cockpit = NodePath("../Cockpit")
 disable_controller = NodePath("../MechbodyController")
+
+[connection signal="dropped" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_released"]
+[connection signal="grabbed" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_grabbed"]
+[connection signal="dropped" from="Cockpit/handlesRight/Handles" to="Cockpit/InputManagerYokeRight" method="_on_released"]
+[connection signal="grabbed" from="Cockpit/handlesRight/Handles" to="Cockpit/InputManagerYokeRight" method="_on_grabbed"]
 
 [editable path="Cockpit"]
 [editable path="Cockpit/handlesLeft"]

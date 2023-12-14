@@ -21,20 +21,20 @@ height = 0.02
 radius = 0.02
 
 [node name="LookTurnButton" instance=ExtResource("1_xx66b")]
+collision_layer = 17
+collision_mask = 131089
 button = NodePath("StaticBody3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 shape = SubResource("CylinderShape3D_sbtij")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="0"]
 mesh = SubResource("CylinderMesh_7aoaa")
 skeleton = NodePath("../..")
 
-[node name="Label3D" type="Label3D" parent="StaticBody3D" index="1"]
-transform = Transform3D(0.129011, 0, 0, 0, 0.0333905, 0.965926, 0, -0.124615, 0.258819, 0, 0, -0.0391664)
-text = "DISABLE GAZE ROTATION"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="1"]
 shape = SubResource("CylinderShape3D_iuvvq")

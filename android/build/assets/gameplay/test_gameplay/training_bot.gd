@@ -7,9 +7,10 @@ extends RigidBody3D
 @export var player : Node3D
 @export var slerp_speed = 2 # per second
 
+@export var gun : StupidGun
+
 @onready var jitter_timer = $Timer
 @onready var shoot_timer = $Timer2
-@onready var gun = $enemygun
 @onready var health = $HealthModule
 
 var r = RandomNumberGenerator.new()

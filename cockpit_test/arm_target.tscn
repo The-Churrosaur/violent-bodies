@@ -19,7 +19,3 @@ shape = SubResource("SphereShape3D_xpoam")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("TextMesh_0okf1")
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762005, -0.647871)
-text = "guygugkuyg"

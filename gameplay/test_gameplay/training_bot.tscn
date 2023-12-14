@@ -38,13 +38,14 @@ height = 6.0
 radial_segments = 16
 rings = 8
 
-[node name="TrainingBot" type="RigidBody3D"]
+[node name="TrainingBot" type="RigidBody3D" node_paths=PackedStringArray("gun")]
 collision_layer = 2
 collision_mask = 2
 mass = 100.0
 gravity_scale = 0.0
 can_sleep = false
 script = ExtResource("1_qefqv")
+gun = NodePath("enemygun")
 
 [node name="explosionFX" parent="." instance=ExtResource("2_771qq")]
 boom_delay = 0.0
@@ -83,8 +84,6 @@ draw_pass_1 = SubResource("SphereMesh_ciiej")
 [node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("6_f3m75")]
 mechbody = NodePath("..")
 enabled = true
-
-[node name="Label3D3" type="Label3D" parent="FlightModule"]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.707107, -0.540324, 0.456125, 0, 0.645058, 0.764134, -0.707107, -0.540324, 0.456125, 6.90655, 10.9964, 5.729)

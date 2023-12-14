@@ -85,8 +85,10 @@ material = ExtResource("2_7wcby")
 radius = 20.0
 height = 40.0
 
-[node name="explosionFX" type="Node3D"]
+[node name="explosionFX" type="Node3D" node_paths=PackedStringArray("bubbling", "nova")]
 script = ExtResource("1_brwyy")
+bubbling = NodePath("bubbling")
+nova = NodePath("nova")
 
 [node name="bubbling" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000318944, 0.628824, -0.00383043)
@@ -113,9 +115,5 @@ draw_pass_1 = SubResource("SphereMesh_pg8aa")
 strength = 0.2
 radius = 22.63
 
-[node name="Timer" type="Timer" parent="."]
-
-[node name="end" type="Timer" parent="."]
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="end" to="." method="_on_end_timeout"]
+[connection signal="finished" from="bubbling" to="." method="_on_bubbling_finished"]
+[connection signal="finished" from="nova" to="." method="_on_nova_finished"]

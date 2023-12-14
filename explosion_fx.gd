@@ -5,21 +5,20 @@ extends Node3D
 signal explosion_ended()
 @export var boom_delay = 5.0
 
-var total_time = boom_delay + 6
+@export var bubbling : GPUParticles3D
+@export var nova : GPUParticles3D
+
 
 func start_explosion_sequence():
-	$bubbling.emitting = true
-	$Timer.start(boom_delay)
-	$end.start(total_time)
+	bubbling.emitting = true
 
 
-func explode_nova():
-	$nova.emitting = true
+func _on_bubbling_finished():
+	nova.emitting = true
 
 
-func _on_timer_timeout():
-	explode_nova()
-
-
-func _on_end_timeout():
+func _on_nova_finished():
 	emit_signal("explosion_ended")
+
+
+

@@ -12,7 +12,6 @@ extends RigidBody3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Label3D.text = "ready"
 	pass
 
 
@@ -20,7 +19,6 @@ func _ready():
 func _physics_process(delta):
 	if target_node == null: return
 	var target = target_node.global_transform
-	$Label3D.text = str(target)
 	global_transform = global_transform.interpolate_with(target, lerp_amount * delta)
 	#$Label3D.text = "target"
 

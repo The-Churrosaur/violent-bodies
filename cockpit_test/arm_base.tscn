@@ -49,10 +49,6 @@ target_node = NodePath("../InitialTarget")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="ArmTarget/HandParent"]
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(0.711658, 0, -0.702526, 0, 1, 0, 0.702526, 0, 0.711658, 0.0076685, 2.36722, -0.00635481)
-text = "asdf"
-
 [node name="InitialTarget" type="Node3D" parent="."]
 
 [node name="ShoulderTarget" type="Node3D" parent="."]

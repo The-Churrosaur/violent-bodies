@@ -8,7 +8,7 @@ script = ExtResource("1_t5bl3")
 bot_template = ExtResource("2_qsxsv")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 30.0
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
