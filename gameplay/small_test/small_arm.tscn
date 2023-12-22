@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcxoxrwq0io2g"]
+
+[ext_resource type="Script" path="res://cockpit_test/arm_base.gd" id="1_ykotn"]
+[ext_resource type="PackedScene" uid="uid://bg8wacgshd3r1" path="res://cockpit_test/mech_arm_temp.tscn" id="2_v8erk"]
+[ext_resource type="PackedScene" uid="uid://clqdxr8l7x1fu" path="res://cockpit_test/arm_target.tscn" id="3_mtb5j"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_bcxlx"]
+
+[node name="ArmBase" type="Node3D" node_paths=PackedStringArray("hand_parent")]
+script = ExtResource("1_ykotn")
+hand_parent = NodePath("ArmTarget/HandParent")
+scaling = 16.0
+
+[node name="ShoulderJoint" type="Node3D" parent="."]
+
+[node name="arm" parent="ShoulderJoint" instance=ExtResource("2_v8erk")]
+transform = Transform3D(-2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, 0.01, 0, -3.20006)
+
+[node name="Cube" parent="ShoulderJoint/arm/Armature/Skeleton3D" index="0"]
+transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.80444e-08, -0.0418429, -5.624e-18, 0.0895613, 8.61473e-09, 4.47967e-16, 2.12213, -0.0846465)
+
+[node name="Cube" parent="ShoulderJoint/arm/Armature/Skeleton3D/Cube" index="0"]
+transform = Transform3D(1, -6.29423e-25, 2.64698e-23, -6.92391e-24, 1, 0, 1.32349e-23, 0, 1, 0, 0, 0)
+
+[node name="Cube_001" parent="ShoulderJoint/arm/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.118076, 2.62181e-17, 8.89721e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.62181e-17, -0.118076, -1.75149e-08, 2.90053e-16, 1.30188, -0.00440489)
+
+[node name="Cube_002" parent="ShoulderJoint/arm/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
+
+[node name="Cylinder_002" parent="ShoulderJoint/arm/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-4.58022e-09, -0.145023, 0, -6.87033e-09, 0, -0.0768434, -0.0768434, 1.2966e-08, 9.16045e-09, 2.23246e-16, 1.00273, -0.00268012)
+
+[node name="SkeletonIK3D" parent="ShoulderJoint/arm/Armature/Skeleton3D" index="5"]
+target_node = NodePath("../../../../../ArmTarget")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShoulderJoint"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.143361, 0)
+mesh = SubResource("PrismMesh_bcxlx")
+
+[node name="ArmTarget" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("3_mtb5j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.07456)
+collision_layer = 0
+collision_mask = 0
+freeze_mode = 0
+target_node = NodePath("../InitialTarget")
+
+[node name="HandParent" type="Node3D" parent="ArmTarget"]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="ArmTarget/HandParent"]
+
+[node name="InitialTarget" type="Node3D" parent="."]
+
+[node name="ShoulderTarget" type="Node3D" parent="."]
+
+[editable path="ShoulderJoint/arm"]

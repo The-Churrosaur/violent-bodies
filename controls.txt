@@ -1,0 +1,31 @@
+
+
+CALIBRATION
+
+
+There is a hockey puck over your right shoulder, grab it and use right stick to move seat
+your shoulders should be approximately level with the blades of the mech's shoulders
+
+
+ARMS
+
+
+grab the control yokes and move them around. recalibrate seat if necessary
+triggers activate weapons
+
+
+MOVEMENT
+
+
+Right stick - pitch and roll
+Left stick - XY movement
+
+Right thumb button A - up
+right thumb button B - down
+
+Left thumb button X + Right stick - yaw
+
+Gaze over 60* triggers automatic pitch and yaw (can be disabled)
+
+Left thumb button Y - flight mode + boost (you will go weeeee)
+

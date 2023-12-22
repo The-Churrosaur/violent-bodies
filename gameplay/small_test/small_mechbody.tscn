@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3 uid="uid://cj0yvk052e7d8"]
+
+[ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_c3ob1"]
+[ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="6_pvsy5"]
+[ext_resource type="PackedScene" uid="uid://bln8cdsrflypy" path="res://gameplay/mechbody/flight_module.tscn" id="7_5q28r"]
+[ext_resource type="PackedScene" uid="uid://ban6wodgf76ma" path="res://gameplay/small_test/small_cockpit.tscn" id="7_bmtnr"]
+[ext_resource type="Script" path="res://gameplay/mechbody/windparticles.gd" id="8_vppbd"]
+[ext_resource type="PackedScene" uid="uid://dvg5e6hisacwi" path="res://mechbody_controller.tscn" id="9_xyc26"]
+[ext_resource type="PackedScene" uid="uid://d26k2y5i1upl1" path="res://gameplay/controls/seat_calibration.tscn" id="10_86wdu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yb10v"]
+friction = 0.14
+absorbent = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g8pff"]
+height = 4.0
+radius = 3.11873
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eelx1"]
+particle_flag_align_y = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 73.5
+angle_max = 73.5
+inherit_velocity_ratio = 0.869
+direction = Vector3(0, 0, 1)
+spread = 8.182
+initial_velocity_min = 5.0
+initial_velocity_max = 58.03
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_64itd"]
+transparency = 1
+albedo_color = Color(0.631373, 0.631373, 0.631373, 0.282353)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4akwj"]
+material = SubResource("StandardMaterial3D_64itd")
+radius = 0.02
+radial_segments = 4
+rings = 3
+
+[node name="Mechbody" type="RigidBody3D"]
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_yb10v")
+linear_damp = 0.1
+angular_damp = 2.0
+script = ExtResource("1_c3ob1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.46176, 0)
+shape = SubResource("CylinderShape3D_g8pff")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+visible = false
+text = "adsf"
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50374, -1.01823)
+visible = false
+text = "asdf"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, -1.09665, 4.00737)
+mesh = ExtResource("6_pvsy5")
+
+[node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("7_5q28r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0422812, 0.0477576, 0.0106616)
+mechbody = NodePath("..")
+coefficient = 1.0
+enabled = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." node_paths=PackedStringArray("body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11827, -1.57225)
+process_material = SubResource("ParticleProcessMaterial_eelx1")
+draw_pass_1 = SubResource("SphereMesh_4akwj")
+script = ExtResource("8_vppbd")
+body = NodePath("..")
+
+[node name="wingfx" type="Node3D" parent="."]
+
+[node name="headrot" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.978566, -0.358034)
+visible = false
+text = "asdf"
+
+[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_effects", "flight_controller") instance=ExtResource("9_xyc26")]
+body = NodePath("..")
+flight_effects = NodePath("../wingfx")
+flight_controller = NodePath("../FlightModule")
+
+[node name="seatcalibrator" parent="." node_paths=PackedStringArray("cockpit", "disable_controller") instance=ExtResource("10_86wdu")]
+transform = Transform3D(0.767781, 0, 0.640713, 0, 1, 0, -0.640713, 0, 0.767781, 0.378891, 0.708426, 0.355719)
+cockpit = NodePath("../Cockpit2")
+disable_controller = NodePath("../MechbodyController")
+
+[node name="Cockpit2" parent="." instance=ExtResource("7_bmtnr")]
+
+[node name="Cockpit" parent="Cockpit2" index="0"]
+visible = false
+
+[node name="Stupidgun2" parent="Cockpit2/RHandParent/MechHand" index="0" node_paths=PackedStringArray("launching_rigidbody")]
+launching_rigidbody = NodePath("../../../..")
+
+[connection signal="dropped" from="Cockpit2/handlesLeft/Handles" to="Cockpit2/InputManagerYokeLeft" method="_on_released"]
+[connection signal="grabbed" from="Cockpit2/handlesLeft/Handles" to="Cockpit2/InputManagerYokeLeft" method="_on_grabbed"]
+[connection signal="dropped" from="Cockpit2/handlesRight/Handles" to="Cockpit2/InputManagerYokeRight" method="_on_released"]
+[connection signal="grabbed" from="Cockpit2/handlesRight/Handles" to="Cockpit2/InputManagerYokeRight" method="_on_grabbed"]
+
+[editable path="Cockpit2"]
+[editable path="Cockpit2/handlesLeft"]
+[editable path="Cockpit2/handlesRight"]

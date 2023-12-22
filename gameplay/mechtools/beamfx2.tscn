@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://beamfx.gd" id="1_5g7rs"]
 [ext_resource type="Material" uid="uid://cyp6f6hs8t5rv" path="res://materials/sword_material.tres" id="2_p8msy"]
-[ext_resource type="Material" uid="uid://cj7hotheanjxq" path="res://particles/bean_particle_process_material.tres" id="3_4f6wc"]
+[ext_resource type="Material" uid="uid://cj7hotheanjxq" path="res://effects/bean_particle_process_material.tres" id="3_7rwda"]
 [ext_resource type="Script" path="res://gameplay/mechtools/damage_area.gd" id="4_rf3xd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktnmc"]
@@ -59,7 +59,7 @@ amount = 100
 lifetime = 0.24
 visibility_aabb = AABB(-4, -3.18469, -4, 8, 8, 8)
 local_coords = true
-process_material = ExtResource("3_4f6wc")
+process_material = ExtResource("3_7rwda")
 draw_pass_1 = SubResource("SphereMesh_3yuae")
 
 [node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="MeshInstance3D/GPUParticles3D"]

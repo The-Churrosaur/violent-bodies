@@ -29,3 +29,6 @@ func _ready():
 		
 	else:
 		print("OpenXR not initialized, please check if your headset is connected")
+		
+	
+	#get_tree().change_scene_to_file("res://small_main.tscn")

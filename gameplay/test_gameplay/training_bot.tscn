@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="1_jp8id"]
 [ext_resource type="Script" path="res://gameplay/test_gameplay/training_bot.gd" id="1_qefqv"]
-[ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://explosion_fx.tscn" id="2_771qq"]
+[ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://effects/explosion_fx.tscn" id="2_7u7ub"]
 [ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="3_pxub6"]
 [ext_resource type="Material" uid="uid://byl3yi4rdb1c0" path="res://smoke_cloud_material.tres" id="4_w4uku"]
 [ext_resource type="PackedScene" uid="uid://bln8cdsrflypy" path="res://gameplay/mechbody/flight_module.tscn" id="6_f3m75"]
@@ -47,7 +47,7 @@ can_sleep = false
 script = ExtResource("1_qefqv")
 gun = NodePath("enemygun")
 
-[node name="explosionFX" parent="." instance=ExtResource("2_771qq")]
+[node name="explosionFX" parent="." instance=ExtResource("2_7u7ub")]
 boom_delay = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

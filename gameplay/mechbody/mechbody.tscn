@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsh7i4eks64gc"]
+[gd_scene load_steps=18 format=3 uid="uid://dsh7i4eks64gc"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_ifmva"]
 [ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="2_gumoi"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" path="res://gameplay/mechbody/windparticles.gd" id="6_tf5xd"]
 [ext_resource type="PackedScene" uid="uid://f0sl8gvyo7an" path="res://gameplay/controls/look_turn_panel.tscn" id="9_gn4jr"]
 [ext_resource type="PackedScene" uid="uid://d26k2y5i1upl1" path="res://gameplay/controls/seat_calibration.tscn" id="10_plbo3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pfxel"]
+friction = 0.53
+absorbent = true
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g8pff"]
 height = 1.0
@@ -44,13 +48,18 @@ radius = 0.02
 radial_segments = 4
 rings = 3
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n3q16"]
+height = 5.0
+radius = 10.0
+
 [node name="Mechbody" type="RigidBody3D"]
 mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_pfxel")
 gravity_scale = 0.0
 linear_damp = 0.1
 angular_damp = 2.0
 script = ExtResource("1_ifmva")
-torque_power = 9000.0
+torque_power = 500000.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
@@ -58,6 +67,7 @@ shape = SubResource("CylinderShape3D_g8pff")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
+visible = false
 mesh = SubResource("CylinderMesh_4co0s")
 
 [node name="Cockpit" parent="." instance=ExtResource("2_gumoi")]
@@ -120,6 +130,10 @@ flight_controller = NodePath("../FlightModule")
 transform = Transform3D(0.767781, 0, 0.640713, 0, 1, 0, -0.640713, 0, 0.767781, 0.378891, 0.708426, 0.355719)
 cockpit = NodePath("../Cockpit")
 disable_controller = NodePath("../MechbodyController")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.3781, 0)
+shape = SubResource("CylinderShape3D_n3q16")
 
 [connection signal="dropped" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_released"]
 [connection signal="grabbed" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_grabbed"]
