@@ -24,3 +24,7 @@ root_bone = &"Bone"
 tip_bone = &"Bone.003"
 use_magnet = true
 magnet = Vector3(0, 0, 100)
+target_node = NodePath("../../../Node3D")
+
+[node name="Node3D" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.209442, -0.866665)

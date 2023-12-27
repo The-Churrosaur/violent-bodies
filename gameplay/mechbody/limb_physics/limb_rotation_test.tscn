@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6o0x4kpw661v"]
+
+[ext_resource type="Script" path="res://gameplay/mechbody/limb_physics/manual_rotator.gd" id="1_6jflt"]
+[ext_resource type="PackedScene" uid="uid://d0ex8w8t8rocw" path="res://gameplay/mechbody/limb_physics/limb_rotator.tscn" id="1_deiq7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqydm"]
+albedo_color = Color(1, 0.254902, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wishc"]
+material = SubResource("StandardMaterial3D_xqydm")
+size = Vector3(0.5, 3, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tuh3m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6ppsm"]
+size = Vector3(1, 2, 0.5)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4iy85"]
+
+[sub_resource type="Sky" id="Sky_u8c0p"]
+sky_material = SubResource("ProceduralSkyMaterial_4iy85")
+
+[sub_resource type="Environment" id="Environment_nmfdj"]
+background_mode = 2
+sky = SubResource("Sky_u8c0p")
+
+[node name="LimbRotationTest" type="Node3D"]
+
+[node name="Target" type="Node3D" parent="."]
+transform = Transform3D(0.925051, 0.379844, 0, -0.379844, 0.925051, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_6jflt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Target"]
+mesh = SubResource("BoxMesh_wishc")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+gravity_scale = 0.0
+angular_damp = 4.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_tuh3m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0019424, 0, 0)
+mesh = SubResource("BoxMesh_6ppsm")
+
+[node name="LimbRotator" parent="RigidBody3D" node_paths=PackedStringArray("body", "target") instance=ExtResource("1_deiq7")]
+body = NodePath("..")
+target = NodePath("../../Target")
+match_x = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.16704)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nmfdj")

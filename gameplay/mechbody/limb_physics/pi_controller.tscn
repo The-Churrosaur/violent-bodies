@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c75mqqdjs2o1n"]
+
+[ext_resource type="Script" path="res://gameplay/mechbody/limb_physics/pi_controller.gd" id="1_1cuuu"]
+
+[node name="PiController" type="Node"]
+script = ExtResource("1_1cuuu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]

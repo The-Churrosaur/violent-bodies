@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0ex8w8t8rocw"]
+
+[ext_resource type="Script" path="res://gameplay/mechbody/limb_physics/limb_rotator.gd" id="1_rlsmf"]
+
+[node name="LimbRotator" type="Node3D"]
+script = ExtResource("1_rlsmf")

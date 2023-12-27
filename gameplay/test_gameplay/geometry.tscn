@@ -12,7 +12,8 @@ buffer = PackedFloat32Array(-1.36967, 0, 0, 233.522, 0, 1.36967, 0, 466.709, 0, 
 [sub_resource type="PlaneMesh" id="PlaneMesh_51sd0"]
 size = Vector2(2000, 2000)
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_t3cd7"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_m87jg"]
+size = Vector3(2000, 2000, 2000)
 
 [sub_resource type="MultiMesh" id="MultiMesh_gjw24"]
 transform_format = 1
@@ -53,7 +54,7 @@ mesh = SubResource("PlaneMesh_51sd0")
 [node name="StaticBody3D" type="StaticBody3D" parent="base"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="base/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_t3cd7")
+shape = SubResource("BoxShape3D_m87jg")
 
 [node name="House" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_1hde3")
