@@ -38,23 +38,25 @@ func _physics_process(delta):
 	body.front_input += secondary.y
 	body.strafe_input += secondary.x
 	
-	if ry: body.climb_input -= 1
-	if rx: body.climb_input += 1
+	if rx: body.climb_input -= 1
+	if ry: body.climb_input += 1
 	
 	# rotation
 	
 	body.pitch_input += primary.y
 	
-	# default roll, secondary yaw
-	# (because headset movement)
-	if lx : body.yaw_input += primary.x
-	else : body.roll_input += primary.x
-	
-	
 	# FLIGHT MODE
 	
 	if flight_controller.enabled:
 		body.front_input = 1
+		body.roll_input += primary.x
+	elif lx : 
+		body.roll_input += primary.x
+	else:
+		body.yaw_input += primary.x
+	
+	
+	
 	
 	
 	# LOOK ROTATION
