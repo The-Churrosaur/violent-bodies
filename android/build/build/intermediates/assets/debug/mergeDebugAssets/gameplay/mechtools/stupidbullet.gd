@@ -21,6 +21,7 @@ func _on_area_3d_area_entered(area):
 		position += linear_velocity * 0.01
 
 func _on_body_entered(body):
+
 	_explode()
 
 
