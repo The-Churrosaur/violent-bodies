@@ -1,14 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://mktno0wfl5yk"]
+[gd_scene load_steps=21 format=3 uid="uid://mktno0wfl5yk"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_y613h"]
 [ext_resource type="ArrayMesh" uid="uid://chx0afiwsqpj" path="res://assets/cruiser.obj" id="3_bc1wl"]
 [ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="4_5et6i"]
 [ext_resource type="Script" path="res://spinner.gd" id="4_jaagw"]
 [ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://effects/explosion_fx.tscn" id="6_hm7qd"]
-[ext_resource type="PackedScene" uid="uid://dlsarb7iw7bpi" path="res://test_player.tscn" id="8_2g6xy"]
 [ext_resource type="PackedScene" uid="uid://c38fl22da0jew" path="res://gameplay/test_gameplay/training_bot.tscn" id="9_2ppjb"]
 [ext_resource type="PackedScene" uid="uid://bdhc7mn7fx7jt" path="res://gameplay/test_gameplay/bot_spawner.tscn" id="10_4e2ph"]
-[ext_resource type="PackedScene" uid="uid://dsh7i4eks64gc" path="res://gameplay/mechbody/mechbody.tscn" id="10_yegbs"]
+[ext_resource type="PackedScene" uid="uid://dhtsktjng545t" path="res://gameplay/test_gameplay/full_mech.tscn" id="10_i13c0"]
 [ext_resource type="ArrayMesh" uid="uid://cl7snahl1dxqk" path="res://assets/terrain_ex.obj" id="11_flred"]
 [ext_resource type="PackedScene" uid="uid://dapy8e8aqf5pt" path="res://gameplay/test_gameplay/geometry.tscn" id="11_hlgp2"]
 
@@ -156,7 +155,6 @@ mesh = ExtResource("11_flred")
 [node name="Geometry" parent="." instance=ExtResource("11_hlgp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -258.479, 0)
 
-[node name="Mechbody" parent="." instance=ExtResource("10_yegbs")]
+[node name="Mechbody" parent="." instance=ExtResource("10_i13c0")]
+transform = Transform3D(0.950651, 0.310262, 0, -0.310262, 0.950651, 0, 0, 0, 1, 0, -191.979, 0)
 gravity_scale = 1.0
-
-[node name="XROrigin3D" parent="Mechbody" instance=ExtResource("8_2g6xy")]

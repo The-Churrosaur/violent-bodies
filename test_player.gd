@@ -16,3 +16,13 @@ func _ready():
 	XRPlayerGlobals.set_xr_nodes(lhand, rhand, headset)
 	
 	print("globals populated")
+
+
+
+var flip = -1
+func _on_timer_timeout():
+	#position += Vector3(0,0.1,0) * flip
+	#rotate_z(0.05 * flip)
+	#flip = flip * -1
+	
+	pass

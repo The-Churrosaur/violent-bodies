@@ -49,7 +49,7 @@ radial_segments = 4
 rings = 3
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_n3q16"]
-height = 5.0
+height = 17.7898
 radius = 10.0
 
 [node name="Mechbody" type="RigidBody3D"]
@@ -131,7 +131,7 @@ cockpit = NodePath("../Cockpit")
 disable_controller = NodePath("../MechbodyController")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.3781, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.1751, 0)
 shape = SubResource("CylinderShape3D_n3q16")
 
 [connection signal="dropped" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_released"]

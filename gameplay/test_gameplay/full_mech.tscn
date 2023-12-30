@@ -16,14 +16,25 @@ shape = SubResource("BoxShape3D_cqkqi")
 
 [node name="XROrigin3D" parent="seatparent" index="1" instance=ExtResource("2_8tojb")]
 
-[node name="JoltPinJoint3D" type="JoltPinJoint3D" parent="." index="14"]
+[node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="." index="14"]
+linear_limit_spring_x/frequency = 20.0
+linear_limit_spring_y/frequency = 20.0
+linear_limit_spring_z/frequency = 5.0
+linear_spring_x/enabled = true
+linear_spring_x/frequency = 5.0
+linear_spring_y/enabled = true
+linear_spring_y/frequency = 5.0
+linear_spring_z/enabled = true
+linear_spring_z/frequency = 5.0
+angular_spring_x/enabled = true
+angular_spring_x/frequency = 5.0
+angular_spring_y/enabled = true
+angular_spring_y/frequency = 5.0
+angular_spring_z/enabled = true
+angular_spring_z/frequency = 5.0
 node_a = NodePath("..")
 node_b = NodePath("../seatparent")
-
-[connection signal="dropped" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_released"]
-[connection signal="grabbed" from="Cockpit/handlesLeft/Handles" to="Cockpit/InputManagerYokeLeft" method="_on_grabbed"]
-[connection signal="dropped" from="Cockpit/handlesRight/Handles" to="Cockpit/InputManagerYokeRight" method="_on_released"]
-[connection signal="grabbed" from="Cockpit/handlesRight/Handles" to="Cockpit/InputManagerYokeRight" method="_on_grabbed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.65933, 0)
 
 [editable path="Cockpit"]
 [editable path="Cockpit/handlesLeft"]
