@@ -8,10 +8,15 @@
 script = ExtResource("2_n7yt0")
 
 [node name="Cylinder_001" parent="." index="0"]
+transform = Transform3D(-1.03608e-08, -0.0402078, 0, 0.173825, -2.39657e-09, 0, 0, 0, -0.173825, 0, 0, 0)
 surface_material_override/0 = ExtResource("3_ltfv1")
 
 [node name="Cylinder_004" parent="." index="1"]
+transform = Transform3D(0.103373, -2.17249e-08, 0, 1.56088e-08, 0.143878, 0, 0, 0, -0.103373, 0, 0, 0)
 surface_material_override/0 = ExtResource("3_ltfv1")
+
+[node name="Armature" parent="." index="2"]
+transform = Transform3D(0.633975, 0, 0, 0, 0, -0.633975, 0, 0.633975, 0, 0, 0, 0)
 
 [node name="Cube" parent="Armature/Skeleton3D" index="0"]
 transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.80444e-08, -0.0418429, -5.624e-18, 0.0895613, 8.61473e-09, 4.47967e-16, 2.12213, -0.0846465)
@@ -46,7 +51,3 @@ root_bone = &"Bone"
 tip_bone = &"Bone.003"
 use_magnet = true
 magnet = Vector3(0, 0, 100)
-target_node = NodePath("../../../Node3D")
-
-[node name="Node3D" type="Node3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.209442, -0.866665)

@@ -16,7 +16,7 @@ scaling = 16.0
 [node name="ShoulderJoint" type="Node3D" parent="."]
 
 [node name="arm" parent="ShoulderJoint" instance=ExtResource("2_3eeh4")]
-transform = Transform3D(-8, 0, -6.99382e-07, 0, 8, 0, 6.99382e-07, 0, -8, 0.00957441, 0.0413374, -12.7886)
+transform = Transform3D(-8, 0, -6.99382e-07, 0, 8, 0, 6.99382e-07, 0, -8, 0.01, 0, 0)
 
 [node name="Cube" parent="ShoulderJoint/arm/Armature/Skeleton3D/Cube" index="0"]
 transform = Transform3D(1, -6.29423e-25, 2.64698e-23, -6.92391e-24, 1, 0, 1.32349e-23, 0, 1, 0, 0, 0)
@@ -29,7 +29,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529284, 0)
 mesh = SubResource("PrismMesh_bcxlx")
 
 [node name="ArmTarget" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("3_pnddb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.07456)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.3121)
 collision_layer = 0
 collision_mask = 0
 freeze_mode = 0

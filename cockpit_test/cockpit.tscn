@@ -11,8 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://bak1wwgkoec2" path="res://gameplay/mechtools/beamfx2.tscn" id="8_0bnul"]
 [ext_resource type="PackedScene" uid="uid://canlurq7heofm" path="res://gameplay/mechtools/laserstupidgun.tscn" id="10_0tm33"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_3fqtn"]
-size = Vector3(0.5, 0.1, 0.5)
+[sub_resource type="CylinderMesh" id="CylinderMesh_1lqo6"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.1
+radial_segments = 6
 
 [node name="Cockpit" type="Node3D"]
 
@@ -20,53 +23,15 @@ size = Vector3(0.5, 0.1, 0.5)
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.06, -0.06)
 mesh = ExtResource("2_by6e6")
 
-[node name="handlesLeft" parent="." instance=ExtResource("3_x8qfj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.374306, 0.651538, 1.0079)
-
-[node name="Cube" parent="handlesLeft/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
-
-[node name="Cube_001" parent="handlesLeft/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="handlesLeft/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="handlesLeft/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="InputManagerYokeLeft" parent="." node_paths=PackedStringArray("mech_hand") instance=ExtResource("3_bc6r6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499248, 0)
-mech_hand = NodePath("../LHandParent/MechHand")
-
-[node name="handlesRight" parent="." instance=ExtResource("3_x8qfj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384, 0.649, 1)
-
-[node name="Cube" parent="handlesRight/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
-
-[node name="Cube_001" parent="handlesRight/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="handlesRight/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="handlesRight/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="InputManagerYokeRight" parent="." node_paths=PackedStringArray("mech_hand") instance=ExtResource("3_bc6r6")]
-mech_hand = NodePath("../RHandParent/MechHand")
-
 [node name="ClavicleLeft" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.98, 0.101)
 script = ExtResource("3_wixsj")
 
 [node name="HandleTargetLeft" parent="ClavicleLeft" node_paths=PackedStringArray("handle_arm") instance=ExtResource("5_rtvdc")]
-handle_arm = NodePath("../../handlesLeft")
+handle_arm = NodePath("../../Handles/handlesLeft")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClavicleLeft"]
-visible = false
-mesh = SubResource("BoxMesh_3fqtn")
+mesh = SubResource("CylinderMesh_1lqo6")
 
 [node name="Label3D" type="Label3D" parent="ClavicleLeft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145661, -0.25648)
@@ -76,31 +41,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.98, 0.101)
 script = ExtResource("3_wixsj")
 
 [node name="HandleTargetRight" parent="ClavicleRight" node_paths=PackedStringArray("handle_arm") instance=ExtResource("5_rtvdc")]
-handle_arm = NodePath("../../handlesRight")
+handle_arm = NodePath("../../Handles/handlesRight")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClavicleRight"]
-visible = false
-mesh = SubResource("BoxMesh_3fqtn")
+mesh = SubResource("CylinderMesh_1lqo6")
 
 [node name="Label3D" type="Label3D" parent="ClavicleRight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145661, -0.25648)
 
 [node name="ArmBaseLeft" parent="." node_paths=PackedStringArray("handle_target") instance=ExtResource("4_k5xln")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.74194, 0)
 handle_target = NodePath("../ClavicleLeft/HandleTargetLeft")
 
 [node name="RemoteTransform3D" parent="ArmBaseLeft/ArmTarget/HandParent" index="0"]
 remote_path = NodePath("../../../../LHandParent")
 
 [node name="ArmBaseRight" parent="." node_paths=PackedStringArray("handle_target") instance=ExtResource("4_k5xln")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.74194, 0)
 handle_target = NodePath("../ClavicleRight/HandleTargetRight")
 
 [node name="RemoteTransform3D" parent="ArmBaseRight/ArmTarget/HandParent" index="0"]
 remote_path = NodePath("../../../../RHandParent")
 
 [node name="LHandParent" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 5.07456)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.74194, -13.3121)
 
 [node name="MechHand" parent="LHandParent" node_paths=PackedStringArray("current_tool", "arm") instance=ExtResource("7_37bp7")]
 current_tool = NodePath("beamfx2")
@@ -110,7 +74,7 @@ arm = NodePath("../../ArmBaseLeft")
 transform = Transform3D(4, 8.52651e-14, 1.69407e-20, -3.35953e-14, 2.36405, 3.22665, 4.58534e-14, -3.22664, 2.36406, 9.53674e-07, -4.17233e-07, -0.665171)
 
 [node name="RHandParent" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5.07456)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.74194, -13.3121)
 
 [node name="MechHand" parent="RHandParent" node_paths=PackedStringArray("current_tool", "arm") instance=ExtResource("7_37bp7")]
 current_tool = NodePath("Stupidgun2")
@@ -122,14 +86,53 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.693941, 0)
 [node name="laser" parent="RHandParent/MechHand" instance=ExtResource("10_0tm33")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730311, 0)
 
-[connection signal="dropped" from="handlesLeft/Handles" to="InputManagerYokeLeft" method="_on_released"]
-[connection signal="grabbed" from="handlesLeft/Handles" to="InputManagerYokeLeft" method="_on_grabbed"]
-[connection signal="dropped" from="handlesRight/Handles" to="InputManagerYokeRight" method="_on_released"]
-[connection signal="grabbed" from="handlesRight/Handles" to="InputManagerYokeRight" method="_on_grabbed"]
+[node name="Handles" type="Node3D" parent="."]
 
-[editable path="handlesLeft"]
-[editable path="handlesRight"]
+[node name="handlesLeft" parent="Handles" instance=ExtResource("3_x8qfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.374306, 0.651538, 1.0079)
+
+[node name="Cube" parent="Handles/handlesLeft/Armature/Skeleton3D" index="0"]
+transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
+
+[node name="Cube_001" parent="Handles/handlesLeft/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
+
+[node name="Cube_002" parent="Handles/handlesLeft/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
+
+[node name="Cylinder_002" parent="Handles/handlesLeft/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
+
+[node name="InputManagerYokeLeft" parent="Handles" node_paths=PackedStringArray("mech_hand") instance=ExtResource("3_bc6r6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499248, 0)
+mech_hand = NodePath("../../LHandParent/MechHand")
+
+[node name="handlesRight" parent="Handles" instance=ExtResource("3_x8qfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384, 0.649, 1)
+
+[node name="Cube" parent="Handles/handlesRight/Armature/Skeleton3D" index="0"]
+transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
+
+[node name="Cube_001" parent="Handles/handlesRight/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
+
+[node name="Cube_002" parent="Handles/handlesRight/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
+
+[node name="Cylinder_002" parent="Handles/handlesRight/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
+
+[node name="InputManagerYokeRight" parent="Handles" node_paths=PackedStringArray("mech_hand") instance=ExtResource("3_bc6r6")]
+mech_hand = NodePath("../../RHandParent/MechHand")
+
+[connection signal="dropped" from="Handles/handlesLeft/Handles" to="Handles/InputManagerYokeLeft" method="_on_released"]
+[connection signal="grabbed" from="Handles/handlesLeft/Handles" to="Handles/InputManagerYokeLeft" method="_on_grabbed"]
+[connection signal="dropped" from="Handles/handlesRight/Handles" to="Handles/InputManagerYokeRight" method="_on_released"]
+[connection signal="grabbed" from="Handles/handlesRight/Handles" to="Handles/InputManagerYokeRight" method="_on_grabbed"]
+
 [editable path="ArmBaseLeft"]
 [editable path="ArmBaseLeft/ShoulderJoint/arm"]
 [editable path="ArmBaseRight"]
 [editable path="ArmBaseRight/ShoulderJoint/arm"]
+[editable path="Handles/handlesLeft"]
+[editable path="Handles/handlesRight"]

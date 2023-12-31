@@ -1,9 +1,11 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cr3o3nwa7xg1b"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cr3o3nwa7xg1b"]
 
+[ext_resource type="Material" uid="uid://dmrgpj2mpj5jt" path="res://materials/test_outline_shader.tres" id="1_dnhc8"]
 [ext_resource type="Shader" path="res://shaders/cel-shader-base.gdshader" id="2_ga80o"]
 
 [resource]
 render_priority = 0
+next_pass = ExtResource("1_dnhc8")
 shader = ExtResource("2_ga80o")
 shader_parameter/color = Color(0.478431, 0.478431, 0.478431, 1)
 shader_parameter/specular = Color(0.152941, 0.152941, 0.152941, 0.615686)
