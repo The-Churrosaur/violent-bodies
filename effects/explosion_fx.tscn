@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://prpquffa8bgi"]
 
 [ext_resource type="Script" path="res://effects/explosion_fx.gd" id="1_qtopc"]
-[ext_resource type="Material" uid="uid://byl3yi4rdb1c0" path="res://smoke_cloud_material.tres" id="2_5vftu"]
+[ext_resource type="Material" uid="uid://byl3yi4rdb1c0" path="res://materials/smoke_cloud_material.tres" id="2_bxpgc"]
 [ext_resource type="Material" uid="uid://d36fshnmb3ppv" path="res://materials/smoke_material.tres" id="3_mg3vs"]
 
 [sub_resource type="Gradient" id="Gradient_d858w"]
@@ -36,7 +36,7 @@ turbulence_noise_speed_random = 0.0
 turbulence_influence_max = 0.16
 
 [sub_resource type="SphereMesh" id="SphereMesh_sdl23"]
-material = ExtResource("2_5vftu")
+material = ExtResource("2_bxpgc")
 radius = 20.0
 height = 40.0
 radial_segments = 32

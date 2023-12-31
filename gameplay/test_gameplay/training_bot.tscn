@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://gameplay/test_gameplay/training_bot.gd" id="1_qefqv"]
 [ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://effects/explosion_fx.tscn" id="2_7u7ub"]
 [ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="3_pxub6"]
+[ext_resource type="Material" uid="uid://cr3o3nwa7xg1b" path="res://materials/generic_toon.tres" id="4_j6s1e"]
 [ext_resource type="Material" uid="uid://byl3yi4rdb1c0" path="res://smoke_cloud_material.tres" id="4_w4uku"]
 [ext_resource type="PackedScene" uid="uid://bln8cdsrflypy" path="res://gameplay/mechbody/flight_module.tscn" id="6_f3m75"]
 [ext_resource type="PackedScene" uid="uid://dyycpms0kxsgm" path="res://gameplay/test_gameplay/health_module.tscn" id="8_27lgs"]
@@ -12,9 +13,6 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2g2oc"]
 radius = 5.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22cga"]
-shading_mode = 2
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wigt3"]
 inherit_velocity_ratio = 0.818
@@ -56,7 +54,7 @@ shape = SubResource("SphereShape3D_2g2oc")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 3.73162)
 mesh = ExtResource("3_pxub6")
-surface_material_override/0 = SubResource("StandardMaterial3D_22cga")
+surface_material_override/0 = ExtResource("4_j6s1e")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

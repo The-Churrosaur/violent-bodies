@@ -51,9 +51,9 @@ func _physics_process(delta):
 		body.front_input = 1
 		body.roll_input += primary.x
 	elif lx : 
-		body.roll_input += primary.x
-	else:
 		body.yaw_input += primary.x
+	else:
+		body.roll_input += primary.x
 	
 	
 	

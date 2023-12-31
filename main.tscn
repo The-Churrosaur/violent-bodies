@@ -1,29 +1,27 @@
-[gd_scene load_steps=21 format=3 uid="uid://mktno0wfl5yk"]
+[gd_scene load_steps=22 format=3 uid="uid://mktno0wfl5yk"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_y613h"]
 [ext_resource type="ArrayMesh" uid="uid://chx0afiwsqpj" path="res://assets/cruiser.obj" id="3_bc1wl"]
 [ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="4_5et6i"]
 [ext_resource type="Script" path="res://spinner.gd" id="4_jaagw"]
 [ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://effects/explosion_fx.tscn" id="6_hm7qd"]
+[ext_resource type="Material" uid="uid://cr3o3nwa7xg1b" path="res://materials/generic_toon.tres" id="6_lgqxr"]
 [ext_resource type="PackedScene" uid="uid://c38fl22da0jew" path="res://gameplay/test_gameplay/training_bot.tscn" id="9_2ppjb"]
 [ext_resource type="PackedScene" uid="uid://bdhc7mn7fx7jt" path="res://gameplay/test_gameplay/bot_spawner.tscn" id="10_4e2ph"]
 [ext_resource type="PackedScene" uid="uid://dhtsktjng545t" path="res://gameplay/test_gameplay/full_mech.tscn" id="10_i13c0"]
 [ext_resource type="ArrayMesh" uid="uid://cl7snahl1dxqk" path="res://assets/terrain_ex.obj" id="11_flred"]
 [ext_resource type="PackedScene" uid="uid://dapy8e8aqf5pt" path="res://gameplay/test_gameplay/geometry.tscn" id="11_hlgp2"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_opudn"]
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wqfvj"]
+energy_multiplier = 2.88
 
-[sub_resource type="Sky" id="Sky_lkh6y"]
-sky_material = SubResource("ProceduralSkyMaterial_opudn")
+[sub_resource type="Sky" id="Sky_wpkdm"]
+sky_material = SubResource("PhysicalSkyMaterial_wqfvj")
 
-[sub_resource type="Environment" id="Environment_axxl0"]
+[sub_resource type="Environment" id="Environment_t3im3"]
 background_mode = 2
-sky = SubResource("Sky_lkh6y")
-ambient_light_color = Color(0.862745, 0.862745, 0.862745, 1)
-glow_enabled = true
-glow_intensity = 2.85
-glow_strength = 0.89
-glow_bloom = 0.14
+background_energy_multiplier = 1.22
+sky = SubResource("Sky_wpkdm")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nfpfe"]
 radius = 1.43949
@@ -36,6 +34,7 @@ size = Vector3(100, 100, 100)
 size = Vector3(100, 100, 100)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tb0qd"]
+material = ExtResource("6_lgqxr")
 radius = 100.0
 height = 500.0
 
@@ -52,11 +51,14 @@ size = Vector2(2000, 2000)
 script = ExtResource("1_y613h")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_axxl0")
+environment = SubResource("Environment_t3im3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.0602297, -0.587268, 0.807149, 0, 0.808617, 0.588336, -0.998185, 0.0354353, -0.0487028, 0, 0, 0)
-light_color = Color(1, 0.85098, 0.65098, 1)
+light_color = Color(0.890196, 0.933333, 0.964706, 1)
+light_energy = 2.663
+light_indirect_energy = 2.247
+light_volumetric_fog_energy = 0.377
 
 [node name="Cruiser2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-6.40465, 0, 39.4955, 0, 40.0114, 0, -39.4955, 0, -6.40465, -1634.32, 222.346, -671.572)
@@ -114,7 +116,7 @@ mesh = SubResource("CapsuleMesh_tb0qd")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
-transform = Transform3D(1, 0, 0, -5.96046e-08, 1, 0, -2.98023e-08, 2.98023e-08, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, -1.19209e-07, 1, 0, -8.9407e-08, 2.98023e-08, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_bfh1b")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]

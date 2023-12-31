@@ -1,6 +1,7 @@
 extends GPUParticles3D
 
 @export var body : RigidBody3D
+@export var min_speed = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,7 +11,5 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var speed = body.linear_velocity.length_squared()
-	if speed < 5 : emitting = false
+	if speed < min_speed : emitting = false
 	else : emitting = true
-	process_material.initial_velocity_min = speed
-	process_material.initial_velocity_max = speed

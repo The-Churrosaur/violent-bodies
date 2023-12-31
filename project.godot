@@ -55,7 +55,11 @@ specular_smoothness={
 }
 fresnel_smoothness={
 "type": "float",
-"value": 0.0
+"value": 0.01
+}
+diffuse_curve={
+"type": "sampler2D",
+"value": ""
 }
 
 [xr]
