@@ -39,6 +39,7 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
+	if target == null: pass
 	_rotate_along_axis(delta)
 
 
