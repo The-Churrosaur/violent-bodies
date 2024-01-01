@@ -49,19 +49,21 @@ target_node = NodePath("../InitialTarget")
 [node name="RagdollBitUArm" parent="RagdollArm" node_paths=PackedStringArray("target_node") instance=ExtResource("5_ldgn4")]
 target_node = NodePath("../../ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube_002/Cube_002")
 
-[node name="JoltPinJoint3D3" type="JoltPinJoint3D" parent="RagdollArm/RagdollBitUArm"]
+[node name="JoltPinJoint3D3" type="PinJoint3D" parent="RagdollArm/RagdollBitUArm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 node_a = NodePath("..")
 node_b = NodePath("../RagdollBitFArm")
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+solver_priority = 2
 
 [node name="RagdollBitFArm" parent="RagdollArm/RagdollBitUArm" node_paths=PackedStringArray("target_node") instance=ExtResource("5_ldgn4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 target_node = NodePath("../../../ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube_001/Cube_001")
 
-[node name="JoltPinJoint3D2" type="JoltPinJoint3D" parent="RagdollArm/RagdollBitUArm/RagdollBitFArm"]
+[node name="JoltPinJoint3D2" type="PinJoint3D" parent="RagdollArm/RagdollBitUArm/RagdollBitFArm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61725, -9)
 node_a = NodePath("..")
 node_b = NodePath("../RagdollBitHand")
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61725, -9)
+solver_priority = 2
 
 [node name="RagdollBitHand" parent="RagdollArm/RagdollBitUArm/RagdollBitFArm" node_paths=PackedStringArray("target_node") instance=ExtResource("5_ldgn4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61725, -9)

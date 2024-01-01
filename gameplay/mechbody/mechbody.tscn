@@ -59,6 +59,9 @@ mesh = SubResource("CylinderMesh_4co0s")
 
 [node name="Cockpit" parent="." instance=ExtResource("2_gumoi")]
 
+[node name="ArmBaseRight" parent="Cockpit" index="4"]
+scaling = 36.0
+
 [node name="Stupidgun2" parent="Cockpit/RHandParent/MechHand" index="0" node_paths=PackedStringArray("launching_rigidbody")]
 launching_rigidbody = NodePath("../../../..")
 

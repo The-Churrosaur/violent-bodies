@@ -14,6 +14,7 @@ material = SubResource("StandardMaterial3D_0wi3h")
 [node name="RagdollBit" type="RigidBody3D"]
 collision_layer = 0
 collision_mask = 0
+angular_damp = 24.324
 script = ExtResource("1_2jgp7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -21,9 +22,6 @@ shape = SubResource("SphereShape3D_0o5ja")
 
 [node name="LimbRotator" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_pn0wm")]
 body = NodePath("..")
-
-[node name="JoltPinJoint3D" type="JoltPinJoint3D" parent="."]
-node_a = NodePath("..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_84uwc")

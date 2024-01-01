@@ -8,6 +8,7 @@
 [node name="Mechbody" instance=ExtResource("1_waaut")]
 
 [node name="seatparent" type="RigidBody3D" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.705581, 0)
 collision_layer = 0
 collision_mask = 0
 

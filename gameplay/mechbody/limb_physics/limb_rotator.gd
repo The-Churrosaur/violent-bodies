@@ -4,6 +4,7 @@
 ## applies forces along that axis to match rotation,
 ## force values mediated by a PID controller,
 ## multiple vectors to catch rotation along vector axis
+## can also do translation
 
 
 class_name LimbRotator
@@ -17,6 +18,7 @@ extends Node3D
 
 ## rotation torque on body
 @export var max_torque_impulse = 0.05
+@export var max_translation_impulse = 0.8
 
 ## will try to match these vectors
 ## selecting a single axis will  not catch rotation along that axis
@@ -39,10 +41,12 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
-	if target == null: pass
+	if target == null: return
 	_rotate_along_axis(delta)
+	_apply_translation()
 
 
+# TODO use quaternion subtraction to get rotation delta
 func _rotate_along_axis(delta):
 	var b_basis = body.transform.basis
 	var t_basis = target.transform.basis
@@ -66,3 +70,8 @@ func _rotate_along_axis(delta):
 # just apply torque impulse for now
 func _apply_rotation_along(axis : Vector3, delta):
 	body.apply_torque_impulse(axis.normalized() * max_torque_impulse)
+
+func _apply_translation():
+	var towards = target.global_position - body.global_position
+	body.apply_central_impulse(towards * max_translation_impulse)
+	
