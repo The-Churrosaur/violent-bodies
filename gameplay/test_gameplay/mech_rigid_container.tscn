@@ -14,18 +14,8 @@ mechbody = NodePath("Mechbody")
 [node name="Mechbody" parent="." instance=ExtResource("1_ji3mg")]
 gravity_scale = 1.0
 
-[node name="LeftArmPin2" type="JoltPinJoint3D" parent="Mechbody"]
-node_a = NodePath("..")
-node_b = NodePath("../../RHandBit")
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3, -1.52016, 0)
-
-[node name="RightArmPin2" type="JoltPinJoint3D" parent="Mechbody"]
-node_a = NodePath("..")
-node_b = NodePath("../../RHandBit")
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1.52016, 0)
-
 [node name="seatparent" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.705581, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0638685, 0)
 collision_layer = 0
 collision_mask = 0
 
@@ -54,8 +44,9 @@ node_a = NodePath("../Mechbody")
 node_b = NodePath("../seatparent")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.65933, 0)
 
-[node name="LHandBit" parent="." instance=ExtResource("4_8vmbs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.995, -1.18157, -8.48853)
+[node name="HandBitLeft" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_8vmbs")]
+mechbody = NodePath("../Mechbody")
 
-[node name="RHandBit" parent="." instance=ExtResource("4_8vmbs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.005, -1.18157, -8.48853)
+[node name="HandBitRight" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_8vmbs")]
+mechbody = NodePath("../Mechbody")
+hands = 1

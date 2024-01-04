@@ -17,6 +17,7 @@ func _ready():
 func _physics_process(delta):
 	# keeps self parented to hand
 	global_transform = arm.hand_parent.global_transform
+	#trigger_tool()
 	#scale = Vector3.ONE
 
 

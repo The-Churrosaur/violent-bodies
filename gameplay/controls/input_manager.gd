@@ -7,7 +7,7 @@ class_name InputManager
 extends Node3D
 
 
-var active = false
+@export var active = false
 var controller : XRController3D
 
 

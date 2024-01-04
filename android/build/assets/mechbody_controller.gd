@@ -83,7 +83,7 @@ func _on_left_input_down(action):
 	# FLIGHT MODE
 	if action == "by_button":
 		body.boost_forwards(0.02)
-		flight_effects.visible = true
+		#flight_effects.visible = true
 		flight_controller.enabled = true
 
 
@@ -92,7 +92,7 @@ func _on_left_input_up(action):
 	
 	# flight mode
 	if action == "by_button":
-		flight_effects.visible = false
+		#flight_effects.visible = false
 		flight_controller.enabled = false
 
 

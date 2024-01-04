@@ -7,7 +7,10 @@ extends RigidBody3D
 @export var thrust_power = 500000.0
 @export var torque_power = 180000.0
 
+@export_category("references")
 @export var cockpit : Cockpit
+@export var left_arm_targeter : ArmTargeter
+@export var right_arm_targeter : ArmTargeter
 
 # set by controller
 # assume 0-1 but it's multiplicative

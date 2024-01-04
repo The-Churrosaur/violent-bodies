@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://mktno0wfl5yk"]
+[gd_scene load_steps=25 format=3 uid="uid://mktno0wfl5yk"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_y613h"]
 [ext_resource type="ArrayMesh" uid="uid://chx0afiwsqpj" path="res://assets/cruiser.obj" id="3_bc1wl"]
@@ -42,10 +42,23 @@ height = 500.0
 radius = 100.0
 height = 500.0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_5qg64"]
-size = Vector2(2000, 2000)
+[sub_resource type="CylinderMesh" id="CylinderMesh_qthmw"]
+top_radius = 5.0
+bottom_radius = 5.0
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hwcv2"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfxq6"]
+radius = 3.0
+height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqrxo"]
+albedo_color = Color(1, 0.301961, 0.294118, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tfvo3"]
+material = SubResource("StandardMaterial3D_tqrxo")
+radius = 3.0
+height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2il4"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_y613h")
@@ -69,6 +82,9 @@ script = ExtResource("4_jaagw")
 [node name="explosionFX" parent="Cruiser2" instance=ExtResource("6_hm7qd")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cruiser2"]
+transform = Transform3D(1, 0, 4.47035e-08, 0, 1, 0, -4.47035e-08, 0, 1, 0.0135689, 0, -0.0103493)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cruiser2/StaticBody3D"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
@@ -82,6 +98,9 @@ surface_material_override/0 = ExtResource("4_5et6i")
 [node name="explosionFX" parent="Cruiser3" instance=ExtResource("6_hm7qd")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cruiser3"]
+transform = Transform3D(1, -3.37184e-08, 0, 4.98324e-08, 1, -1.63672e-08, -1.19209e-07, 8.91762e-10, 1, -0.0164242, -0.00251722, -0.00387049)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cruiser3/StaticBody3D"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
@@ -95,6 +114,9 @@ surface_material_override/0 = ExtResource("4_5et6i")
 [node name="explosionFX" parent="Cruiser4" instance=ExtResource("6_hm7qd")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cruiser4"]
+transform = Transform3D(1, 4.28408e-08, 0, -1.39698e-08, 1, -3.72529e-09, -5.96046e-08, 0, 1, -0.0153184, 0.00244188, -0.00710106)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cruiser4/StaticBody3D"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
@@ -105,6 +127,9 @@ transform = Transform3D(0.843316, 0.537417, 0, -0.428012, 0.671638, -0.604738, -
 mesh = SubResource("BoxMesh_i47ny")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+transform = Transform3D(1, -2.98023e-08, 0, -1.3411e-07, 1, 0, -1.19209e-07, 1.19209e-07, 1, -0.264923, -0.505707, -0.3741)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_4ukup")
@@ -114,6 +139,9 @@ transform = Transform3D(0.843316, 0.537417, 0, -0.428012, 0.671638, -0.604738, -
 mesh = SubResource("CapsuleMesh_tb0qd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, -2.98023e-08, 0, -1.3411e-07, 1, 0, -1.19209e-07, 1.19209e-07, 1, -0.264954, -0.505615, -0.374207)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
 transform = Transform3D(1, 0, 0, -1.19209e-07, 1, 0, -8.9407e-08, 2.98023e-08, 1, 0, 0, 0)
@@ -124,19 +152,46 @@ transform = Transform3D(-0.0203409, 0.999571, 0.0210682, -0.928277, -0.0110546, 
 mesh = SubResource("CapsuleMesh_tb0qd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+transform = Transform3D(1, -8.3819e-09, -8.9407e-08, 9.31323e-10, 1, -1.86265e-09, -2.98023e-08, -1.86265e-09, 1, 0.184517, -0.482239, -0.446419)
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
 transform = Transform3D(1, 0, 0, -5.96046e-08, 1, 0, -2.98023e-08, 2.98023e-08, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_bfh1b")
 
-[node name="plane" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1096.58, 0)
-mesh = SubResource("PlaneMesh_5qg64")
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -752.567, -233.102, 291.001)
+mesh = SubResource("CylinderMesh_qthmw")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="plane"]
+[node name="bag" type="RigidBody3D" parent="MeshInstance3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.86813, 0)
+collision_layer = 9
+collision_mask = 9
+mass = 100.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="plane/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_hwcv2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/bag"]
+shape = SubResource("CapsuleShape3D_sfxq6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D4/bag"]
+mesh = SubResource("CapsuleMesh_tfvo3")
+
+[node name="bag2" type="RigidBody3D" parent="MeshInstance3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.86813, 19.7594)
+collision_layer = 9
+collision_mask = 9
+mass = 10.0
+sleeping = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/bag2"]
+shape = SubResource("CapsuleShape3D_sfxq6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D4/bag2"]
+mesh = SubResource("CapsuleMesh_tfvo3")
+surface_material_override/0 = SubResource("StandardMaterial3D_u2il4")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="MeshInstance3D4"]
+node_a = NodePath("../bag")
 
 [node name="TrainingBot6" parent="." instance=ExtResource("9_2ppjb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -263.713, -81.2646)

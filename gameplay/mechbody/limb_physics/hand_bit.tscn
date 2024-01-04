@@ -1,19 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://bysrkagylo8yh"]
+[gd_scene load_steps=7 format=3 uid="uid://bysrkagylo8yh"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/limb_physics/hand_bit.gd" id="1_nifvo"]
+[ext_resource type="PackedScene" uid="uid://d0ex8w8t8rocw" path="res://gameplay/mechbody/limb_physics/limb_rotator.tscn" id="2_mnakk"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_2k7lh"]
-radius = 1.0
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_663pm"]
+friction = 20.0
+rough = true
+bounce = 0.1
+absorbent = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c072q"]
+size = Vector3(2, 2, 2)
 
 [sub_resource type="SphereMesh" id="SphereMesh_wgu1x"]
 radius = 1.0
 height = 2.0
 
-[node name="HandBit" type="RigidBody3D"]
-script = ExtResource("1_nifvo")
+[sub_resource type="SphereShape3D" id="SphereShape3D_2k7lh"]
+radius = 1.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="HandBit" type="Node3D" node_paths=PackedStringArray("hand", "anchor")]
+script = ExtResource("1_nifvo")
+hand = NodePath("Hand")
+anchor = NodePath("Anchor")
+
+[node name="Hand" type="RigidBody3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+physics_material_override = SubResource("PhysicsMaterial_663pm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hand"]
+shape = SubResource("BoxShape3D_c072q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hand"]
+mesh = SubResource("SphereMesh_wgu1x")
+
+[node name="LimbRotator" parent="Hand" node_paths=PackedStringArray("body", "target") instance=ExtResource("2_mnakk")]
+debug = true
+body = NodePath("..")
+target = NodePath("../../Anchor")
+match_z = false
+match_y = false
+
+[node name="PositionalPidController" parent="Hand/LimbRotator" index="1"]
+i_tune = 0.001
+d_tune = -0.2
+log_size = 50
+
+[node name="Anchor" type="RigidBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+freeze = true
+freeze_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Anchor"]
+visible = false
 shape = SubResource("SphereShape3D_2k7lh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Anchor"]
+visible = false
 mesh = SubResource("SphereMesh_wgu1x")
+
+[editable path="Hand/LimbRotator"]

@@ -21,6 +21,9 @@ extends Node3D
 ## rotation torque on body
 @export var max_torque_impulse = 0.1
 @export var max_translation_impulse = 0.8
+@export var damp = 0.5
+
+@export var recoil_body : RigidBody3D ## equal and opposite
 
 ## will try to match these vectors
 ## selecting a single axis will  not catch rotation along that axis
@@ -51,24 +54,6 @@ func _physics_process(delta):
 
 
 func _rotate_along_axis(delta):
-	#var b_basis = body.transform.basis
-	#var t_basis = target.transform.basis
-	#
-	#var rotation_axis = Vector3.ZERO
-	#
-	#if match_z: 
-		#var cross = b_basis.z.cross(t_basis.z)
-		#rotation_axis += cross
-	#if match_y: 
-		#var cross = b_basis.y.cross(t_basis.y)
-		#rotation_axis += cross
-	#if match_x: 
-		#var cross = b_basis.x.cross(t_basis.x)
-		#rotation_axis += cross
-	#
-	#rotation_axis = rotation_axis.normalized()
-	#_apply_rotation_along(rotation_axis, delta)
-	
 	
 	var b_basis = body.global_basis
 	var t_basis = target.global_basis
@@ -83,18 +68,33 @@ func _rotate_along_axis(delta):
 		print("target rotation: ", target.rotation)
 		print("body rotation: ", body.rotation)
 		print("ERROR AXIS: ", error_axis)
+		pass
 	
 	_apply_rotation_along(error_axis, error_angle, delta)
 
 
-# just apply torque impulse for now
 func _apply_rotation_along(axis : Vector3, angle, delta):
 	var k = rpid.solve(angle)
 	body.apply_torque_impulse(axis * max_torque_impulse)
 
+
 func _apply_translation():
-	var towards = target.global_position - body.global_position
-	var k = ppid.solve(towards.length())
-	#print("TRANS K: ", k)
-	body.apply_central_impulse( k * towards * max_translation_impulse)
 	
+	var towards = target.global_position - body.global_position
+	var length = towards.length()
+	var k = ppid.solve(length)
+	if debug: print("TRANS K: ", k)
+	
+	# dampening by length
+	var relative_vel = target.linear_velocity - body.linear_velocity
+	var d = damp * relative_vel / length 
+	
+	var impulse = k * towards * max_translation_impulse
+	
+	body.apply_central_impulse(impulse)
+	body.apply_central_impulse(d)
+	
+	# wheee
+	if recoil_body != null:
+		recoil_body.apply_central_impulse(-impulse)
+		recoil_body.apply_central_impulse(-d)

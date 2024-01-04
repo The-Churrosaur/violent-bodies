@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqpxjcewjoqk4"]
-
-[ext_resource type="Script" path="res://xr_level_startup/xr_player_globals.gd" id="1_ci6dc"]
-
-[node name="XRPlayerGlobals" type="Node"]
-script = ExtResource("1_ci6dc")

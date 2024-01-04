@@ -5,6 +5,6 @@
 
 [node name="MechbodyController" instance=ExtResource("1_4agol")]
 script = ExtResource("2_r8ium")
-look_rotation = true
+look_rotation = false
 look_pitch = 0.523599
 look_yaw = 0.785398
