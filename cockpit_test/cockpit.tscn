@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://11c031wphmm0"]
+[gd_scene load_steps=13 format=3 uid="uid://11c031wphmm0"]
 
+[ext_resource type="Script" path="res://cockpit_test/cockpit.gd" id="1_wnyec"]
 [ext_resource type="ArrayMesh" uid="uid://d33xgs6swlxjo" path="res://assets/cockpit.obj" id="2_by6e6"]
 [ext_resource type="PackedScene" uid="uid://cfm5v38inyif1" path="res://gameplay/controls/input_manager_yoke.tscn" id="3_bc6r6"]
 [ext_resource type="Script" path="res://cockpit_test/clavicle_mover.gd" id="3_wixsj"]
@@ -17,7 +18,10 @@ bottom_radius = 0.05
 height = 0.1
 radial_segments = 6
 
-[node name="Cockpit" type="Node3D"]
+[node name="Cockpit" type="Node3D" node_paths=PackedStringArray("left_arm", "right_arm")]
+script = ExtResource("1_wnyec")
+left_arm = NodePath("ArmBaseLeft")
+right_arm = NodePath("ArmBaseRight")
 
 [node name="Cockpit" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.06, -0.06)

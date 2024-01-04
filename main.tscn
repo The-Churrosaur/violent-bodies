@@ -8,9 +8,9 @@
 [ext_resource type="Material" uid="uid://cr3o3nwa7xg1b" path="res://materials/generic_toon.tres" id="6_lgqxr"]
 [ext_resource type="PackedScene" uid="uid://c38fl22da0jew" path="res://gameplay/test_gameplay/training_bot.tscn" id="9_2ppjb"]
 [ext_resource type="PackedScene" uid="uid://bdhc7mn7fx7jt" path="res://gameplay/test_gameplay/bot_spawner.tscn" id="10_4e2ph"]
-[ext_resource type="PackedScene" uid="uid://dhtsktjng545t" path="res://gameplay/test_gameplay/full_mech.tscn" id="10_i13c0"]
 [ext_resource type="ArrayMesh" uid="uid://cl7snahl1dxqk" path="res://assets/terrain_ex.obj" id="11_flred"]
 [ext_resource type="PackedScene" uid="uid://dapy8e8aqf5pt" path="res://gameplay/test_gameplay/geometry.tscn" id="11_hlgp2"]
+[ext_resource type="PackedScene" uid="uid://bwtsyqg37x6vq" path="res://gameplay/test_gameplay/mech_rigid_container.tscn" id="11_ybwbn"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wqfvj"]
 energy_multiplier = 2.88
@@ -138,17 +138,15 @@ mesh = SubResource("PlaneMesh_5qg64")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="plane/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_hwcv2")
 
-[node name="TrainingBot6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+[node name="TrainingBot6" parent="." instance=ExtResource("9_2ppjb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -263.713, -81.2646)
-player = NodePath("../Mechbody")
 
-[node name="TrainingBot7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+[node name="TrainingBot7" parent="." instance=ExtResource("9_2ppjb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 10, -250.361)
-player = NodePath("../Mechbody")
 
-[node name="BotSpawner" parent="." node_paths=PackedStringArray("bot_target") instance=ExtResource("10_4e2ph")]
+[node name="BotSpawner" parent="." instance=ExtResource("10_4e2ph")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7019, -25.8647, -403.568)
-bot_target = NodePath("../Mechbody")
+enabled = false
 
 [node name="TerrainEx" type="MeshInstance3D" parent="."]
 transform = Transform3D(200, 0, 0, 0, -200, 3.01992e-05, 0, -3.01992e-05, -200, -528.204, 762.742, 445.669)
@@ -157,6 +155,5 @@ mesh = ExtResource("11_flred")
 [node name="Geometry" parent="." instance=ExtResource("11_hlgp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -258.479, 0)
 
-[node name="Mechbody" parent="." instance=ExtResource("10_i13c0")]
-transform = Transform3D(0.950651, 0.310262, 0, -0.310262, 0.950651, 0, 0, 0, 1, 0, -191.979, 0)
-gravity_scale = 1.0
+[node name="MechRigidContainer" parent="." instance=ExtResource("11_ybwbn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 183.148, 0, 0)

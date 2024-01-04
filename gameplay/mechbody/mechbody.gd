@@ -7,6 +7,8 @@ extends RigidBody3D
 @export var thrust_power = 500000.0
 @export var torque_power = 180000.0
 
+@export var cockpit : Cockpit
+
 # set by controller
 # assume 0-1 but it's multiplicative
 var pitch_input = 0

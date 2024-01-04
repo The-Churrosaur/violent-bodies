@@ -7,6 +7,9 @@
 
 [node name="Mechbody" instance=ExtResource("1_waaut")]
 
+[node name="LimbRotator" parent="Cockpit/ArmBaseRight/RagdollArm/RagdollBitUArm" index="1"]
+debug = true
+
 [node name="seatparent" type="RigidBody3D" parent="." index="13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.705581, 0)
 collision_layer = 0
@@ -37,10 +40,16 @@ node_a = NodePath("..")
 node_b = NodePath("../seatparent")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.65933, 0)
 
+[connection signal="dropped" from="Cockpit/Handles/handlesLeft/Handles" to="Cockpit/Handles/InputManagerYokeLeft" method="_on_released"]
+[connection signal="grabbed" from="Cockpit/Handles/handlesLeft/Handles" to="Cockpit/Handles/InputManagerYokeLeft" method="_on_grabbed"]
+[connection signal="dropped" from="Cockpit/Handles/handlesRight/Handles" to="Cockpit/Handles/InputManagerYokeRight" method="_on_released"]
+[connection signal="grabbed" from="Cockpit/Handles/handlesRight/Handles" to="Cockpit/Handles/InputManagerYokeRight" method="_on_grabbed"]
+
 [editable path="Cockpit"]
 [editable path="Cockpit/ArmBaseLeft"]
 [editable path="Cockpit/ArmBaseLeft/ShoulderJoint/KinematicArm"]
 [editable path="Cockpit/ArmBaseRight"]
 [editable path="Cockpit/ArmBaseRight/ShoulderJoint/KinematicArm"]
+[editable path="Cockpit/ArmBaseRight/RagdollArm/RagdollBitUArm"]
 [editable path="Cockpit/Handles/handlesLeft"]
 [editable path="Cockpit/Handles/handlesRight"]

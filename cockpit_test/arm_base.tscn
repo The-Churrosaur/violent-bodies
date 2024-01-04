@@ -1,26 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://dblov20n4ihk2"]
+[gd_scene load_steps=6 format=3 uid="uid://dblov20n4ihk2"]
 
 [ext_resource type="Script" path="res://cockpit_test/arm_base.gd" id="1_tk250"]
 [ext_resource type="PackedScene" uid="uid://bg8wacgshd3r1" path="res://cockpit_test/mech_arm_temp.tscn" id="2_3eeh4"]
 [ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="3_hrcnc"]
 [ext_resource type="PackedScene" uid="uid://clqdxr8l7x1fu" path="res://cockpit_test/arm_target.tscn" id="3_pnddb"]
-[ext_resource type="PackedScene" uid="uid://bqnvrt4u18rnk" path="res://gameplay/mechbody/limb_physics/ragdoll_bit.tscn" id="5_ldgn4"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_bcxlx"]
 material = ExtResource("3_hrcnc")
 
-[node name="ArmBase" type="Node3D" node_paths=PackedStringArray("hand_parent")]
+[node name="ArmBase" type="Node3D" node_paths=PackedStringArray("hand_parent", "uarm_ref", "farm_ref", "hand_ref")]
 script = ExtResource("1_tk250")
-hand_parent = NodePath("ArmTarget/HandParent")
 scaling = 16.0
+hand_parent = NodePath("ArmTarget/HandParent")
+uarm_ref = NodePath("ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube_002")
+farm_ref = NodePath("ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube_001")
+hand_ref = NodePath("ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube")
 
 [node name="ShoulderJoint" type="Node3D" parent="."]
 
 [node name="KinematicArm" parent="ShoulderJoint" instance=ExtResource("2_3eeh4")]
 transform = Transform3D(-8, 0, -6.99382e-07, 0, 8, 0, 6.99382e-07, 0, -8, 0.01, 0, 0)
 
+[node name="Cube" parent="ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="0"]
+transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.80444e-08, -0.0418429, -5.624e-18, 0.0895613, 8.61473e-09, 4.47967e-16, 2.12213, -0.0846465)
+
 [node name="Cube" parent="ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube" index="0"]
 transform = Transform3D(1, -6.29423e-25, 2.64698e-23, -6.92391e-24, 1, 0, 1.32349e-23, 0, 1, 0, 0, 0)
+
+[node name="Cube_001" parent="ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.118076, 2.62181e-17, 8.89721e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.62181e-17, -0.118076, -1.75149e-08, 2.90053e-16, 1.30188, -0.00440489)
+
+[node name="Cube_002" parent="ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
+
+[node name="Cylinder_002" parent="ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-4.58022e-09, -0.145023, 0, -6.87033e-09, 0, -0.0768434, -0.0768434, 1.2966e-08, 9.16045e-09, 2.23246e-16, 1.00273, -0.00268012)
 
 [node name="SkeletonIK3D" parent="ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="5"]
 target_node = NodePath("../../../../../ArmTarget")
@@ -43,30 +57,5 @@ target_node = NodePath("../InitialTarget")
 [node name="InitialTarget" type="Node3D" parent="."]
 
 [node name="ShoulderTarget" type="Node3D" parent="."]
-
-[node name="RagdollArm" type="Node3D" parent="."]
-
-[node name="RagdollBitUArm" parent="RagdollArm" node_paths=PackedStringArray("target_node") instance=ExtResource("5_ldgn4")]
-target_node = NodePath("../../ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube_002/Cube_002")
-
-[node name="JoltPinJoint3D3" type="PinJoint3D" parent="RagdollArm/RagdollBitUArm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
-node_a = NodePath("..")
-node_b = NodePath("../RagdollBitFArm")
-solver_priority = 2
-
-[node name="RagdollBitFArm" parent="RagdollArm/RagdollBitUArm" node_paths=PackedStringArray("target_node") instance=ExtResource("5_ldgn4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
-target_node = NodePath("../../../ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube_001/Cube_001")
-
-[node name="JoltPinJoint3D2" type="PinJoint3D" parent="RagdollArm/RagdollBitUArm/RagdollBitFArm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61725, -9)
-node_a = NodePath("..")
-node_b = NodePath("../RagdollBitHand")
-solver_priority = 2
-
-[node name="RagdollBitHand" parent="RagdollArm/RagdollBitUArm/RagdollBitFArm" node_paths=PackedStringArray("target_node") instance=ExtResource("5_ldgn4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61725, -9)
-target_node = NodePath("../../../../ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube/Cube")
 
 [editable path="ShoulderJoint/KinematicArm"]

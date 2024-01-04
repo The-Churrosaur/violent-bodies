@@ -11,14 +11,19 @@ class_name ArmBase
 extends Node3D
 
 @export var calibrate = false
-# for access by others
-@export var hand_parent : Node3D
-
 
 # to calculate target
 @export var handle_target : HandleTarget
 @export var scaling = 8.0
 @export var shoulder_lerp = 5
+
+@export_category("References")
+# for access by others
+
+@export var hand_parent : Node3D
+@export var uarm_ref : Node3D
+@export var farm_ref : Node3D
+@export var hand_ref : Node3D
 
 @onready var arm = $ShoulderJoint/arm
 @onready var initial_target = $InitialTarget # desired arm target

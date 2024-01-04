@@ -10,11 +10,13 @@ albedo_color = Color(1, 0.521569, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_84uwc"]
 material = SubResource("StandardMaterial3D_0wi3h")
+size = Vector3(2, 2, 2)
 
 [node name="RagdollBit" type="RigidBody3D"]
 collision_layer = 0
 collision_mask = 0
-angular_damp = 24.324
+gravity_scale = 0.0
+angular_damp = 2.0
 script = ExtResource("1_2jgp7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

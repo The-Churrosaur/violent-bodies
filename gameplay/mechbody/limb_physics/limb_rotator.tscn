@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0ex8w8t8rocw"]
+[gd_scene load_steps=3 format=3 uid="uid://d0ex8w8t8rocw"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/limb_physics/limb_rotator.gd" id="1_rlsmf"]
+[ext_resource type="PackedScene" uid="uid://g5c04c1ek1j" path="res://gameplay/mechbody/limb_physics/pid_controller.tscn" id="2_gdfu0"]
 
 [node name="LimbRotator" type="Node3D"]
 script = ExtResource("1_rlsmf")
+
+[node name="RotationalPidController" parent="." instance=ExtResource("2_gdfu0")]
+p_tune = 0.0
+i_tune = 0.0
+d_tune = 0.0
+
+[node name="PositionalPidController" parent="." instance=ExtResource("2_gdfu0")]
+p_tune = 0.01

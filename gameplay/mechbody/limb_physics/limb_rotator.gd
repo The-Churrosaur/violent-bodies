@@ -10,6 +10,8 @@
 class_name LimbRotator
 extends Node3D
 
+@export var debug = false
+
 ## body to be rotated
 @export var body : RigidBody3D
 
@@ -17,7 +19,7 @@ extends Node3D
 @export var target : Node3D
 
 ## rotation torque on body
-@export var max_torque_impulse = 0.05
+@export var max_torque_impulse = 0.1
 @export var max_translation_impulse = 0.8
 
 ## will try to match these vectors
@@ -28,6 +30,8 @@ extends Node3D
 @export var match_x = false 
 
 
+@onready var rpid = $RotationalPidController
+@onready var ppid = $PositionalPidController
 
 
 # Called when the node enters the scene tree for the first time.
@@ -46,32 +50,51 @@ func _physics_process(delta):
 	_apply_translation()
 
 
-# TODO use quaternion subtraction to get rotation delta
 func _rotate_along_axis(delta):
-	var b_basis = body.transform.basis
-	var t_basis = target.transform.basis
+	#var b_basis = body.transform.basis
+	#var t_basis = target.transform.basis
+	#
+	#var rotation_axis = Vector3.ZERO
+	#
+	#if match_z: 
+		#var cross = b_basis.z.cross(t_basis.z)
+		#rotation_axis += cross
+	#if match_y: 
+		#var cross = b_basis.y.cross(t_basis.y)
+		#rotation_axis += cross
+	#if match_x: 
+		#var cross = b_basis.x.cross(t_basis.x)
+		#rotation_axis += cross
+	#
+	#rotation_axis = rotation_axis.normalized()
+	#_apply_rotation_along(rotation_axis, delta)
 	
-	var rotation_axis = Vector3.ZERO
 	
-	if match_z: 
-		var cross = b_basis.z.cross(t_basis.z)
-		rotation_axis += cross
-	if match_y: 
-		var cross = b_basis.y.cross(t_basis.y)
-		rotation_axis += cross
-	if match_x: 
-		var cross = b_basis.x.cross(t_basis.x)
-		rotation_axis += cross
+	var b_basis = body.global_basis
+	var t_basis = target.global_basis
 	
-	rotation_axis = rotation_axis.normalized()
-	_apply_rotation_along(rotation_axis, delta)
+	var error_basis : Basis = t_basis * b_basis.inverse()
+	var error_quat = error_basis.get_rotation_quaternion()
+	
+	var error_axis = error_quat.get_axis().normalized()
+	var error_angle = error_quat.get_angle()
+	
+	if debug: 
+		print("target rotation: ", target.rotation)
+		print("body rotation: ", body.rotation)
+		print("ERROR AXIS: ", error_axis)
+	
+	_apply_rotation_along(error_axis, error_angle, delta)
 
 
 # just apply torque impulse for now
-func _apply_rotation_along(axis : Vector3, delta):
-	body.apply_torque_impulse(axis.normalized() * max_torque_impulse)
+func _apply_rotation_along(axis : Vector3, angle, delta):
+	var k = rpid.solve(angle)
+	body.apply_torque_impulse(axis * max_torque_impulse)
 
 func _apply_translation():
 	var towards = target.global_position - body.global_position
-	body.apply_central_impulse(towards * max_translation_impulse)
+	var k = ppid.solve(towards.length())
+	#print("TRANS K: ", k)
+	body.apply_central_impulse( k * towards * max_translation_impulse)
 	

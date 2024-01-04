@@ -29,7 +29,7 @@ height = 1.0
 height = 8.0
 radius = 10.0
 
-[node name="Mechbody" type="RigidBody3D"]
+[node name="Mechbody" type="RigidBody3D" node_paths=PackedStringArray("cockpit")]
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_pfxel")
 gravity_scale = 0.0
@@ -37,16 +37,7 @@ linear_damp = 0.1
 angular_damp = 2.0
 script = ExtResource("1_ifmva")
 torque_power = 1e+06
-
-[node name="LeftArmPin" type="JoltPinJoint3D" parent="."]
-node_a = NodePath("../Cockpit/ArmBaseLeft/RagdollArm/RagdollBitUArm")
-node_b = NodePath("..")
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3, -1.52016, 0)
-
-[node name="RightArmPin" type="JoltPinJoint3D" parent="."]
-node_a = NodePath("../Cockpit/ArmBaseRight/RagdollArm/RagdollBitUArm")
-node_b = NodePath("..")
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1.52016, 0)
+cockpit = NodePath("Cockpit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)

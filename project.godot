@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
 XRPlayerGlobals="*res://xr_level_startup/XRPlayerGlobals.tscn"
+LevelGlobals="*res://gameplay/level_globals.tscn"
 
 [editor_plugins]
 

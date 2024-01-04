@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://g5c04c1ek1j"]
+
+[ext_resource type="Script" path="res://gameplay/mechbody/limb_physics/pid_controller.gd" id="1_es2ke"]
+
+[node name="PidController" type="Node"]
+script = ExtResource("1_es2ke")
+i_tune = 0.05
+d_tune = 0.05
