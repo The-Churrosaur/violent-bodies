@@ -23,9 +23,9 @@ func trigger():
 
 
 # call this when the tool is equipped
-func equip():
-	if input != null : input.active = true
-
-
-func deequip():
-	if input != null : input.active = false
+#func equip():
+	#if input != null : input.active = true
+#
+#
+#func deequip():
+	#if input != null : input.active = false

@@ -20,8 +20,6 @@ func _on_grabbed(pickable, by):
 	controller.button_pressed.connect(_on_controller_button_released)
 	
 	active = true
-	
-	$Label3D.text = "input manager reads grabbed from pickable"
 
 
 func _on_released(pickable):

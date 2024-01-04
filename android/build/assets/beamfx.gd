@@ -18,19 +18,16 @@ func trigger():
 
 
 func toggle():
-	$Label3D.text = "TOGGLING"
 	if powered: _power_off()
 	else: _power_on()
 
 
 func _power_on():
-	$Label3D.text = "POWERING ON"
 	for particle in particles : particle.emitting = true
 	powered = true
 
 
 func _power_off():
-	$Label3D.text = "POWERING OFF"
 	for particle in particles : particle.emitting = false
 	powered = false
 

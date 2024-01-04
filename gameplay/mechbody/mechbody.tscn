@@ -1,35 +1,38 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsh7i4eks64gc"]
+[gd_scene load_steps=19 format=3 uid="uid://dsh7i4eks64gc"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_ifmva"]
 [ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="2_gumoi"]
-[ext_resource type="PackedScene" uid="uid://cddnr57mbx6f0" path="res://gameplay/mechbody/velocity_indicator.tscn" id="3_h412r"]
+[ext_resource type="PackedScene" uid="uid://cjemm0ivcuagh" path="res://gameplay/mechbody/arm_targeter.tscn" id="2_nvite"]
 [ext_resource type="PackedScene" uid="uid://bln8cdsrflypy" path="res://gameplay/mechbody/flight_module.tscn" id="4_wgapf"]
 [ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="5_3oo3b"]
+[ext_resource type="PackedScene" uid="uid://doptv24orlqm0" path="res://cockpit_test/mech_hand.tscn" id="5_68b7c"]
 [ext_resource type="PackedScene" uid="uid://dvg5e6hisacwi" path="res://mechbody_controller.tscn" id="6_gk30v"]
-[ext_resource type="PackedScene" uid="uid://ct1mqoq7ffeph" path="res://gameplay/controls/flight_module_panel.tscn" id="6_jyua8"]
 [ext_resource type="Material" uid="uid://cr3o3nwa7xg1b" path="res://materials/generic_toon.tres" id="6_kxm6c"]
-[ext_resource type="PackedScene" uid="uid://f0sl8gvyo7an" path="res://gameplay/controls/look_turn_panel.tscn" id="9_gn4jr"]
+[ext_resource type="PackedScene" uid="uid://bak1wwgkoec2" path="res://gameplay/mechtools/beamfx2.tscn" id="6_nmrqg"]
+[ext_resource type="PackedScene" uid="uid://c7dfxmp5k4sa3" path="res://gameplay/mechtools/stupidgun.tscn" id="7_r17d4"]
+[ext_resource type="PackedScene" uid="uid://canlurq7heofm" path="res://gameplay/mechtools/laserstupidgun.tscn" id="8_jt7bt"]
 [ext_resource type="PackedScene" uid="uid://cwn381pjcowiv" path="res://effects/wind_particles.tscn" id="9_t76ck"]
 [ext_resource type="PackedScene" uid="uid://d26k2y5i1upl1" path="res://gameplay/controls/seat_calibration.tscn" id="10_plbo3"]
+[ext_resource type="PackedScene" uid="uid://dblov20n4ihk2" path="res://cockpit_test/arm_base.tscn" id="13_8cwlu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pfxel"]
 friction = 0.53
 absorbent = true
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_g8pff"]
-height = 1.0
-radius = 1.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_4co0s"]
 top_radius = 1.0
 bottom_radius = 1.0
 height = 1.0
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g8pff"]
+height = 1.0
+radius = 1.0
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_n3q16"]
 height = 8.0
 radius = 10.0
 
-[node name="Mechbody" type="RigidBody3D" node_paths=PackedStringArray("cockpit")]
+[node name="Mechbody" type="RigidBody3D"]
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_pfxel")
 gravity_scale = 0.0
@@ -37,99 +40,59 @@ linear_damp = 0.1
 angular_damp = 2.0
 script = ExtResource("1_ifmva")
 torque_power = 1e+06
-cockpit = NodePath("Cockpit")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
-shape = SubResource("CylinderShape3D_g8pff")
+[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_controller") instance=ExtResource("6_gk30v")]
+body = NodePath("..")
+flight_controller = NodePath("../FlightModule")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
 visible = false
 mesh = SubResource("CylinderMesh_4co0s")
 
+[node name="ArmTargeterLeft" parent="." node_paths=PackedStringArray("player_shoulder", "player_yoke", "arm") instance=ExtResource("2_nvite")]
+player_shoulder = NodePath("../Cockpit/PlayerShoulderLeft")
+player_yoke = NodePath("../Cockpit/Handles/handlesLeft/YokePositionLeft")
+arm = NodePath("../ArmBaseLeft")
+
+[node name="ArmTargeterRight" parent="." node_paths=PackedStringArray("player_shoulder", "player_yoke", "arm") instance=ExtResource("2_nvite")]
+player_shoulder = NodePath("../Cockpit/PlayerShoulderRight")
+player_yoke = NodePath("../Cockpit/Handles/handlesRight/YokePositionRight")
+arm = NodePath("../ArmBaseRight")
+
 [node name="Cockpit" parent="." instance=ExtResource("2_gumoi")]
 
-[node name="Cube" parent="Cockpit/ArmBaseLeft/ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.80444e-08, -0.0418429, -5.624e-18, 0.0895613, 8.61473e-09, 4.47967e-16, 2.12213, -0.0846465)
+[node name="InputManagerYokeLeft" parent="Cockpit/Handles" index="1" node_paths=PackedStringArray("mech_hand")]
+mech_hand = NodePath("../../../LeftHandRemote")
 
-[node name="Cube_001" parent="Cockpit/ArmBaseLeft/ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.62181e-17, 8.89721e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.62181e-17, -0.118076, -1.75149e-08, 2.90053e-16, 1.30188, -0.00440489)
+[node name="InputManagerYokeRight" parent="Cockpit/Handles" index="3" node_paths=PackedStringArray("mech_hand")]
+mech_hand = NodePath("../../../RightHandRemote")
 
-[node name="Cube_002" parent="Cockpit/ArmBaseLeft/ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
+[node name="ArmBaseLeft" parent="." instance=ExtResource("13_8cwlu")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3, -1.52016, 0)
 
-[node name="Cylinder_002" parent="Cockpit/ArmBaseLeft/ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-4.58022e-09, -0.145023, 0, -6.87033e-09, 0, -0.0768434, -0.0768434, 1.2966e-08, 9.16045e-09, 2.23246e-16, 1.00273, -0.00268012)
+[node name="ArmBaseRight" parent="." instance=ExtResource("13_8cwlu")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1.52016, 0)
 
-[node name="ArmBaseRight" parent="Cockpit" index="4"]
-scaling = 36.0
+[node name="LeftHandRemote" parent="." node_paths=PackedStringArray("current_tool", "arm") instance=ExtResource("5_68b7c")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3, -1.52016, -6.65605)
+current_tool = NodePath("beamfx2")
+arm = NodePath("../ArmBaseLeft")
 
-[node name="Cube" parent="Cockpit/ArmBaseRight/ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.80444e-08, -0.0418429, -5.624e-18, 0.0895613, 8.61473e-09, 4.47967e-16, 2.12213, -0.0846465)
+[node name="beamfx2" parent="LeftHandRemote" node_paths=PackedStringArray("particles") instance=ExtResource("6_nmrqg")]
+transform = Transform3D(4, 8.52651e-14, 1.69407e-20, -3.35953e-14, 2.36405, 3.22665, 4.58534e-14, -3.22664, 2.36406, 9.53674e-07, -4.17233e-07, -0.665171)
+particles = [null, null, null]
 
-[node name="Cube_001" parent="Cockpit/ArmBaseRight/ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.62181e-17, 8.89721e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.62181e-17, -0.118076, -1.75149e-08, 2.90053e-16, 1.30188, -0.00440489)
+[node name="RightHandRemote" parent="." node_paths=PackedStringArray("current_tool", "arm") instance=ExtResource("5_68b7c")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1.52016, -6.65605)
+current_tool = NodePath("Stupidgun2")
+arm = NodePath("../ArmBaseRight")
 
-[node name="Cube_002" parent="Cockpit/ArmBaseRight/ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
+[node name="Stupidgun2" parent="RightHandRemote" instance=ExtResource("7_r17d4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.693941, 0)
 
-[node name="Cylinder_002" parent="Cockpit/ArmBaseRight/ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-4.58022e-09, -0.145023, 0, -6.87033e-09, 0, -0.0768434, -0.0768434, 1.2966e-08, 9.16045e-09, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="Stupidgun2" parent="Cockpit/RHandParent/MechHand" index="0" node_paths=PackedStringArray("launching_rigidbody")]
-launching_rigidbody = NodePath("../../../..")
-
-[node name="Cube" parent="Cockpit/Handles/handlesLeft/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
-
-[node name="Cube_001" parent="Cockpit/Handles/handlesLeft/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="Cockpit/Handles/handlesLeft/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="Cockpit/Handles/handlesLeft/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="Cube" parent="Cockpit/Handles/handlesRight/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.0253282, -1.98865e-17, -9.29091e-18, 5.62396e-18, 3.93484e-08, -0.0418429, -5.62399e-18, 0.0895613, 1.85682e-08, 4.47966e-16, 2.12213, -0.0846466)
-
-[node name="Cube_001" parent="Cockpit/Handles/handlesRight/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.118076, 2.6218e-17, 8.89718e-17, -2.6218e-17, -5.16125e-09, 0.400694, 2.6218e-17, -0.118076, -1.75149e-08, 2.90052e-16, 1.30188, -0.00440489)
-
-[node name="Cube_002" parent="Cockpit/Handles/handlesRight/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.0961825, -3.3449e-17, -1.12117e-16, -2.13568e-17, -5.38734e-08, -0.50493, 2.13568e-17, 0.150641, -1.80577e-07, 1.35494e-16, 0.607185, -0.00302469)
-
-[node name="Cylinder_002" parent="Cockpit/Handles/handlesRight/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0, -0.145023, 0, 0, 0, -0.0768434, -0.0768434, 0, 0, 2.23246e-16, 1.00273, -0.00268012)
-
-[node name="Indicator" parent="Cockpit" node_paths=PackedStringArray("ship") instance=ExtResource("3_h412r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.901351, -0.496)
-ship = NodePath("../..")
-
-[node name="Label3D3" parent="Cockpit" node_paths=PackedStringArray("flight_module") instance=ExtResource("6_jyua8")]
-transform = Transform3D(0.244102, 0, 0, 0, 0.231611, -0.673907, 0, 0.0770828, 2.02489, -0.126783, 1.59756, -0.121219)
-flight_module = NodePath("../../FlightModule")
-
-[node name="LookTurnPanel" parent="Cockpit" node_paths=PackedStringArray("mechcontroller") instance=ExtResource("9_gn4jr")]
-transform = Transform3D(1, 0, 0, 0, 0.274446, -0.961603, 0, 0.961603, 0.274446, 0.0802011, 0.639585, -0.339646)
-mechcontroller = NodePath("../../MechbodyController")
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
-visible = false
-text = "adsf"
-
-[node name="Label3D2" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50374, -1.01823)
-visible = false
-text = "asdf"
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -7.12, 10.6366)
-mesh = ExtResource("5_3oo3b")
-surface_material_override/0 = ExtResource("6_kxm6c")
+[node name="laser" parent="RightHandRemote" instance=ExtResource("8_jt7bt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730311, 0)
 
 [node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_wgapf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0422812, 0.0477576, 0.0106616)
@@ -139,31 +102,22 @@ coefficient = 1.0
 [node name="WindParticles" parent="." node_paths=PackedStringArray("body") instance=ExtResource("9_t76ck")]
 body = NodePath("..")
 
-[node name="wingfx" type="Node3D" parent="."]
-
-[node name="headrot" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.978566, -0.358034)
-visible = false
-text = "asdf"
-
-[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_effects", "flight_controller") instance=ExtResource("6_gk30v")]
-body = NodePath("..")
-flight_effects = NodePath("../wingfx")
-flight_controller = NodePath("../FlightModule")
-
 [node name="seatcalibrator" parent="." node_paths=PackedStringArray("cockpit", "disable_controller") instance=ExtResource("10_plbo3")]
 transform = Transform3D(0.767781, 0, 0.640713, 0, 1, 0, -0.640713, 0, 0.767781, 0.378891, 0.708426, 0.355719)
 cockpit = NodePath("../Cockpit")
 disable_controller = NodePath("../MechbodyController")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -7.12, 10.6366)
+mesh = ExtResource("5_3oo3b")
+surface_material_override/0 = ExtResource("6_kxm6c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
+shape = SubResource("CylinderShape3D_g8pff")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.1751, 0)
 shape = SubResource("CylinderShape3D_n3q16")
 
 [editable path="Cockpit"]
-[editable path="Cockpit/ArmBaseLeft"]
-[editable path="Cockpit/ArmBaseLeft/ShoulderJoint/KinematicArm"]
-[editable path="Cockpit/ArmBaseRight"]
-[editable path="Cockpit/ArmBaseRight/ShoulderJoint/KinematicArm"]
-[editable path="Cockpit/Handles/handlesLeft"]
-[editable path="Cockpit/Handles/handlesRight"]

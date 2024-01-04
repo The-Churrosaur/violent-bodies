@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjemm0ivcuagh"]
+
+[ext_resource type="Script" path="res://gameplay/mechbody/arm_targeter.gd" id="1_3l0lf"]
+
+[node name="ArmTargeter" type="Node3D"]
+script = ExtResource("1_3l0lf")
+
+[node name="ArmTarget" type="Node3D" parent="."]

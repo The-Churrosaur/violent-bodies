@@ -9,8 +9,6 @@ extends Node3D
 
 @export var mechbody : MechBody
 
-@onready var ragdoll_bit_u_arm = $RagdollArmLeft/RagdollBitUArm
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if Engine.is_editor_hint():
@@ -24,5 +22,6 @@ func _process(delta):
 
 func _set_positions():
 	print("setting positions")
-	
+	$LHandBit.global_position = mechbody.cockpit.left_arm.hand_ref.global_position
+	$RHandBit.global_position = mechbody.cockpit.right_arm.hand_ref.global_position
 	pass
