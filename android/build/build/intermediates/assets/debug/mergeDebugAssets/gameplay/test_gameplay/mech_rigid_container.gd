@@ -25,25 +25,4 @@ func _process(delta):
 func _set_positions():
 	print("setting positions")
 	
-	# left arm
-	var larm = mechbody.cockpit.left_arm
-	print(ragdoll_bit_u_arm)
-	_set_bit($RagdollArmLeft/RagdollBitUArm, larm.uarm_ref)
-	_set_bit($RagdollArmLeft/RagdollBitFArm, larm.farm_ref)
-	_set_bit($RagdollArmLeft/RagdollBitHand, larm.hand_ref)
-	
-	# right arm
-	var rarm = mechbody.cockpit.right_arm
-	_set_bit($RagdollArmRight/RagdollBitUArm, rarm.uarm_ref)
-	_set_bit($RagdollArmRight/RagdollBitFArm, rarm.farm_ref)
-	_set_bit($RagdollArmRight/RagdollBitHand, rarm.hand_ref)
-
-
-func _set_bit(bit, target):
-	print("setting bit")
-	bit.global_position = target.global_position
-	bit.global_rotation = target.global_rotation
-	bit.target_node = target
-	
-	if bit.pin != null:
-		bit.pin.global_position = bit.global_position
+	pass
