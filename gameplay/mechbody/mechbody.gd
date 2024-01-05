@@ -4,6 +4,9 @@
 class_name MechBody
 extends RigidBody3D
 
+signal landed()
+signal takeoff()
+
 @export var thrust_power = 500000.0
 @export var torque_power = 180000.0
 

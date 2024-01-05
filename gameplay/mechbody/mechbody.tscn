@@ -44,9 +44,13 @@ cockpit = NodePath("Cockpit")
 left_arm_targeter = NodePath("ArmTargeterLeft")
 right_arm_targeter = NodePath("ArmTargeterRight")
 
-[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_controller") instance=ExtResource("6_gk30v")]
+[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_controller", "cockpit_headset_reference") instance=ExtResource("6_gk30v")]
 body = NodePath("..")
 flight_controller = NodePath("../FlightModule")
+cockpit_headset_reference = NodePath("../Cockpit/HeadsetReference")
+look_mult = 0.5
+lean_roll_mult = 2.0
+lean_input_mult = 5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)

@@ -36,7 +36,6 @@ shape = SubResource("BoxShape3D_c072q")
 mesh = SubResource("SphereMesh_wgu1x")
 
 [node name="LimbRotator" parent="Hand" node_paths=PackedStringArray("body", "target") instance=ExtResource("2_mnakk")]
-debug = true
 body = NodePath("..")
 target = NodePath("../../Anchor")
 match_z = false

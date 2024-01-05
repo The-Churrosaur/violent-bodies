@@ -19,6 +19,9 @@ script = ExtResource("1_wnyec")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.06, -0.06)
 mesh = ExtResource("2_by6e6")
 
+[node name="HeadsetReference" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11946, 0.109797)
+
 [node name="PlayerShoulderLeft" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.98, 0.101)
 script = ExtResource("3_wixsj")

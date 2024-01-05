@@ -5,6 +5,12 @@
 
 [node name="MechbodyController" instance=ExtResource("1_4agol")]
 script = ExtResource("2_r8ium")
+tranlation_mult = 0.5
+rotation_mult = 0.5
 look_rotation = false
 look_pitch = 0.523599
 look_yaw = 0.785398
+look_mult = 0.5
+lean_deadzone = 0.1
+lean_roll_mult = 2.0
+lean_input_mult = 1
