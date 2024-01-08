@@ -1,0 +1,31 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cf87130kny254"]
+
+[ext_resource type="Shader" uid="uid://337o3kje1brr" path="res://effects/style_smoke.tres" id="1_uqbs4"]
+
+[sub_resource type="Gradient" id="Gradient_xl16w"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_goj77"]
+gradient = SubResource("Gradient_xl16w")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8sfos"]
+noise_type = 3
+seed = 1
+frequency = 0.0116
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c6uiy"]
+invert = true
+seamless = true
+noise = SubResource("FastNoiseLite_8sfos")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_uqbs4")
+shader_parameter/Fresnel = 0.6
+shader_parameter/CrackMovementSpeed = 0.1
+shader_parameter/CrackAlpha = 0.694
+shader_parameter/FresnelColor = Color(0.988235, 0.541176, 0.615686, 1)
+shader_parameter/CrackNoise = SubResource("NoiseTexture2D_c6uiy")
+shader_parameter/Albedo = SubResource("GradientTexture1D_goj77")

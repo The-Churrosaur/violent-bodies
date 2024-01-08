@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://x7l4qcvmdopj"]
+
+[ext_resource type="Shader" uid="uid://dr6mnl8mbr2fx" path="res://effects/dissolve.tres" id="1_wvytp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yqudm"]
+noise_type = 2
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_31olt"]
+seamless = true
+noise = SubResource("FastNoiseLite_yqudm")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wvytp")
+shader_parameter/FloatParameter = 0.609
+shader_parameter/AlphaNoise = SubResource("NoiseTexture2D_31olt")

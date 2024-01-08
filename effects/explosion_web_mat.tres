@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://btsqufydjsfjp"]
+
+[ext_resource type="Shader" uid="uid://uahrd3p2ylm8" path="res://effects/explosion_web.tres" id="1_8lws2"]
+
+[sub_resource type="Gradient" id="Gradient_8j0bj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uf1mu"]
+noise_type = 2
+frequency = 0.004
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_53goy"]
+width = 2048
+height = 2048
+color_ramp = SubResource("Gradient_8j0bj")
+noise = SubResource("FastNoiseLite_uf1mu")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8lws2")
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_53goy")

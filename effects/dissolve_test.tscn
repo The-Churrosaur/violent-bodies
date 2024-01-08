@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://blctfrm4mbxes"]
+
+[ext_resource type="Material" uid="uid://btsqufydjsfjp" path="res://effects/explosion_web_mat.tres" id="2_c4k5g"]
+[ext_resource type="Material" uid="uid://med2ngygitgh" path="res://effects/alpha_fade_material.tres" id="2_hqq1l"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_401g5"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_enn3r"]
+particle_flag_rotate_y = true
+emission_shape_scale = Vector3(2, 2, 2)
+angle_min = -90.0
+angle_max = 90.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ocmm"]
+material = ExtResource("2_hqq1l")
+
+[sub_resource type="FogMaterial" id="FogMaterial_crvxg"]
+density = 1.5128
+
+[node name="DissolveTest" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_401g5")
+surface_material_override/0 = ExtResource("2_c4k5g")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+visible = false
+process_material = SubResource("ParticleProcessMaterial_enn3r")
+draw_pass_1 = SubResource("BoxMesh_8ocmm")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+size = Vector3(2.95016, 2, 2.39655)
+shape = 0
+material = SubResource("FogMaterial_crvxg")

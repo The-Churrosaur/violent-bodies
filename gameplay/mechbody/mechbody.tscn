@@ -48,8 +48,6 @@ right_arm_targeter = NodePath("ArmTargeterRight")
 body = NodePath("..")
 flight_controller = NodePath("../FlightModule")
 cockpit_headset_reference = NodePath("../Cockpit/HeadsetReference")
-look_mult = 0.5
-lean_roll_mult = 2.0
 lean_input_mult = 5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

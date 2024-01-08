@@ -1,0 +1,152 @@
+[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://dudqme73d46cw"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_mnsdt"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_b3rqn"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_cy700"]
+parameter_name = "OffsetSpeed"
+default_value_enabled = true
+default_value = 0.5
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_qp1wh"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_8wwca"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="Curve" id="Curve_lpuxu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.537659, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_myu4q"]
+curve = SubResource("Curve_lpuxu")
+
+[sub_resource type="VisualShaderNodeCurveTexture" id="VisualShaderNodeCurveTexture_hyib1"]
+texture = SubResource("CurveTexture_myu4q")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pmfd1"]
+source = 5
+
+[sub_resource type="VisualShaderNodeVaryingGetter" id="VisualShaderNodeVaryingGetter_8f7v3"]
+varying_name = "particle_life"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_u8lpy"]
+parameter_name = "Alpha"
+texture_repeat = 1
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_gj11j"]
+parameter_name = "Albedo"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_0wmv7"]
+source = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_xl0dg"]
+expanded_output_ports = [0]
+input_name = "instance_custom"
+
+[sub_resource type="VisualShaderNodeVaryingSetter" id="VisualShaderNodeVaryingSetter_kykl7"]
+varying_name = "particle_life"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+// Varyings
+varying float particle_life;
+
+uniform sampler2D Albedo;
+uniform sampler2D curve_frg_19 : repeat_disable;
+uniform sampler2D Alpha : repeat_enable;
+
+
+
+void vertex() {
+// Input:2
+	vec4 n_out2p0 = INSTANCE_CUSTOM;
+	float n_out2p2 = n_out2p0.g;
+
+
+// VaryingSetter:3
+	particle_life = n_out2p2;
+
+
+}
+
+void fragment() {
+	vec4 n_out5p0;
+// Texture2D:5
+	n_out5p0 = texture(Albedo, UV);
+
+
+// Input:11
+	float n_out11p0 = TIME;
+
+
+// CurveTexture:19
+	float n_out19p0 = texture(curve_frg_19, vec2(n_out11p0)).r;
+
+
+// VectorOp:18
+	vec2 n_out18p0 = vec2(n_out19p0) + vec2(n_out11p0);
+
+
+// Input:12
+	vec2 n_out12p0 = UV;
+
+
+// VectorOp:15
+	vec2 n_out15p0 = n_out18p0 + n_out12p0;
+
+
+	vec4 n_out2p0;
+// Texture2D:2
+	n_out2p0 = texture(Alpha, n_out15p0);
+
+
+// VaryingGetter:20
+	float n_out20p0 = particle_life;
+
+
+// Output:0
+	ALBEDO = vec3(n_out5p0.xyz);
+	ALPHA = n_out2p0.x;
+	ALPHA_SCISSOR_THRESHOLD = n_out20p0;
+
+
+}
+"
+varyings/particle_life = "0,0"
+nodes/vertex/2/node = SubResource("VisualShaderNodeInput_xl0dg")
+nodes/vertex/2/position = Vector2(-298.901, 178.734)
+nodes/vertex/3/node = SubResource("VisualShaderNodeVaryingSetter_kykl7")
+nodes/vertex/3/position = Vector2(80, 180)
+nodes/vertex/connections = PackedInt32Array(2, 2, 3, 0)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_pmfd1")
+nodes/fragment/2/position = Vector2(-160, 320)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_u8lpy")
+nodes/fragment/3/position = Vector2(-640, 300)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_gj11j")
+nodes/fragment/4/position = Vector2(-200, -180)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_0wmv7")
+nodes/fragment/5/position = Vector2(140, 0)
+nodes/fragment/11/node = SubResource("VisualShaderNodeInput_mnsdt")
+nodes/fragment/11/position = Vector2(-1260, -160)
+nodes/fragment/12/node = SubResource("VisualShaderNodeInput_b3rqn")
+nodes/fragment/12/position = Vector2(-760, 100)
+nodes/fragment/13/node = SubResource("VisualShaderNodeFloatParameter_cy700")
+nodes/fragment/13/position = Vector2(-1160, -20)
+nodes/fragment/15/node = SubResource("VisualShaderNodeVectorOp_qp1wh")
+nodes/fragment/15/position = Vector2(-360, 0)
+nodes/fragment/18/node = SubResource("VisualShaderNodeVectorOp_8wwca")
+nodes/fragment/18/position = Vector2(-540, -180)
+nodes/fragment/19/node = SubResource("VisualShaderNodeCurveTexture_hyib1")
+nodes/fragment/19/position = Vector2(-900, -500)
+nodes/fragment/20/node = SubResource("VisualShaderNodeVaryingGetter_8f7v3")
+nodes/fragment/20/position = Vector2(-160, 580)
+nodes/fragment/connections = PackedInt32Array(3, 0, 2, 2, 2, 0, 0, 1, 12, 0, 15, 1, 11, 0, 18, 1, 18, 0, 15, 0, 11, 0, 19, 0, 19, 0, 18, 0, 4, 0, 5, 2, 5, 0, 0, 0, 20, 0, 0, 19, 15, 0, 2, 0)

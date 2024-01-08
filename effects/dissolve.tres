@@ -1,0 +1,63 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://dr6mnl8mbr2fx"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_nrmcd"]
+parameter_name = "AlphaNoise"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_wvhoe"]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_0s2kn"]
+parameter_name = "Albedo"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_wg88o"]
+source = 5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_v6kw7"]
+parameter_name = "FloatParameter"
+hint = 1
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D Albedo;
+uniform sampler2D AlphaNoise;
+uniform float FloatParameter : hint_range(0, 1);
+
+
+
+void fragment() {
+	vec4 n_out7p0;
+// Texture2D:7
+	n_out7p0 = texture(Albedo, UV);
+
+
+	vec4 n_out5p0;
+// Texture2D:5
+	n_out5p0 = texture(AlphaNoise, UV);
+
+
+// FloatParameter:8
+	float n_out8p0 = FloatParameter;
+
+
+// Output:0
+	ALBEDO = vec3(n_out7p0.xyz);
+	ALPHA = n_out5p0.x;
+	ALPHA_SCISSOR_THRESHOLD = n_out8p0;
+
+
+}
+"
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_nrmcd")
+nodes/fragment/4/position = Vector2(-280, 20)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_wvhoe")
+nodes/fragment/5/position = Vector2(80, 100)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_0s2kn")
+nodes/fragment/6/position = Vector2(-280, -360)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture_wg88o")
+nodes/fragment/7/position = Vector2(100, -180)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatParameter_v6kw7")
+nodes/fragment/8/position = Vector2(-276.526, 374.093)
+nodes/fragment/connections = PackedInt32Array(4, 0, 5, 2, 5, 0, 0, 1, 6, 0, 7, 2, 7, 0, 0, 0, 8, 0, 0, 19)

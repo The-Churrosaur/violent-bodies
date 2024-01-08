@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://med2ngygitgh"]
+
+[ext_resource type="Shader" uid="uid://dudqme73d46cw" path="res://effects/alpha_fade_shader.tres" id="1_2ctrv"]
+
+[sub_resource type="Gradient" id="Gradient_avkmj"]
+offsets = PackedFloat32Array(0.34434, 0.40566)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1mq5n"]
+noise_type = 2
+frequency = 0.0051
+fractal_octaves = 2
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kaohr"]
+width = 2048
+height = 2048
+seamless = true
+color_ramp = SubResource("Gradient_avkmj")
+noise = SubResource("FastNoiseLite_1mq5n")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_2ctrv")
+shader_parameter/Alpha = SubResource("NoiseTexture2D_kaohr")
