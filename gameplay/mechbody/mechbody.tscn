@@ -52,7 +52,7 @@ right_player_shoulder = NodePath("Cockpit/PlayerShoulderRight")
 body = NodePath("..")
 flight_controllers = [NodePath("../FlightModule"), NodePath("../FlightModuleTail")]
 cockpit_headset_reference = NodePath("../Cockpit/HeadsetReference")
-lean_input_mult = 5
+lean_deadzone = 0.05
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)

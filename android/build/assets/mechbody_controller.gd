@@ -19,9 +19,9 @@ extends XRInputProcessor
 @export var look_yaw = PI / 4
 @export var look_mult = 0.5
 
-@export var lean_deadzone = 0.1
+@export var lean_deadzone = 0.05
 @export var lean_roll_mult = 2.0
-@export var lean_input_mult = 5
+@export var lean_input_mult = 1
 
 @export var arm_wing_deadzone = 0.1
 @export var arm_wing_roll_mult = 1
@@ -103,11 +103,13 @@ func _physics_process(delta):
 		
 		# LEAN ROLL
 		
-		var headset_pos = cockpit_headset_reference.to_local(headset.global_position)
-		var headset_xz = Vector2(headset_pos.x, -headset_pos.z)
-		
-		if headset_xz.length_squared() > lean_deadzone * lean_deadzone:
-			body.roll_input += (headset_xz.x ) * lean_roll_mult
+		if !body.is_landed:
+			
+			var headset_pos = cockpit_headset_reference.to_local(headset.global_position)
+			var headset_xz = Vector2(headset_pos.x, -headset_pos.z)
+			
+			if headset_xz.length_squared() > lean_deadzone * lean_deadzone:
+				body.roll_input += (headset_xz.x ) * lean_roll_mult
 	
 	# GROUND MOVEMENT
 	
