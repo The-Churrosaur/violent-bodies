@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dsh7i4eks64gc"]
+[gd_scene load_steps=22 format=3 uid="uid://dsh7i4eks64gc"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_ifmva"]
 [ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="2_gumoi"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cwn381pjcowiv" path="res://effects/wind_particles.tscn" id="9_t76ck"]
 [ext_resource type="PackedScene" uid="uid://dk57ccrojdqh1" path="res://gameplay/mechtools/gun_input_processor.tscn" id="10_f55vg"]
 [ext_resource type="PackedScene" uid="uid://d26k2y5i1upl1" path="res://gameplay/controls/seat_calibration.tscn" id="10_plbo3"]
+[ext_resource type="PackedScene" uid="uid://ct1mqoq7ffeph" path="res://gameplay/controls/flight_module_panel.tscn" id="12_ut7dy"]
 [ext_resource type="PackedScene" uid="uid://dblov20n4ihk2" path="res://cockpit_test/arm_base.tscn" id="13_8cwlu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pfxel"]
@@ -24,6 +25,9 @@ absorbent = true
 top_radius = 1.0
 bottom_radius = 1.0
 height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_mniyf"]
+size = Vector3(0.1, 0.15, 0.2)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g8pff"]
 height = 1.0
@@ -48,11 +52,11 @@ right_arm_targeter = NodePath("ArmTargeterRight")
 left_player_shoulder = NodePath("Cockpit/PlayerShoulderLeft")
 right_player_shoulder = NodePath("Cockpit/PlayerShoulderRight")
 
-[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_controllers", "cockpit_headset_reference") instance=ExtResource("6_gk30v")]
+[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_controller_pitch", "flight_controller_yaw", "cockpit_headset_reference") instance=ExtResource("6_gk30v")]
 body = NodePath("..")
-flight_controllers = [NodePath("../FlightModule"), NodePath("../FlightModuleTail")]
+flight_controller_pitch = NodePath("../FlightModule")
+flight_controller_yaw = NodePath("../FlightModuleTail")
 cockpit_headset_reference = NodePath("../Cockpit/HeadsetReference")
-lean_deadzone = 0.05
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
@@ -107,13 +111,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730311, 0)
 gun = NodePath("../Stupidgun2")
 
 [node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_wgapf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0422812, 0.0477576, 0.0106616)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0422812, 0.942789, -1.45214)
 mechbody = NodePath("..")
-coefficient = 2.0
+coefficient = 4.0
 
-[node name="FlightModuleTail" parent="." instance=ExtResource("4_wgapf")]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="FlightModule"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.214992)
+mesh = SubResource("BoxMesh_mniyf")
+skeleton = NodePath("../..")
+
+[node name="FlightPanel" parent="FlightModule" node_paths=PackedStringArray("flight_module") instance=ExtResource("12_ut7dy")]
+transform = Transform3D(0.244102, 0, 0, 0, 0.231611, -0.673907, 0, 0.0770828, 2.02489, -0.0845021, 0.483912, 1.29092)
+flight_module = NodePath("..")
+
+[node name="FlightModuleTail" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_wgapf")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0422812, 0.0477576, 0.0106616)
-coefficient = 2.0
+mechbody = NodePath("..")
+coefficient = 4.0
+
+[node name="FlightPanel" parent="FlightModuleTail" instance=ExtResource("12_ut7dy")]
+transform = Transform3D(0.244102, 0, 0, 0, 0.243389, 0.162944, 0, -0.0186379, 2.12786, 1.13703, -0.395037, -0.124847)
 
 [node name="WindParticles" parent="." node_paths=PackedStringArray("body") instance=ExtResource("9_t76ck")]
 body = NodePath("..")

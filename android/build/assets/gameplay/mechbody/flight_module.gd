@@ -10,6 +10,9 @@ extends Node3D
 @export var coefficient = 1.2
 @export var max_aoa = PI / 2
 @export var enabled = false
+@export var max_force = 10000  
+
+@onready var ball = $MeshInstance3D
 
 var data : String
 
@@ -29,9 +32,13 @@ func _physics_process(delta):
 		return 
 	
 	var lift = global_transform.basis.y * alpha * coefficient * vel.length_squared()
+	
+	if lift.length_squared() > max_force * max_force:
+		lift = lift.normalized() * max_force
+	
 	mechbody.apply_central_force(lift)
 	
 	var length = lift.length()
 	data = str(int(length))
 	
-	
+	ball.position = lift / 1000

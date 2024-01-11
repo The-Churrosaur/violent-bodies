@@ -6,9 +6,8 @@
 [sub_resource type="BoxMesh" id="BoxMesh_pcilt"]
 size = Vector3(0.1, 0.15, 0.2)
 
-[node name="MechbodyController" node_paths=PackedStringArray("flight_controllers") instance=ExtResource("1_4agol")]
+[node name="MechbodyController" instance=ExtResource("1_4agol")]
 script = ExtResource("2_r8ium")
-flight_controllers = []
 tranlation_mult = 0.5
 rotation_mult = 0.5
 look_rotation = false
@@ -22,7 +21,9 @@ arm_wing_deadzone = 0.1
 arm_wing_roll_mult = 1
 arm_wing_yaw_mult = 0.3
 arm_wing_pitch_deadzone = 0.05
-arm_wing_pitch_mult = 2
+arm_wing_pitch_mult = 3
+arm_wing_thrust_mult = 1
+arm_wing_speed_div = 100
 
 [node name="ArmCenter" type="Node3D" parent="." index="0"]
 

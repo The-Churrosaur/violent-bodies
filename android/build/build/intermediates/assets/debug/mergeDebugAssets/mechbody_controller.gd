@@ -5,7 +5,8 @@ extends XRInputProcessor
 
 @export var body : MechBody
 @export var flight_effects : Node3D
-@export var flight_controllers : Array[FlightModule]
+@export var flight_controller_pitch : FlightModule
+@export var flight_controller_yaw : FlightModule
 
 @export_category("stick movement")
 @export var tranlation_mult = 0.5
@@ -27,7 +28,9 @@ extends XRInputProcessor
 @export var arm_wing_roll_mult = 1
 @export var arm_wing_yaw_mult = 0.3
 @export var arm_wing_pitch_deadzone = 0.05
-@export var arm_wing_pitch_mult = 2
+@export var arm_wing_pitch_mult = 3
+@export var arm_wing_thrust_mult = 1
+@export var arm_wing_speed_div = 100
 
 @onready var arm_center = $ArmCenter ## points towards left hand
 @onready var arm_center_reference = $ArmCenterReference
@@ -71,16 +74,7 @@ func _physics_process(delta):
 	# rotation
 	
 	body.pitch_input += primary.y * rotation_mult
-	
-	# FLIGHT MODE
-	
-	if is_flight:
-		body.front_input = 1
-		body.roll_input += primary.x * rotation_mult
-	elif lx : 
-		body.roll_input += primary.x
-	else:
-		body.roll_input += primary.x * rotation_mult
+	body.roll_input += primary.x * rotation_mult
 	
 	# gadf
 	
@@ -137,17 +131,26 @@ func _physics_process(delta):
 	
 	if is_flight:
 		
+		var speed = abs(body.linear_velocity.length())
+		var s = speed / arm_wing_speed_div
+		
 		var roll = arm_center.rotation.x
 		if abs(roll) > arm_wing_deadzone:
-			body.roll_input += roll * arm_wing_roll_mult
+			body.roll_input += roll * arm_wing_roll_mult * s
 		
 		var yaw = - arm_center.rotation.y + PI/2 # armcenter is rotated
 		if abs(yaw) > arm_wing_deadzone:
-			body.yaw_input += yaw * arm_wing_yaw_mult 
+			body.yaw_input += yaw * arm_wing_yaw_mult * s
 		
 		var pitch = arm_center_reference.position.y - arm_center.position.y
 		if abs(pitch) > arm_wing_pitch_deadzone:
-			body.pitch_input += pitch * arm_wing_pitch_mult
+			body.pitch_input += pitch * arm_wing_pitch_mult * s
+			#flight_controller_pitch.rotation.x = -pitch # rotates correctly, something wrong with wings
+		
+		# thrust
+		var length = (rhand.global_position - lhand.global_position).length()
+		var thrust = length * arm_wing_thrust_mult
+		body.front_input += thrust
 	
 
 
@@ -189,10 +192,10 @@ func _on_right_input_up(action):
 
 func _enter_flight():
 	is_flight = true
-	for f in flight_controllers:
-		f.enabled = true
+	flight_controller_pitch.enabled = true
+	flight_controller_yaw.enabled = true
 
 func _exit_flight():
 	is_flight = false
-	for f in flight_controllers:
-		f.enabled = false
+	flight_controller_pitch.enabled = false
+	flight_controller_yaw.enabled = false
