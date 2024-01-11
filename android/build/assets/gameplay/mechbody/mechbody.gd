@@ -14,6 +14,8 @@ signal takeoff()
 @export var cockpit : Cockpit
 @export var left_arm_targeter : ArmTargeter
 @export var right_arm_targeter : ArmTargeter
+@export var left_player_shoulder : Node3D
+@export var right_player_shoulder : Node3D
 
 # set by controller
 # assume 0-1 but it's multiplicative
@@ -28,6 +30,9 @@ var climb_input = 0
 var fore
 var right
 var up
+
+var is_landed = false
+
 
 func _physics_process(delta):
 	
@@ -63,3 +68,17 @@ func clear_inputs():
 	front_input = 0
 	strafe_input = 0
 	climb_input = 0
+
+
+func _on_body_entered(body):
+	print("body entered")
+	if body.is_in_group("ground"): 
+		print("GROUNDED")
+		landed.emit()
+		is_landed = true
+
+
+func _on_body_exited(body):
+	if body.is_in_group("ground"): 
+		takeoff.emit()
+		is_landed = false

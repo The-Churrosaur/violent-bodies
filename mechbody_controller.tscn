@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvg5e6hisacwi"]
+[gd_scene load_steps=4 format=3 uid="uid://dvg5e6hisacwi"]
 
 [ext_resource type="PackedScene" uid="uid://byul3rfe4u44s" path="res://gameplay/controls/xr_input_processor.tscn" id="1_4agol"]
 [ext_resource type="Script" path="res://mechbody_controller.gd" id="2_r8ium"]
 
-[node name="MechbodyController" instance=ExtResource("1_4agol")]
+[sub_resource type="BoxMesh" id="BoxMesh_pcilt"]
+size = Vector3(0.1, 0.15, 0.2)
+
+[node name="MechbodyController" node_paths=PackedStringArray("flight_controllers") instance=ExtResource("1_4agol")]
 script = ExtResource("2_r8ium")
+flight_controllers = []
 tranlation_mult = 0.5
 rotation_mult = 0.5
 look_rotation = false
@@ -14,3 +18,17 @@ look_mult = 0.5
 lean_deadzone = 0.1
 lean_roll_mult = 2.0
 lean_input_mult = 1
+arm_wing_deadzone = 0.1
+arm_wing_roll_mult = 1
+arm_wing_yaw_mult = 0.3
+arm_wing_pitch_deadzone = 0.05
+arm_wing_pitch_mult = 2
+
+[node name="ArmCenter" type="Node3D" parent="." index="0"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ArmCenter" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.214992)
+mesh = SubResource("BoxMesh_pcilt")
+skeleton = NodePath("../..")
+
+[node name="ArmCenterReference" type="Node3D" parent="." index="1"]

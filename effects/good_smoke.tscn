@@ -50,9 +50,11 @@ height = 40.0
 
 [node name="bubbling" type="GPUParticles3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000318944, 0.628824, -0.00383043)
+emitting = false
 amount = 20
 sub_emitter = NodePath(".")
 lifetime = 1.37
+one_shot = true
 explosiveness = 0.42
 process_material = SubResource("ParticleProcessMaterial_qtaus")
 draw_pass_1 = SubResource("SphereMesh_34mk2")

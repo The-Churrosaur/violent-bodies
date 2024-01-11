@@ -32,10 +32,12 @@ radius = 2.78995
 [sub_resource type="BoxShape3D" id="BoxShape3D_cmj2x"]
 size = Vector3(10, 5, 10)
 
-[node name="Mechbody" type="RigidBody3D" node_paths=PackedStringArray("cockpit", "left_arm_targeter", "right_arm_targeter")]
+[node name="Mechbody" type="RigidBody3D" node_paths=PackedStringArray("cockpit", "left_arm_targeter", "right_arm_targeter", "left_player_shoulder", "right_player_shoulder")]
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_pfxel")
 gravity_scale = 0.0
+max_contacts_reported = 2
+contact_monitor = true
 linear_damp = 0.1
 angular_damp = 2.0
 script = ExtResource("1_ifmva")
@@ -43,10 +45,12 @@ torque_power = 1e+06
 cockpit = NodePath("Cockpit")
 left_arm_targeter = NodePath("ArmTargeterLeft")
 right_arm_targeter = NodePath("ArmTargeterRight")
+left_player_shoulder = NodePath("Cockpit/PlayerShoulderLeft")
+right_player_shoulder = NodePath("Cockpit/PlayerShoulderRight")
 
-[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_controller", "cockpit_headset_reference") instance=ExtResource("6_gk30v")]
+[node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_controllers", "cockpit_headset_reference") instance=ExtResource("6_gk30v")]
 body = NodePath("..")
-flight_controller = NodePath("../FlightModule")
+flight_controllers = [NodePath("../FlightModule"), NodePath("../FlightModuleTail")]
 cockpit_headset_reference = NodePath("../Cockpit/HeadsetReference")
 lean_input_mult = 5
 
@@ -105,7 +109,11 @@ gun = NodePath("../Stupidgun2")
 [node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_wgapf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0422812, 0.0477576, 0.0106616)
 mechbody = NodePath("..")
-coefficient = 1.0
+coefficient = 2.0
+
+[node name="FlightModuleTail" parent="." instance=ExtResource("4_wgapf")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0422812, 0.0477576, 0.0106616)
+coefficient = 2.0
 
 [node name="WindParticles" parent="." node_paths=PackedStringArray("body") instance=ExtResource("9_t76ck")]
 body = NodePath("..")
@@ -127,5 +135,8 @@ shape = SubResource("CylinderShape3D_g8pff")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.0343, 0)
 shape = SubResource("BoxShape3D_cmj2x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
 
 [editable path="Cockpit"]

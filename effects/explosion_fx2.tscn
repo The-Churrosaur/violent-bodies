@@ -1,9 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://cwy4f8hnji8jb"]
+[gd_scene load_steps=29 format=3 uid="uid://cwy4f8hnji8jb"]
 
 [ext_resource type="Script" path="res://effects/explosion_fx.gd" id="1_0bkck"]
 [ext_resource type="Material" uid="uid://btsqufydjsfjp" path="res://effects/explosion_web_mat.tres" id="2_tugvy"]
 [ext_resource type="PackedScene" uid="uid://d0jdcfqgvui6p" path="res://effects/good_smoke.tscn" id="3_gm0up"]
-[ext_resource type="Material" uid="uid://cf87130kny254" path="res://effects/style_smoke_material.tres" id="3_qm6ni"]
+[ext_resource type="Shader" uid="uid://337o3kje1brr" path="res://effects/style_smoke.tres" id="4_paaua"]
 [ext_resource type="Material" uid="uid://d36fshnmb3ppv" path="res://materials/smoke_material.tres" id="5_idydg"]
 
 [sub_resource type="Gradient" id="Gradient_d858w"]
@@ -14,8 +14,8 @@ colors = PackedColorArray(0.999615, 0.983605, 0.973213, 1, 0.992157, 0.792157, 0
 gradient = SubResource("Gradient_d858w")
 
 [sub_resource type="Curve" id="Curve_rqtru"]
-_data = [Vector2(0, 0), 0.0, 2.66316, 0, 0, Vector2(0.422078, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.725275), -1.42637, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 2.66316, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_00r4a"]
 curve = SubResource("Curve_rqtru")
@@ -56,28 +56,62 @@ curve = SubResource("Curve_s74ug")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o0c2y"]
 lifetime_randomness = 0.39
-particle_flag_rotate_y = true
+particle_flag_align_y = true
 emission_shape = 3
-emission_box_extents = Vector3(4, 4, 4)
+emission_box_extents = Vector3(2, 2, 2)
 angle_min = -90.0
 angle_max = 90.0
+direction = Vector3(0, 0, 0)
 spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
 angular_velocity_curve = SubResource("CurveTexture_30o36")
 gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
 scale_min = 0.3
-scale_max = 0.4
 scale_curve = SubResource("CurveTexture_00r4a")
 color_ramp = SubResource("GradientTexture1D_fgtpn")
 turbulence_noise_strength = 20.0
-turbulence_noise_scale = 7.41
+turbulence_noise_scale = 1.903
 turbulence_noise_speed_random = 0.0
-turbulence_influence_max = 0.16
+turbulence_influence_min = 0.085
+turbulence_influence_max = 0.085
 
-[sub_resource type="SphereMesh" id="SphereMesh_34mk2"]
-material = ExtResource("3_qm6ni")
-radius = 20.0
-height = 40.0
+[sub_resource type="Gradient" id="Gradient_xl16w"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_goj77"]
+gradient = SubResource("Gradient_xl16w")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8sfos"]
+noise_type = 3
+seed = 1
+frequency = 0.0116
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c6uiy"]
+invert = true
+seamless = true
+noise = SubResource("FastNoiseLite_8sfos")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phw24"]
+render_priority = 0
+shader = ExtResource("4_paaua")
+shader_parameter/Fresnel = 1.0
+shader_parameter/CrackMovementSpeed = 0.5
+shader_parameter/CrackAlpha = 0.866
+shader_parameter/FresnelColor = Color(0.988235, 0.541176, 0.615686, 1)
+shader_parameter/CrackNoise = SubResource("NoiseTexture2D_c6uiy")
+shader_parameter/Albedo = SubResource("GradientTexture1D_goj77")
+
+[sub_resource type="SphereMesh" id="SphereMesh_t27kp"]
+material = SubResource("ShaderMaterial_phw24")
+radius = 2.0
+height = 30.0
+radial_segments = 16
+rings = 8
+is_hemisphere = true
 
 [sub_resource type="Gradient" id="Gradient_iounm"]
 offsets = PackedFloat32Array(0.0108108, 0.497297, 1)
@@ -122,9 +156,8 @@ material = ExtResource("5_idydg")
 radius = 20.0
 height = 40.0
 
-[node name="explosionFX" type="Node3D" node_paths=PackedStringArray("bubbling", "nova")]
+[node name="explosionFX" type="Node3D" node_paths=PackedStringArray("nova")]
 script = ExtResource("1_0bkck")
-bubbling = NodePath("")
 nova = NodePath("nova")
 
 [node name="web" type="GPUParticles3D" parent="."]
@@ -142,12 +175,14 @@ draw_pass_1 = SubResource("SphereMesh_ygh2x")
 [node name="launched" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000318944, 0.628824, -0.00383043)
 emitting = false
-amount = 20
+amount = 5
 sub_emitter = NodePath(".")
-lifetime = 1.37
-explosiveness = 0.42
+lifetime = 0.96
+one_shot = true
+explosiveness = 0.76
+trail_lifetime = 0.71
 process_material = SubResource("ParticleProcessMaterial_o0c2y")
-draw_pass_1 = SubResource("SphereMesh_34mk2")
+draw_pass_1 = SubResource("SphereMesh_t27kp")
 
 [node name="nova" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0568449, 0)
