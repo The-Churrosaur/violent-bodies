@@ -39,7 +39,7 @@ extends XRInputProcessor
 @onready var arm_center_reference = $ArmCenterReference
 @onready var arm_aimer = $ArmAimer
 
-var alt_look = false
+var alt_look = true
 var is_flight = false
 
 
@@ -94,12 +94,12 @@ func _physics_process(delta):
 		var y = headset.rotation.y
 		
 		# TODO testing arm following
-		if ltrigger > 0:
-			
-			arm_aimer.look_at(arm_aimer_hand_remote.global_position)
-			x += arm_aimer.rotation.x
-			y += arm_aimer.rotation.y
-		
+		#if ltrigger > 0:
+			#
+		arm_aimer.look_at(arm_aimer_hand_remote.global_position)
+		x += arm_aimer.rotation.x
+		y += arm_aimer.rotation.y
+	
 		
 		if abs(x) > look_pitch:
 			body.pitch_input -= x * look_mult
@@ -180,10 +180,11 @@ func _on_left_input_down(action):
 		body.boost_forwards(0.02)
 		#flight_effects.visible = true
 		_enter_flight()
+		alt_look = false
 	
 	# ALT LOOK
 	if action == "ax_button":
-		alt_look = true
+		alt_look = false
 
 
 func _on_left_input_up(action):
@@ -193,10 +194,11 @@ func _on_left_input_up(action):
 	if action == "by_button":
 		#flight_effects.visible = false
 		_exit_flight()
+		alt_look = true
 		
 	# ALT LOOK
 	if action == "ax_button":
-		alt_look = false
+		alt_look = true
 
 
 func _on_right_input_down(action):

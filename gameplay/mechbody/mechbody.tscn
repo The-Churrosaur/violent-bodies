@@ -60,10 +60,6 @@ flight_controller_yaw = NodePath("../FlightModuleTail")
 pull_thruster = NodePath("../LeftHandRemote/PullThruster")
 arm_aimer_hand_remote = NodePath("../LeftHandRemote")
 cockpit_headset_reference = NodePath("../Cockpit/HeadsetReference")
-look_rotation = true
-look_pitch = 0.19635
-look_yaw = 0.19635
-lean_pitch_mult = 1.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
