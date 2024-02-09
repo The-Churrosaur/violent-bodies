@@ -166,9 +166,6 @@ func _physics_process(delta):
 		#body.front_input += thrust
 		
 		pull_thruster.pull(body)
-	
-	if ltrigger > 0: 
-		
 		pull_thruster.pull(body)
 
 
