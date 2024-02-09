@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfsksqu0ew2gv"]
+
+[ext_resource type="Script" path="res://gameplay/mechbody/pull_thruster.gd" id="1_6ekpq"]
+
+[node name="PullThruster" type="Node3D"]
+script = ExtResource("1_6ekpq")
+thrust = 100

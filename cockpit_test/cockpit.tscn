@@ -16,7 +16,7 @@ radial_segments = 6
 script = ExtResource("1_wnyec")
 
 [node name="Cockpit" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.06, -0.06)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.0175886, -0.0157744)
 mesh = ExtResource("2_by6e6")
 
 [node name="HeadsetReference" type="Node3D" parent="."]

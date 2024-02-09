@@ -7,6 +7,8 @@ extends XRInputProcessor
 @export var flight_effects : Node3D
 @export var flight_controller_pitch : FlightModule
 @export var flight_controller_yaw : FlightModule
+@export var pull_thruster : PullThruster
+@export var arm_aimer_hand_remote : Node3D
 
 @export_category("stick movement")
 @export var tranlation_mult = 0.5
@@ -16,24 +18,26 @@ extends XRInputProcessor
 # look rotation / movement is in relation to this node 
 @export var cockpit_headset_reference : Node3D
 @export var look_rotation = true
-@export var look_pitch = PI / 6
-@export var look_yaw = PI / 4
+@export var look_pitch = PI/16
+@export var look_yaw = PI/16
 @export var look_mult = 0.5
 
 @export var lean_deadzone = 0.05
 @export var lean_roll_mult = 2.0
 @export var lean_input_mult = 1
+@export var lean_pitch_mult = 1.0
 
-@export var arm_wing_deadzone = 0.1
-@export var arm_wing_roll_mult = 1
-@export var arm_wing_yaw_mult = 0.3
-@export var arm_wing_pitch_deadzone = 0.05
-@export var arm_wing_pitch_mult = 3
-@export var arm_wing_thrust_mult = 1
-@export var arm_wing_speed_div = 100
+#@export var arm_wing_deadzone = 0.1
+#@export var arm_wing_roll_mult = 1
+#@export var arm_wing_yaw_mult = 0.3
+#@export var arm_wing_pitch_deadzone = 0.05
+#@export var arm_wing_pitch_mult = 3
+#@export var arm_wing_thrust_mult = 1
+#@export var arm_wing_speed_div = 100
 
 @onready var arm_center = $ArmCenter ## points towards left hand
 @onready var arm_center_reference = $ArmCenterReference
+@onready var arm_aimer = $ArmAimer
 
 var alt_look = false
 var is_flight = false
@@ -69,7 +73,7 @@ func _physics_process(delta):
 	if rx: body.climb_input -= 1
 	if ry: body.climb_input += 1
 	
-	body.climb_input += rtrigger
+	#body.climb_input += rtrigger
 	
 	# rotation
 	
@@ -78,7 +82,7 @@ func _physics_process(delta):
 	
 	# gadf
 	
-	if !alt_look and !is_flight:
+	if !alt_look:
 		
 		# LOOK ROTATION
 		
@@ -88,6 +92,14 @@ func _physics_process(delta):
 		
 		var x = headset.rotation.x
 		var y = headset.rotation.y
+		
+		# TODO testing arm following
+		if ltrigger > 0:
+			
+			arm_aimer.look_at(arm_aimer_hand_remote.global_position)
+			x += arm_aimer.rotation.x
+			y += arm_aimer.rotation.y
+		
 		
 		if abs(x) > look_pitch:
 			body.pitch_input -= x * look_mult
@@ -104,6 +116,7 @@ func _physics_process(delta):
 			
 			if headset_xz.length_squared() > lean_deadzone * lean_deadzone:
 				body.roll_input += (headset_xz.x ) * lean_roll_mult
+				body.pitch_input += headset_xz.y * lean_pitch_mult
 	
 	# GROUND MOVEMENT
 	
@@ -120,39 +133,43 @@ func _physics_process(delta):
 	
 	# ARM WINGS
 	
-	var lshoulder = body.left_player_shoulder.global_position
-	var rshoulder = body.right_player_shoulder.global_position
-	arm_center_reference.global_position = (lshoulder + rshoulder) / 2
-	
-	var midpoint = (rhand.global_position + lhand.global_position) / 2
-	var up = body.global_transform.basis.y
-	
-	arm_center.look_at_from_position(midpoint, lhand.global_position, up)
+	#var lshoulder = body.left_player_shoulder.global_position
+	#var rshoulder = body.right_player_shoulder.global_position
+	#arm_center_reference.global_position = (lshoulder + rshoulder) / 2
+	#
+	#var midpoint = (rhand.global_position + lhand.global_position) / 2
+	#var up = body.global_transform.basis.y
+	#
+	#arm_center.look_at_from_position(midpoint, lhand.global_position, up)
 	
 	if is_flight:
 		
-		var speed = abs(body.linear_velocity.length())
-		var s = speed / arm_wing_speed_div
-		
-		var roll = arm_center.rotation.x
-		if abs(roll) > arm_wing_deadzone:
-			body.roll_input += roll * arm_wing_roll_mult * s
-		
-		var yaw = - arm_center.rotation.y + PI/2 # armcenter is rotated
-		if abs(yaw) > arm_wing_deadzone:
-			body.yaw_input += yaw * arm_wing_yaw_mult * s
-		
-		var pitch = arm_center_reference.position.y - arm_center.position.y
-		if abs(pitch) > arm_wing_pitch_deadzone:
-			body.pitch_input += pitch * arm_wing_pitch_mult * s
+		#var speed = abs(body.linear_velocity.length())
+		#var s = speed / arm_wing_speed_div
+		#
+		#var roll = arm_center.rotation.x
+		#if abs(roll) > arm_wing_deadzone:
+			#body.roll_input += roll * arm_wing_roll_mult * s
+		#
+		#var yaw = - arm_center.rotation.y + PI/2 # armcenter is rotated
+		#if abs(yaw) > arm_wing_deadzone:
+			#body.yaw_input += yaw * arm_wing_yaw_mult * s
+		#
+		#var pitch = arm_center_reference.position.y - arm_center.position.y
+		#if abs(pitch) > arm_wing_pitch_deadzone:
+			#body.pitch_input += pitch * arm_wing_pitch_mult * s
 			#flight_controller_pitch.rotation.x = -pitch # rotates correctly, something wrong with wings
 		
 		# thrust
-		var length = (rhand.global_position - lhand.global_position).length()
-		var thrust = length * arm_wing_thrust_mult
-		body.front_input += thrust
+		#var length = (rhand.global_position - lhand.global_position).length()
+		#var thrust = length * arm_wing_thrust_mult
+		#body.front_input += thrust
+		
+		pull_thruster.pull(body)
 	
-
+	if ltrigger > 0: 
+		
+		pull_thruster.pull(body)
 
 
 func _on_left_input_down(action):

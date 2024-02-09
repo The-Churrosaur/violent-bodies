@@ -10,20 +10,14 @@ size = Vector3(0.1, 0.15, 0.2)
 script = ExtResource("2_r8ium")
 tranlation_mult = 0.5
 rotation_mult = 0.5
-look_rotation = false
-look_pitch = 0.523599
-look_yaw = 0.785398
+look_rotation = true
+look_pitch = 0.19635
+look_yaw = 0.19635
 look_mult = 0.5
 lean_deadzone = 0.05
 lean_roll_mult = 2.0
 lean_input_mult = 1
-arm_wing_deadzone = 0.1
-arm_wing_roll_mult = 1
-arm_wing_yaw_mult = 0.3
-arm_wing_pitch_deadzone = 0.05
-arm_wing_pitch_mult = 3
-arm_wing_thrust_mult = 1
-arm_wing_speed_div = 100
+lean_pitch_mult = 1.0
 
 [node name="ArmCenter" type="Node3D" parent="." index="0"]
 
@@ -33,3 +27,5 @@ mesh = SubResource("BoxMesh_pcilt")
 skeleton = NodePath("../..")
 
 [node name="ArmCenterReference" type="Node3D" parent="." index="1"]
+
+[node name="ArmAimer" type="Node3D" parent="." index="2"]
