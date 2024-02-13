@@ -14,9 +14,11 @@ enum hand{LEFT, RIGHT}
 var lhand : XRController3D
 var rhand : XRController3D
 var headset : XRCamera3D
+var origin : XROrigin3D
 
-func set_xr_nodes(lhand : XRController3D, rhand : XRController3D, headset : XRCamera3D):
+func set_xr_nodes(lhand : XRController3D, rhand : XRController3D, headset : XRCamera3D, origin = XROrigin3D):
 	self.lhand = lhand
 	self.rhand = rhand
 	self.headset = headset
+	self.origin = origin
 	emit_signal("nodes_set")

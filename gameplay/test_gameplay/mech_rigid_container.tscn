@@ -15,7 +15,7 @@ mechbody = NodePath("Mechbody")
 gravity_scale = 1.0
 
 [node name="seatparent" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0638685, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0313884, 0.175038)
 collision_layer = 0
 collision_mask = 0
 

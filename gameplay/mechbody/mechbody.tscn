@@ -37,7 +37,7 @@ radius = 2.78995
 [sub_resource type="BoxShape3D" id="BoxShape3D_cmj2x"]
 size = Vector3(10, 5, 10)
 
-[node name="Mechbody" type="RigidBody3D" node_paths=PackedStringArray("cockpit", "left_arm_targeter", "right_arm_targeter", "left_player_shoulder", "right_player_shoulder")]
+[node name="Mechbody" type="RigidBody3D" node_paths=PackedStringArray("cockpit", "left_arm_targeter", "right_arm_targeter", "left_player_shoulder", "right_player_shoulder", "step_push_timer", "step_fall_timer")]
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_pfxel")
 gravity_scale = 0.0
@@ -47,11 +47,14 @@ linear_damp = 0.1
 angular_damp = 2.0
 script = ExtResource("1_ifmva")
 torque_power = 1e+06
+step_power = 400000.0
 cockpit = NodePath("Cockpit")
 left_arm_targeter = NodePath("ArmTargeterLeft")
 right_arm_targeter = NodePath("ArmTargeterRight")
 left_player_shoulder = NodePath("Cockpit/PlayerShoulderLeft")
 right_player_shoulder = NodePath("Cockpit/PlayerShoulderRight")
+step_push_timer = NodePath("Step/StepPushTimer")
+step_fall_timer = NodePath("Step/StepFallTimer")
 
 [node name="MechbodyController" parent="." node_paths=PackedStringArray("body", "flight_controller_pitch", "flight_controller_yaw", "pull_thruster", "arm_aimer_hand_remote", "cockpit_headset_reference") instance=ExtResource("6_gk30v")]
 body = NodePath("..")
@@ -159,7 +162,16 @@ shape = SubResource("CylinderShape3D_g8pff")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.0343, 0)
 shape = SubResource("BoxShape3D_cmj2x")
 
+[node name="Step" type="Node3D" parent="."]
+
+[node name="StepPushTimer" type="Timer" parent="Step"]
+one_shot = true
+
+[node name="StepFallTimer" type="Timer" parent="Step"]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Step/StepPushTimer" to="." method="_on_step_push_timer_timeout"]
+[connection signal="timeout" from="Step/StepFallTimer" to="." method="_on_step_fall_timer_timeout"]
 
 [editable path="Cockpit"]

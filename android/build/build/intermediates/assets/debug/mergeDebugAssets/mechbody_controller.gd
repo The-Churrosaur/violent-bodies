@@ -93,23 +93,19 @@ func _physics_process(delta):
 		var x = headset.rotation.x
 		var y = headset.rotation.y
 		
-		# TODO testing arm following
-		#if ltrigger > 0:
-			#
 		arm_aimer.look_at(arm_aimer_hand_remote.global_position)
 		x += arm_aimer.rotation.x
 		y += arm_aimer.rotation.y
-	
-		
-		if abs(x) > look_pitch:
-			body.pitch_input -= x * look_mult
 		
 		if abs(y) > look_yaw:
 			body.yaw_input -= y * look_mult
 		
-		# LEAN ROLL
+		# PITCH AND LEAN ROLL
 		
 		if !body.is_landed:
+			
+			if abs(x) > look_pitch:
+				body.pitch_input -= x * look_mult
 			
 			var headset_pos = cockpit_headset_reference.to_local(headset.global_position)
 			var headset_xz = Vector2(headset_pos.x, -headset_pos.z)
@@ -120,7 +116,7 @@ func _physics_process(delta):
 	
 	# GROUND MOVEMENT
 	
-	if body.is_landed:
+	if body.is_landed and !alt_look:
 		
 		# LEAN MOVEMENT
 		
@@ -130,6 +126,11 @@ func _physics_process(delta):
 		if headset_xz.length_squared() > lean_deadzone * lean_deadzone:
 			body.front_input += (headset_xz.y - lean_deadzone) * lean_input_mult
 			body.strafe_input += (headset_xz.x - lean_deadzone) * lean_input_mult
+			body.walk = true
+		else: 
+			body.walk = false
+	
+	else: body.walk = false
 	
 	# ARM WINGS
 	
@@ -166,9 +167,6 @@ func _physics_process(delta):
 		#body.front_input += thrust
 		
 		pull_thruster.pull(body)
-	
-	if ltrigger > 0: 
-		
 		pull_thruster.pull(body)
 
 
@@ -203,6 +201,11 @@ func _on_left_input_up(action):
 
 func _on_right_input_down(action):
 	super._on_right_input_down(action)
+	print("right hand input")
+	
+	if action == "by_button":
+		print("dual action")
+		_set_xr_origin_to_headset_reference()
 
 
 func _on_right_input_up(action):
@@ -218,3 +221,11 @@ func _exit_flight():
 	is_flight = false
 	flight_controller_pitch.enabled = false
 	flight_controller_yaw.enabled = false
+	
+	#777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777`;p1.l1gfm,k-0.[2]
+	# - A.B. Snuggle
+	
+func _set_xr_origin_to_headset_reference():
+	print("MOVING ORIGIN")
+	var displacement = headset.global_position - cockpit_headset_reference.global_position
+	XRPlayerGlobals.origin.global_position -= displacement 
