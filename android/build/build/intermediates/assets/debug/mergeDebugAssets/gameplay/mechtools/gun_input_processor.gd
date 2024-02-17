@@ -13,6 +13,6 @@ func _ready():
 func _process(delta):
 	if rhand == null : return
 	
-	if rhand.get_float("trigger") > 0.2 and rhand.get_float("grip") > 0.2 : 
+	if rhand.get_float("trigger") > 0.2: 
 		gun.pull_trigger()
 	else : gun.release_trigger()

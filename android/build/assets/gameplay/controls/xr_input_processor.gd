@@ -38,6 +38,7 @@ func _physics_process(delta):
 	if headset == null : return
 	if !active : return
 
+
 func _on_left_input_down(action):
 	if !active : return
 

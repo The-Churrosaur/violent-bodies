@@ -12,6 +12,8 @@ extends RigidBody3D
 @onready var jitter_timer = $Timer
 @onready var shoot_timer = $Timer2
 @onready var health = $HealthModule
+@onready var mechmesh = $mechmesh
+
 
 var r = RandomNumberGenerator.new()
 
@@ -71,6 +73,7 @@ func explode():
 
 
 func _on_explosion_fx_explosion_ended():
+	mechmesh.visible = false
 	queue_free()
 
 

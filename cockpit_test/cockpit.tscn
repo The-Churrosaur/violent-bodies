@@ -45,7 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145661, -0.25648)
 [node name="Handles" type="Node3D" parent="."]
 
 [node name="handlesLeft" parent="Handles" node_paths=PackedStringArray("yoke_position_tracker") instance=ExtResource("3_x8qfj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.374306, 0.651538, 1.0079)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.374306, 0.818408, -0.986735)
 yoke_position_tracker = NodePath("YokePositionLeft")
 
 [node name="YokePositionLeft" type="Node3D" parent="Handles/handlesLeft"]
@@ -55,10 +55,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499248, 0)
 active = true
 
 [node name="handlesRight" parent="Handles" node_paths=PackedStringArray("yoke_position_tracker") instance=ExtResource("3_x8qfj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384, 0.649, 1)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.384, 0.81587, -0.994635)
 yoke_position_tracker = NodePath("YokePositionRight")
 
 [node name="YokePositionRight" type="Node3D" parent="Handles/handlesRight"]
 
 [node name="InputManagerYokeRight" parent="Handles" instance=ExtResource("3_bc6r6")]
 active = true
+
+[editable path="Handles/handlesLeft"]
+[editable path="Handles/handlesLeft/Handles"]

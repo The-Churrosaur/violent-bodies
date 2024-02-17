@@ -38,6 +38,8 @@ mesh = SubResource("SphereMesh_wgu1x")
 [node name="LimbRotator" parent="Hand" node_paths=PackedStringArray("body", "target") instance=ExtResource("2_mnakk")]
 body = NodePath("..")
 target = NodePath("../../Anchor")
+max_translation_impulse = 1.6
+damp = 0.8
 match_z = false
 match_y = false
 

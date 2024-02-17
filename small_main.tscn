@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c38fl22da0jew" path="res://gameplay/test_gameplay/training_bot.tscn" id="9_0sh4p"]
 [ext_resource type="PackedScene" uid="uid://bdhc7mn7fx7jt" path="res://gameplay/test_gameplay/bot_spawner.tscn" id="10_1p50t"]
 [ext_resource type="ArrayMesh" uid="uid://cl7snahl1dxqk" path="res://assets/terrain_ex.obj" id="11_vsuo4"]
-[ext_resource type="PackedScene" uid="uid://dapy8e8aqf5pt" path="res://gameplay/test_gameplay/geometry.tscn" id="12_je84l"]
+[ext_resource type="PackedScene" uid="uid://dapy8e8aqf5pt" path="res://gameplay/test_gameplay/terrain/geometry.tscn" id="12_je84l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_opudn"]
 

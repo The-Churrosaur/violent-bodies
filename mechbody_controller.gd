@@ -96,19 +96,23 @@ func _physics_process(delta):
 		var x = headset.rotation.x
 		var y = headset.rotation.y
 		
-		arm_aimer.look_at(arm_aimer_hand_remote.global_position)
-		x += arm_aimer.rotation.x
-		y += arm_aimer.rotation.y
+		# adds hand following
+		if ltrigger:
+			arm_aimer.look_at(arm_aimer_hand_remote.global_position)
+			x += arm_aimer.rotation.x
+			y += arm_aimer.rotation.y
 		
 		if abs(y) > look_yaw:
 			body.yaw_input -= y * look_mult
 		
-		# PITCH AND LEAN ROLL
-		
-		if !body.is_landed:
-			
+		# don't pitch while walking or standing
+		if !body.is_landed and !body.walk:
 			if abs(x) > look_pitch:
 				body.pitch_input -= x * look_mult
+		
+		# LEAN ROLL
+		
+		if !body.is_landed:
 			
 			var headset_pos = cockpit_headset_reference.to_local(headset.global_position)
 			var headset_xz = Vector2(headset_pos.x, -headset_pos.z)
@@ -169,7 +173,7 @@ func _physics_process(delta):
 		#var thrust = length * arm_wing_thrust_mult
 		#body.front_input += thrust
 		
-		pull_thruster.pull(body)
+		body.front_input += 0.3
 		pull_thruster.pull(body)
 
 
@@ -178,14 +182,13 @@ func _on_left_input_down(action):
 	
 	# FLIGHT MODE
 	if action == "by_button":
-		body.boost_forwards(0.02)
+		body.boost_forwards(0.01)
 		#flight_effects.visible = true
 		_enter_flight()
-		alt_look = false
 	
-	# ALT LOOK
+	# ALT LOOK TOGGLE
 	if action == "ax_button":
-		alt_look = false
+		alt_look = !alt_look
 
 
 func _on_left_input_up(action):
@@ -195,11 +198,11 @@ func _on_left_input_up(action):
 	if action == "by_button":
 		#flight_effects.visible = false
 		_exit_flight()
-		alt_look = true
+		#alt_look = true
 		
 	# ALT LOOK
-	if action == "ax_button":
-		alt_look = true
+	#if action == "ax_button":
+		#alt_look = true
 
 
 func _on_right_input_down(action):

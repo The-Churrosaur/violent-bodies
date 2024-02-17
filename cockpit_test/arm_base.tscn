@@ -18,7 +18,7 @@ hand_ref = NodePath("ShoulderJoint/KinematicArm/Armature/Skeleton3D/Cube")
 [node name="ShoulderJoint" type="Node3D" parent="."]
 
 [node name="KinematicArm" parent="ShoulderJoint" instance=ExtResource("2_3eeh4")]
-transform = Transform3D(-8, 0, -6.99382e-07, 0, 8, 0, 6.99382e-07, 0, -8, 0.01, 0, 0)
+transform = Transform3D(-4, 0, -6.03983e-07, 0, 4, 0, 6.03983e-07, 0, -4, 0.01, 0, 0)
 
 [node name="Cube" parent="ShoulderJoint/KinematicArm/Armature/Skeleton3D" index="0"]
 transform = Transform3D(-0.0253282, -1.98866e-17, -9.29099e-18, 5.624e-18, 1.80444e-08, -0.0418429, -5.624e-18, 0.0895613, 8.61473e-09, 4.47967e-16, 2.12213, -0.0846465)

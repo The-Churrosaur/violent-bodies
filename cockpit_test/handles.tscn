@@ -5,13 +5,13 @@
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="3_0n1vn"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_2pxa1"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_d5pdd"]
-margin = 0.002
-height = 0.1
-radius = 0.1
-
 [sub_resource type="BoxMesh" id="BoxMesh_auyaj"]
 size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wwp6v"]
+margin = 0.0
+height = 0.1
+radius = 0.1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fjjby"]
 _surfaces = [{
@@ -34,26 +34,30 @@ albedo_color = Color(0.803922, 0.956863, 1, 1)
 gravity_scale = 0.0
 freeze = true
 freeze_mode = 0
+press_to_hold = false
 ranged_grab_method = 2
 
-[node name="CollisionShape3D" parent="." index="0"]
-shape = SubResource("CylinderShape3D_d5pdd")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="0"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000365414, 7.45058e-09, -0.000308216)
 mesh = SubResource("BoxMesh_auyaj")
+skeleton = NodePath("../../CollisionShape3D")
 
-[node name="GrabPointHandRight" parent="." index="1" instance=ExtResource("2_qd1el")]
+[node name="CollisionShape3D" parent="." index="1"]
+shape = SubResource("CylinderShape3D_wwp6v")
+
+[node name="GrabPointHandRight" parent="." index="2" instance=ExtResource("2_qd1el")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00211621, -0.0121166, 0.0744104)
 
-[node name="XRToolsHighlightVisible" type="Node3D" parent="." index="2"]
+[node name="XRToolsHighlightVisible" type="Node3D" parent="." index="3"]
 script = ExtResource("3_0n1vn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XRToolsHighlightVisible" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000365414, 7.45058e-09, -0.000308216)
 mesh = SubResource("ArrayMesh_fjjby")
-skeleton = NodePath("../../CollisionShape3D/MeshInstance3D")
+skeleton = NodePath("../../CollisionShape3D2/MeshInstance3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_q08hs")
 
-[node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("4_2pxa1")]
+[node name="GrabPointHandLeft" parent="." index="4" instance=ExtResource("4_2pxa1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0757425)
