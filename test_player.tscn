@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlsarb7iw7bpi"]
+[gd_scene load_steps=11 format=3 uid="uid://dlsarb7iw7bpi"]
 
 [ext_resource type="Script" path="res://test_player.gd" id="1_bbutg"]
 [ext_resource type="Shader" path="res://shaders/embyr_outline.gdshader" id="1_iu4kd"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_mcp2j"]
 [ext_resource type="PackedScene" uid="uid://bx1xdisoqo1f6" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_tac_glove_low.tscn" id="5_tncjn"]
+[ext_resource type="PackedScene" uid="uid://bgaiy7hiyncpy" path="res://controller_body.tscn" id="6_iait1"]
 [ext_resource type="PackedScene" uid="uid://chumpejwiub7f" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_tac_glove_low.tscn" id="6_nr3qn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gajeu"]
@@ -18,6 +19,10 @@ size = Vector2(2, 2)
 [sub_resource type="SphereShape3D" id="SphereShape3D_fq2hl"]
 margin = 0.005
 radius = 0.01
+
+[sub_resource type="SphereMesh" id="SphereMesh_14qty"]
+radius = 0.01
+height = 0.02
 
 [node name="XROrigin3D" type="XROrigin3D" node_paths=PackedStringArray("lhand", "rhand", "headset")]
 script = ExtResource("1_bbutg")
@@ -51,9 +56,20 @@ pose = &"aim"
 [node name="RightHand" parent="XRController3D" instance=ExtResource("6_nr3qn")]
 
 [node name="Area3D" type="Area3D" parent="XRController3D/RightHand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00971688, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="XRController3D/RightHand/Area3D"]
 shape = SubResource("SphereShape3D_fq2hl")
+
+[node name="ControllerBody" parent="XRController3D" node_paths=PackedStringArray("xr_controller") instance=ExtResource("6_iait1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00289667, -0.00995497, 0)
+xr_controller = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XRController3D/ControllerBody"]
+shape = SubResource("SphereShape3D_fq2hl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XRController3D/ControllerBody"]
+mesh = SubResource("SphereMesh_14qty")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05

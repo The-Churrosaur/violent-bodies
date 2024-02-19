@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://ec67phkun5lg"]
+
+[ext_resource type="PackedScene" uid="uid://drp2rsavelpkt" path="res://my_xr_tools/xr_joint_button.tscn" id="1_1y3sv"]
+[ext_resource type="Script" path="res://my_xr_tools/button_controller_shaker.gd" id="2_iss5p"]
+[ext_resource type="Script" path="res://my_xr_tools/reparenting_joint.gd" id="3_a5s6q"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_js6v2"]
+height = 0.05
+radius = 0.025
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nj883"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5657y"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nviab"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nrxkr"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[node name="JointButtonDemo" node_paths=PackedStringArray("contact_base", "button") instance=ExtResource("1_1y3sv")]
+contact_base = NodePath("base2")
+button = NodePath("button")
+
+[node name="JoltSliderJoint3D" type="JoltSliderJoint3D" parent="." index="0"]
+limit_enabled = true
+limit_lower = -0.1
+limit_spring_enabled = true
+limit_spring_frequency = 10.0
+limit_spring_damping = 0.1
+motor_target_velocity = -1.0
+node_a = NodePath("../button")
+node_b = NodePath("../base2")
+exclude_nodes_from_collision = false
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.44125e-09, 0.0423239, 0)
+script = ExtResource("3_a5s6q")
+
+[node name="ControllerShaker" type="Node" parent="." index="1" node_paths=PackedStringArray("joint_button")]
+script = ExtResource("2_iss5p")
+joint_button = NodePath("..")
+
+[node name="button" type="RigidBody3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.080054, 0)
+max_contacts_reported = 3
+contact_monitor = true
+linear_damp_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="button" index="0"]
+shape = SubResource("CylinderShape3D_js6v2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="button" index="1"]
+mesh = SubResource("CylinderMesh_nj883")
+surface_material_override/0 = SubResource("StandardMaterial3D_5657y")
+
+[node name="base2" type="RigidBody3D" parent="." index="3"]
+freeze = true
+
+[node name="ContactBase#CollisionShape3D" type="CollisionShape3D" parent="base2" index="0"]
+shape = SubResource("BoxShape3D_nviab")
+
+[node name="ContactBase#MeshInstance3D" type="MeshInstance3D" parent="base2" index="1"]
+mesh = SubResource("BoxMesh_nrxkr")
+skeleton = NodePath("../..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" index="0"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="button_pressed" from="." to="ControllerShaker" method="_on_joint_button_demo_button_pressed"]
+[connection signal="button_released" from="." to="ControllerShaker" method="_on_joint_button_demo_button_released"]
+[connection signal="controller_entered" from="." to="ControllerShaker" method="_on_joint_button_controller_entered"]
+[connection signal="controller_exited" from="." to="ControllerShaker" method="_on_joint_button_controller_exited"]

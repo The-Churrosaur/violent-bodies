@@ -94,7 +94,6 @@ func clear_inputs():
 # -- CALLBACKS
 
 func _on_body_entered(body):
-	print("body entered")
 	if body.is_in_group("ground"): 
 		#print("GROUNDED")
 		landed.emit()
@@ -102,7 +101,6 @@ func _on_body_entered(body):
 
 
 func _on_body_exited(body):
-	print("left ground")
 	if body.is_in_group("ground"): 
 		takeoff.emit()
 		is_landed = false

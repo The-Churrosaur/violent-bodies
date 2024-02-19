@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drp2rsavelpkt"]
+
+[ext_resource type="Script" path="res://my_xr_tools/xr_joint_button.gd" id="1_0yrlx"]
+
+[node name="XrJointButton" type="Node3D"]
+script = ExtResource("1_0yrlx")
