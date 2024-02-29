@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhdf60liydlym"]
+
+[ext_resource type="Script" path="res://gameplay/mechbody/limb_physics/mech_hand_grabber.gd" id="1_rxkic"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_av0fv"]
+radius = 0.25
+
+[node name="MechHandGrabber" type="Node3D"]
+script = ExtResource("1_rxkic")
+
+[node name="GrabJoint" type="JoltGeneric6DOFJoint3D" parent="."]
+enabled = false
+
+[node name="GrabArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabArea"]
+shape = SubResource("SphereShape3D_av0fv")
+
+[connection signal="body_entered" from="GrabArea" to="." method="_on_grab_area_body_entered"]
+[connection signal="body_exited" from="GrabArea" to="." method="_on_grab_area_body_exited"]

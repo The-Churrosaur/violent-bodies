@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://37qanjrxrmlx"]
+
+[ext_resource type="PackedScene" uid="uid://drvjrx7jx7pwb" path="res://my_xr_tools/my_xr_grabbable.tscn" id="1_vx3yd"]
+[ext_resource type="Script" path="res://my_xr_tools/my_xr_grabbable_pickup.gd" id="2_c6vap"]
+
+[node name="MyXrGrabbablePickup" instance=ExtResource("1_vx3yd")]
+script = ExtResource("2_c6vap")
+lerp_weight = 0.5

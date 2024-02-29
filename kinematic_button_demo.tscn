@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://brtq4qf8y08wa"]
+
+[ext_resource type="PackedScene" uid="uid://by45reof1gcat" path="res://my_xr_tools/fake_joint_button.tscn" id="1_bbh12"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_po7h0"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ojs18"]
+material = SubResource("StandardMaterial3D_po7h0")
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.02
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tkkdq"]
+margin = 0.01
+height = 0.02
+radius = 0.025
+
+[sub_resource type="BoxMesh" id="BoxMesh_lsgik"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="FakeJointButton" node_paths=PackedStringArray("button_area", "button_anim", "button_zero_reference") instance=ExtResource("1_bbh12")]
+button_area = NodePath("Button")
+button_anim = NodePath("ButtonMesh")
+button_zero_reference = NodePath("ButtonZero")
+
+[node name="ButtonMesh" type="MeshInstance3D" parent="." index="0"]
+mesh = SubResource("CylinderMesh_ojs18")
+skeleton = NodePath("../Button")
+
+[node name="Button" type="Area3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button" index="0"]
+shape = SubResource("CylinderShape3D_tkkdq")
+
+[node name="ButtonZero" type="Node3D" parent="." index="2"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.106748, 0)
+mesh = SubResource("BoxMesh_lsgik")

@@ -2,7 +2,7 @@
 ## set input attributes with controller
 
 class_name MechBody
-extends RigidBody3D
+extends ReparentingRigidbody3D
 
 signal landed()
 signal takeoff()

@@ -1,34 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7dfxmp5k4sa3"]
+[gd_scene load_steps=3 format=3 uid="uid://c7dfxmp5k4sa3"]
 
 [ext_resource type="Script" path="res://gameplay/mechtools/stupidgun.gd" id="1_jkqyc"]
 [ext_resource type="PackedScene" uid="uid://d1dyiu4yccxjx" path="res://gameplay/mechtools/stupidbullet.tscn" id="2_2kp06"]
-[ext_resource type="PackedScene" uid="uid://dk57ccrojdqh1" path="res://gameplay/mechtools/gun_input_processor.tscn" id="3_eacfx"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_0rrtw"]
-top_radius = 0.2
-height = 4.0
-radial_segments = 6
 
 [node name="stupidgun" type="Node3D" node_paths=PackedStringArray("muzzle")]
 script = ExtResource("1_jkqyc")
 bullet_scene = ExtResource("2_2kp06")
-muzzle = NodePath("muzzle")
+muzzle = NodePath("")
 
-[node name="ShotTimer" type="Timer" parent="."]
+[node name="CycleTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.156072, 0)
-text = "adfad"
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.60379)
-mesh = SubResource("CylinderMesh_0rrtw")
-
-[node name="muzzle" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.3667)
-
-[node name="GunInput" parent="." node_paths=PackedStringArray("gun") instance=ExtResource("3_eacfx")]
-gun = NodePath("..")
-
-[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="CycleTimer" to="." method="_on_cycle_timer_timeout"]

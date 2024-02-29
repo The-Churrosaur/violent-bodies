@@ -8,8 +8,8 @@ class_name XRJointButton
 extends Node3D
 
 
-signal button_pressed(contact_items : Array)
-signal button_released(contact_items : Array)
+signal button_pressed()
+signal button_released()
 
 signal controller_entered(controller_body : ControllerBody)
 signal controller_exited(controller_body : ControllerBody)
@@ -36,6 +36,9 @@ func _on_button_body_entered(body):
 	# add body to dict
 	contact_items[body] = true
 	
+	# body is controller
+	if body is ControllerBody: _on_controller_body_entered(body)
+	
 	# button succesfully pressed
 	if body == contact_base: _on_button_contacted()
 
@@ -45,16 +48,19 @@ func _on_button_body_exited(body):
 	# remove body from dict
 	contact_items.erase(body)
 	
+	# body is controller
+	if body is ControllerBody: _on_controller_body_exited(body)
+	
 	# button no longer pressed
 	if body == contact_base: _on_button_released()
 
 
 func _on_button_contacted():
-	button_pressed.emit(contact_items.keys())
+	button_pressed.emit()
 
 
 func _on_button_released():
-	button_released.emit(contact_items.keys())
+	button_released.emit()
 
 
 func _on_controller_body_entered(controller_body : ControllerBody):

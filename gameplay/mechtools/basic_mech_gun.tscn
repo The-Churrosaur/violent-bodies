@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6po2ax5njo4o"]
+
+[ext_resource type="PackedScene" uid="uid://fk6g4bxa483y" path="res://gameplay/mechtools/mech_tool.tscn" id="1_wm0i6"]
+[ext_resource type="Script" path="res://gameplay/mechtools/basic_mech_gun.gd" id="2_mbm85"]
+[ext_resource type="PackedScene" uid="uid://c7dfxmp5k4sa3" path="res://gameplay/mechtools/stupidgun.tscn" id="3_j5572"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p0guc"]
+top_radius = 0.1
+bottom_radius = 0.25
+
+[node name="BasicGun" node_paths=PackedStringArray("gun") instance=ExtResource("1_wm0i6")]
+script = ExtResource("2_mbm85")
+gun = NodePath("stupidgun")
+trigger_action = "trigger"
+
+[node name="stupidgun" parent="." index="0" node_paths=PackedStringArray("muzzle") instance=ExtResource("3_j5572")]
+muzzle = NodePath("../muzzle")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1.05833)
+mesh = SubResource("CylinderMesh_p0guc")
+
+[node name="muzzle" type="Node3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.57233)

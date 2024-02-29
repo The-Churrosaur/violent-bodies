@@ -63,156 +63,177 @@ height = 10.0
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_y613h")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="MechRigidContainer" parent="." instance=ExtResource("11_ybwbn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 183.148, -253.038, 0)
+
+[node name="HandBitLeft" parent="MechRigidContainer" index="3" node_paths=PackedStringArray("mechbody", "hand", "anchor")]
+mechbody = NodePath("")
+hand = NodePath("")
+anchor = NodePath("")
+
+[node name="HandBitRight" parent="MechRigidContainer" index="4" node_paths=PackedStringArray("mechbody", "hand", "anchor")]
+mechbody = NodePath("")
+hand = NodePath("")
+anchor = NodePath("")
+
+[node name="Base" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Base"]
 environment = SubResource("Environment_t3im3")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.0602297, -0.587268, 0.807149, 0, 0.808617, 0.588336, -0.998185, 0.0354353, -0.0487028, 0, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Base"]
+transform = Transform3D(-0.0602297, -0.587268, 0.807149, 0, 0.808617, 0.588336, -0.998185, 0.0354353, -0.0487027, 0, 0, 0)
 light_color = Color(0.890196, 0.933333, 0.964706, 1)
 light_energy = 2.663
 light_indirect_energy = 2.247
 light_volumetric_fog_energy = 0.377
 
-[node name="Cruiser2" type="MeshInstance3D" parent="."]
+[node name="Cruiser2" type="MeshInstance3D" parent="Base"]
 transform = Transform3D(-6.40465, 0, 39.4955, 0, 40.0114, 0, -39.4955, 0, -6.40465, -1634.32, 222.346, -671.572)
 mesh = ExtResource("3_bc1wl")
+skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("4_5et6i")
 script = ExtResource("4_jaagw")
 
-[node name="explosionFX" parent="Cruiser2" instance=ExtResource("6_hm7qd")]
+[node name="explosionFX" parent="Base/Cruiser2" instance=ExtResource("6_hm7qd")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Cruiser2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Base/Cruiser2"]
 transform = Transform3D(1, 0, 4.47035e-08, 0, 1, 0, -4.47035e-08, 0, 1, 0.0135689, 0, -0.0103493)
 collision_layer = 9
 collision_mask = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cruiser2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cruiser2/StaticBody3D"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
 shape = SubResource("CapsuleShape3D_nfpfe")
 
-[node name="Cruiser3" type="MeshInstance3D" parent="."]
+[node name="Cruiser3" type="MeshInstance3D" parent="Base"]
 transform = Transform3D(33.6361, 8.13637, -20.083, -6.9859, 39.1754, 4.17105, 20.5115, 0, 34.3539, 387.291, 69.6044, 387.702)
 mesh = ExtResource("3_bc1wl")
+skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("4_5et6i")
 
-[node name="explosionFX" parent="Cruiser3" instance=ExtResource("6_hm7qd")]
+[node name="explosionFX" parent="Base/Cruiser3" instance=ExtResource("6_hm7qd")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Cruiser3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Base/Cruiser3"]
 transform = Transform3D(1, -3.37184e-08, 0, 4.98324e-08, 1, -1.63672e-08, -1.19209e-07, 8.91762e-10, 1, -0.0164242, -0.00251722, -0.00387049)
 collision_layer = 9
 collision_mask = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cruiser3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cruiser3/StaticBody3D"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
 shape = SubResource("CapsuleShape3D_nfpfe")
 
-[node name="Cruiser4" type="MeshInstance3D" parent="."]
+[node name="Cruiser4" type="MeshInstance3D" parent="Base"]
 transform = Transform3D(37.3364, -6.24781, -12.9563, 6.47425, 39.4823, -0.382201, 12.8447, -1.73981, 37.8537, -374.522, -230.039, 703.847)
 mesh = ExtResource("3_bc1wl")
+skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("4_5et6i")
 
-[node name="explosionFX" parent="Cruiser4" instance=ExtResource("6_hm7qd")]
+[node name="explosionFX" parent="Base/Cruiser4" instance=ExtResource("6_hm7qd")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Cruiser4"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Base/Cruiser4"]
 transform = Transform3D(1, 4.28408e-08, 0, -1.39698e-08, 1, -3.72529e-09, -5.96046e-08, 0, 1, -0.0153184, 0.00244188, -0.00710106)
 collision_layer = 9
 collision_mask = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cruiser4/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cruiser4/StaticBody3D"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
 shape = SubResource("CapsuleShape3D_nfpfe")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base"]
 transform = Transform3D(0.843316, 0.537417, 0, -0.428012, 0.671638, -0.604738, -0.324997, 0.509986, 0.796424, -31.7603, 80.3797, 250.799)
 mesh = SubResource("BoxMesh_i47ny")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Base/MeshInstance3D"]
 transform = Transform3D(1, -2.98023e-08, 0, -1.3411e-07, 1, 0, -1.19209e-07, 1.19209e-07, 1, -0.264923, -0.505707, -0.3741)
 collision_layer = 9
 collision_mask = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_4ukup")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Base"]
 transform = Transform3D(0.843316, 0.537417, 0, -0.428012, 0.671638, -0.604738, -0.324997, 0.509986, 0.796424, -615.708, 80.3797, -687.524)
 mesh = SubResource("CapsuleMesh_tb0qd")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Base/MeshInstance3D2"]
 transform = Transform3D(1, -2.98023e-08, 0, -1.3411e-07, 1, 0, -1.19209e-07, 1.19209e-07, 1, -0.264954, -0.505615, -0.374207)
 collision_layer = 9
 collision_mask = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/MeshInstance3D2/StaticBody3D"]
 transform = Transform3D(1, 0, 0, -1.19209e-07, 1, 0, -8.9407e-08, 2.98023e-08, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_bfh1b")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Base"]
 transform = Transform3D(-0.0203409, 0.999571, 0.0210682, -0.928277, -0.0110546, -0.371723, -0.371331, -0.0271181, 0.928104, -752.567, 20.0292, -23.2985)
 mesh = SubResource("CapsuleMesh_tb0qd")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Base/MeshInstance3D3"]
 transform = Transform3D(1, -8.3819e-09, -8.9407e-08, 9.31323e-10, 1, -1.86265e-09, -2.98023e-08, -1.86265e-09, 1, 0.184517, -0.482239, -0.446419)
 collision_layer = 9
 collision_mask = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/MeshInstance3D3/StaticBody3D"]
 transform = Transform3D(1, 0, 0, -5.96046e-08, 1, 0, -2.98023e-08, 2.98023e-08, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_bfh1b")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Base"]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -752.567, -233.102, 291.001)
 mesh = SubResource("CylinderMesh_qthmw")
+skeleton = NodePath("../..")
 
-[node name="bag" type="RigidBody3D" parent="MeshInstance3D4"]
+[node name="bag" type="RigidBody3D" parent="Base/MeshInstance3D4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.86813, 0)
 collision_layer = 9
 collision_mask = 9
 mass = 100.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/bag"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/MeshInstance3D4/bag"]
 shape = SubResource("CapsuleShape3D_sfxq6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D4/bag"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base/MeshInstance3D4/bag"]
 mesh = SubResource("CapsuleMesh_tfvo3")
 
-[node name="bag2" type="RigidBody3D" parent="MeshInstance3D4"]
+[node name="bag2" type="RigidBody3D" parent="Base/MeshInstance3D4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.86813, 19.7594)
 collision_layer = 9
 collision_mask = 9
 mass = 10.0
 sleeping = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/bag2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/MeshInstance3D4/bag2"]
 shape = SubResource("CapsuleShape3D_sfxq6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D4/bag2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base/MeshInstance3D4/bag2"]
 mesh = SubResource("CapsuleMesh_tfvo3")
 surface_material_override/0 = SubResource("StandardMaterial3D_u2il4")
 
-[node name="PinJoint3D" type="PinJoint3D" parent="MeshInstance3D4"]
+[node name="PinJoint3D" type="PinJoint3D" parent="Base/MeshInstance3D4"]
 node_a = NodePath("../bag")
 
-[node name="TrainingBot6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+[node name="TrainingBot6" parent="Base" node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 179.109, 1.24913, -17.79)
-player = NodePath("../MechRigidContainer/Mechbody")
+player = NodePath("../../MechRigidContainer/Mechbody")
 
-[node name="TrainingBot7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+[node name="TrainingBot7" parent="Base" node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 10, -250.361)
-player = NodePath("../MechRigidContainer/Mechbody")
+player = NodePath("../../MechRigidContainer/Mechbody")
 
-[node name="BotSpawner" parent="." node_paths=PackedStringArray("bot_target") instance=ExtResource("10_4e2ph")]
+[node name="BotSpawner" parent="Base" node_paths=PackedStringArray("bot_target") instance=ExtResource("10_4e2ph")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7019, -25.8647, -403.568)
-bot_target = NodePath("../MechRigidContainer/Mechbody")
+bot_target = NodePath("../../MechRigidContainer/Mechbody")
+enabled = false
 
-[node name="TerrainEx" type="MeshInstance3D" parent="."]
+[node name="TerrainEx" type="MeshInstance3D" parent="Base"]
 transform = Transform3D(200, 0, 0, 0, -200, 3.01992e-05, 0, -3.01992e-05, -200, -528.204, 762.742, 445.669)
 mesh = ExtResource("11_flred")
+skeleton = NodePath("../..")
 
-[node name="Geometry" parent="." instance=ExtResource("11_hlgp2")]
+[node name="Geometry" parent="Base" instance=ExtResource("11_hlgp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -258.479, 0)
-
-[node name="MechRigidContainer" parent="." instance=ExtResource("11_ybwbn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 183.148, -253.038, 0)
 
 [editable path="MechRigidContainer"]

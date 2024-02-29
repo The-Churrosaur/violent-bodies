@@ -30,6 +30,10 @@ enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addon
 
 import/fbx/enabled=false
 
+[layer_names]
+
+3d_physics/layer_2="xr_grabbable"
+
 [physics]
 
 3d/physics_engine="JoltPhysics3D"

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bysrkagylo8yh"]
+[gd_scene load_steps=8 format=3 uid="uid://bysrkagylo8yh"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/limb_physics/hand_bit.gd" id="1_nifvo"]
+[ext_resource type="Script" path="res://utils/reparenting_rigidbody_3d.gd" id="2_a0gnx"]
 [ext_resource type="PackedScene" uid="uid://d0ex8w8t8rocw" path="res://gameplay/mechbody/limb_physics/limb_rotator.tscn" id="2_mnakk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_663pm"]
@@ -28,6 +29,7 @@ anchor = NodePath("Anchor")
 collision_layer = 8
 collision_mask = 8
 physics_material_override = SubResource("PhysicsMaterial_663pm")
+script = ExtResource("2_a0gnx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hand"]
 shape = SubResource("BoxShape3D_c072q")
@@ -53,6 +55,7 @@ collision_layer = 0
 collision_mask = 0
 freeze = true
 freeze_mode = 1
+script = ExtResource("2_a0gnx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Anchor"]
 visible = false

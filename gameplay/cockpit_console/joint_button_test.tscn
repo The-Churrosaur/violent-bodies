@@ -6,14 +6,11 @@
 [node name="JointButtonTest" type="Node3D"]
 script = ExtResource("1_1b7oe")
 
-[node name="JointButtonDemo" parent="." instance=ExtResource("2_e2up6")]
-
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.00299e-08, 0.122123)
 text = "TEST"
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.974039, 0.226379, 0, -0.226379, 0.974039, 0, 0.279673, 0.711189)
+[node name="JointButtonDemo" parent="." instance=ExtResource("2_e2up6")]
 
 [connection signal="button_pressed" from="JointButtonDemo" to="." method="_on_joint_button_demo_button_pressed"]
 [connection signal="button_released" from="JointButtonDemo" to="." method="_on_joint_button_demo_button_released"]

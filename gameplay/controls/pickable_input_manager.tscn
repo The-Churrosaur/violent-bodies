@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bsethweiej3tx"]
 
-[ext_resource type="Script" path="res://gameplay/controls/input_manager.gd" id="1_7plkm"]
+[ext_resource type="Script" path="res://gameplay/controls/pickable_input_manager.gd" id="1_v74y8"]
 
 [node name="InputManager" type="Node3D"]
-script = ExtResource("1_7plkm")
+script = ExtResource("1_v74y8")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74824, 0)

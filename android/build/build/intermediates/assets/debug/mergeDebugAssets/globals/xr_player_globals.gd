@@ -9,6 +9,8 @@ signal controller_input_released(name : String, controller : XRController3D)
 signal nodes_set()
 
 
+
+
 enum CONTROLLERS {LHAND, RHAND, HEADSET, ORIGIN} # APPEND THIS LIST AS NECESSARY
 
 var _controller_dict= {} # maps enums to objects for internal use

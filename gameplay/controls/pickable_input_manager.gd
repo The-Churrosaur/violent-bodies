@@ -3,7 +3,7 @@
 # ONE HAND input management for a particular pickable
 # just for organization
 
-class_name InputManager
+class_name PickableInputManager
 extends Node3D
 
 

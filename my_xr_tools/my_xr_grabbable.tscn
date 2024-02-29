@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://drvjrx7jx7pwb"]
+
+[ext_resource type="Script" path="res://my_xr_tools/my_xr_grabbable.gd" id="1_nhbwo"]
+
+[node name="MyXrGrabbable" type="RigidBody3D"]
+collision_layer = 3
+script = ExtResource("1_nhbwo")

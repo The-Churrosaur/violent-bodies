@@ -26,17 +26,21 @@ size = Vector3(0.05, 0.05, 0.05)
 contact_base = NodePath("base2")
 button = NodePath("button")
 
-[node name="JoltSliderJoint3D" type="JoltSliderJoint3D" parent="." index="0"]
-limit_enabled = true
-limit_lower = -0.1
-limit_spring_enabled = true
-limit_spring_frequency = 10.0
-limit_spring_damping = 0.1
-motor_target_velocity = -1.0
+[node name="JoltGeneric6DOFJoint3D" type="JoltGeneric6DOFJoint3D" parent="." index="0"]
+linear_limit_y/enabled = false
+linear_spring_x/enabled = true
+linear_spring_x/frequency = 5.0
+linear_spring_x/damping = 1.0
+linear_spring_y/enabled = true
+linear_spring_y/frequency = 5.0
+linear_spring_y/damping = 0.1
+linear_spring_z/enabled = true
+linear_spring_z/frequency = 5.0
+linear_spring_z/damping = 1.0
 node_a = NodePath("../button")
 node_b = NodePath("../base2")
 exclude_nodes_from_collision = false
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.44125e-09, 0.0423239, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0801658, 0)
 script = ExtResource("3_a5s6q")
 
 [node name="ControllerShaker" type="Node" parent="." index="1" node_paths=PackedStringArray("joint_button")]

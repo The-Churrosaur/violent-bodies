@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://sc4fek8fkr7d"]
+
+[ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="1_0u0p8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sbtij"]
+margin = 0.01
+height = 0.02
+radius = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjtmk"]
+albedo_color = Color(0.423529, 0.423529, 0.423529, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7aoaa"]
+material = SubResource("StandardMaterial3D_mjtmk")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.02
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_iuvvq"]
+height = 0.02
+radius = 0.02
+
+[node name="XRButon" instance=ExtResource("1_0u0p8")]
+collision_layer = 17
+collision_mask = 131089
+button = NodePath("StaticBody3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("CylinderShape3D_sbtij")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="0"]
+mesh = SubResource("CylinderMesh_7aoaa")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="1"]
+shape = SubResource("CylinderShape3D_iuvvq")

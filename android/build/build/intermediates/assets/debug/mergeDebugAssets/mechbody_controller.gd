@@ -227,6 +227,10 @@ func _exit_flight():
 	# - A.B. Snuggle
 	
 func _set_xr_origin_to_headset_reference():
+	
 	print("MOVING ORIGIN")
 	var displacement = headset.global_position - cockpit_headset_reference.global_position
-	XRPlayerGlobals.origin.global_position -= displacement 
+	XRPlayerGlobals.origin.global_position -= displacement
+	
+	var headset_rotation = headset.global_rotation.y
+	XRPlayerGlobals.origin.global_rotation.y -= headset_rotation

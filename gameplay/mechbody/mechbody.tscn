@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dsh7i4eks64gc"]
+[gd_scene load_steps=21 format=3 uid="uid://dsh7i4eks64gc"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_ifmva"]
 [ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="2_gumoi"]
@@ -9,10 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dvg5e6hisacwi" path="res://mechbody_controller.tscn" id="6_gk30v"]
 [ext_resource type="Material" uid="uid://cr3o3nwa7xg1b" path="res://materials/generic_toon.tres" id="6_kxm6c"]
 [ext_resource type="PackedScene" uid="uid://bak1wwgkoec2" path="res://gameplay/mechtools/beamfx2.tscn" id="6_nmrqg"]
-[ext_resource type="PackedScene" uid="uid://c7dfxmp5k4sa3" path="res://gameplay/mechtools/stupidgun.tscn" id="7_r17d4"]
-[ext_resource type="PackedScene" uid="uid://canlurq7heofm" path="res://gameplay/mechtools/laserstupidgun.tscn" id="8_jt7bt"]
+[ext_resource type="PackedScene" uid="uid://b6po2ax5njo4o" path="res://gameplay/mechtools/basic_mech_gun.tscn" id="9_srk0d"]
 [ext_resource type="PackedScene" uid="uid://cwn381pjcowiv" path="res://effects/wind_particles.tscn" id="9_t76ck"]
-[ext_resource type="PackedScene" uid="uid://dk57ccrojdqh1" path="res://gameplay/mechtools/gun_input_processor.tscn" id="10_f55vg"]
 [ext_resource type="PackedScene" uid="uid://d26k2y5i1upl1" path="res://gameplay/controls/seat_calibration.tscn" id="10_plbo3"]
 [ext_resource type="PackedScene" uid="uid://dfsksqu0ew2gv" path="res://gameplay/mechbody/pull_thruster.tscn" id="11_lhcv4"]
 [ext_resource type="PackedScene" uid="uid://ct1mqoq7ffeph" path="res://gameplay/controls/flight_module_panel.tscn" id="12_ut7dy"]
@@ -46,8 +44,9 @@ contact_monitor = true
 linear_damp = 0.1
 angular_damp = 2.0
 script = ExtResource("1_ifmva")
-torque_power = 100000.0
 step_power = 200000.0
+step_push_time = null
+min_step_fall_time = null
 cockpit = NodePath("Cockpit")
 left_arm_targeter = NodePath("ArmTargeterLeft")
 right_arm_targeter = NodePath("ArmTargeterRight")
@@ -107,20 +106,11 @@ thrust = 400
 [node name="beamfx2" parent="LeftHandRemote" instance=ExtResource("6_nmrqg")]
 transform = Transform3D(3, 4.26326e-14, 3.81165e-20, -2.51965e-14, 1.77304, 2.41998, 3.439e-14, -2.41998, 1.77304, 9.53674e-07, -4.17233e-07, -0.665171)
 
-[node name="RightHandRemote" parent="." node_paths=PackedStringArray("current_tool", "arm") instance=ExtResource("5_68b7c")]
+[node name="RightHandRemote" parent="." node_paths=PackedStringArray("arm") instance=ExtResource("5_68b7c")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.01847, 0.2794, -2.90604)
-current_tool = NodePath("Stupidgun2")
 arm = NodePath("../ArmBaseRight")
 
-[node name="Stupidgun2" parent="RightHandRemote" node_paths=PackedStringArray("launching_rigidbody") instance=ExtResource("7_r17d4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.693941, 0)
-launching_rigidbody = NodePath("../..")
-
-[node name="laser" parent="RightHandRemote" instance=ExtResource("8_jt7bt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730311, 0)
-
-[node name="GunInput" parent="RightHandRemote" node_paths=PackedStringArray("gun") instance=ExtResource("10_f55vg")]
-gun = NodePath("../Stupidgun2")
+[node name="BasicGun" parent="RightHandRemote" instance=ExtResource("9_srk0d")]
 
 [node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_wgapf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0422812, 0.942789, -1.45214)
@@ -147,10 +137,10 @@ transform = Transform3D(0.244102, 0, 0, 0, 0.243389, 0.162944, 0, -0.0186379, 2.
 [node name="WindParticles" parent="." node_paths=PackedStringArray("body") instance=ExtResource("9_t76ck")]
 body = NodePath("..")
 
-[node name="seatcalibrator" parent="." node_paths=PackedStringArray("cockpit", "disable_controller") instance=ExtResource("10_plbo3")]
+[node name="seatcalibrator" parent="." instance=ExtResource("10_plbo3")]
 transform = Transform3D(0.767781, 0, 0.640713, 0, 1, 0, -0.640713, 0, 0.767781, 0.378891, 0.708426, 0.355719)
-cockpit = NodePath("../Cockpit")
-disable_controller = NodePath("../MechbodyController")
+cockpit = null
+disable_controller = null
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.563671, 1.02496)

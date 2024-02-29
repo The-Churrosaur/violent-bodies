@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://by45reof1gcat"]
+
+[ext_resource type="Script" path="res://my_xr_tools/fake_joint_button.gd" id="1_3o1qt"]
+
+[node name="FakeJointButton" type="Node3D"]
+script = ExtResource("1_3o1qt")
