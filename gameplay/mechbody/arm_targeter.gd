@@ -10,7 +10,7 @@ extends Node3D
 @export var active = true
 @export var scaling = 32 ## ratio of player arm to mech arm
 
-@export_category("nodes")
+@export_group("References")
 @export var player_shoulder : Node3D
 @export var player_yoke : Node3D
 @export var arm : ArmBase

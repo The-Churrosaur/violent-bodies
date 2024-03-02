@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwtsyqg37x6vq"]
+[gd_scene load_steps=7 format=3 uid="uid://bwtsyqg37x6vq"]
 
 [ext_resource type="PackedScene" uid="uid://dsh7i4eks64gc" path="res://gameplay/mechbody/mechbody.tscn" id="1_ji3mg"]
 [ext_resource type="Script" path="res://gameplay/test_gameplay/mech_rigid_container.gd" id="1_wghhh"]
 [ext_resource type="PackedScene" uid="uid://dlsarb7iw7bpi" path="res://test_player.tscn" id="2_hfoqc"]
-[ext_resource type="Script" path="res://utils/reparenting_rigidbody_3d.gd" id="3_dn2sh"]
 [ext_resource type="PackedScene" uid="uid://bysrkagylo8yh" path="res://gameplay/mechbody/limb_physics/hand_bit.tscn" id="4_8vmbs"]
 [ext_resource type="Script" path="res://my_xr_tools/reparenting_joint.gd" id="5_6bdt2"]
 
@@ -20,7 +19,6 @@ gravity_scale = 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0313884, 0.175038)
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("3_dn2sh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="seatparent"]
 shape = SubResource("BoxShape3D_0oolq")

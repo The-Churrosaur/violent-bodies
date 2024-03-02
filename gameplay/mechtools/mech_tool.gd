@@ -50,6 +50,11 @@ func release_trigger():
 	pass
 
 
+func trigger():
+	press_trigger()
+	release_trigger()
+
+
 ## pass in a grabbable controller for this tool to parse input
 func activate(grabbable_controller : MyXRGrabbable):
 	

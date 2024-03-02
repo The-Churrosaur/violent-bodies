@@ -2,7 +2,7 @@
 ## set input attributes with controller
 
 class_name MechBody
-extends ReparentingRigidbody3D
+extends RigidBody3D
 
 signal landed()
 signal takeoff()
@@ -13,7 +13,7 @@ signal takeoff()
 @export var step_push_time = 0.2
 @export var min_step_fall_time = 0.2
 
-@export_category("references")
+@export_group("references")
 @export var cockpit : Cockpit
 @export var left_arm_targeter : ArmTargeter
 @export var right_arm_targeter : ArmTargeter

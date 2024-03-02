@@ -3,10 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://c7dfxmp5k4sa3" path="res://gameplay/mechtools/stupidgun.tscn" id="1_6a1sf"]
 [ext_resource type="PackedScene" uid="uid://pomw230pn714" path="res://gameplay/mechtools/enemybullet.tscn" id="2_2tv43"]
 
-[node name="enemygun" instance=ExtResource("1_6a1sf")]
-haptics = false
+[node name="enemygun" node_paths=PackedStringArray("muzzle") instance=ExtResource("1_6a1sf")]
 bullet_scene = ExtResource("2_2tv43")
+muzzle = NodePath("Muzzle")
 launch_force = 50000.0
 
-[node name="muzzle" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.67555)
+[node name="Muzzle" type="Node3D" parent="." index="1"]

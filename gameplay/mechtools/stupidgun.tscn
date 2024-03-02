@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://gameplay/mechtools/stupidgun.gd" id="1_jkqyc"]
 [ext_resource type="PackedScene" uid="uid://d1dyiu4yccxjx" path="res://gameplay/mechtools/stupidbullet.tscn" id="2_2kp06"]
 
-[node name="stupidgun" type="Node3D" node_paths=PackedStringArray("muzzle")]
+[node name="stupidgun" type="Node3D"]
 script = ExtResource("1_jkqyc")
 bullet_scene = ExtResource("2_2kp06")
-muzzle = NodePath("")
 
 [node name="CycleTimer" type="Timer" parent="."]
 autostart = true

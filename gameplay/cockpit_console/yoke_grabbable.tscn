@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwgffr50u1d7o"]
+
+[ext_resource type="PackedScene" uid="uid://37qanjrxrmlx" path="res://my_xr_tools/my_xr_grabbable_pickup.tscn" id="1_p671w"]
+[ext_resource type="Script" path="res://gameplay/cockpit_console/yoke_grabbable.gd" id="2_5bksf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_38slx"]
+margin = 0.005
+radius = 0.03
+height = 0.1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bfab0"]
+radius = 0.03
+height = 0.1
+
+[node name="YokeGrabbable" node_paths=PackedStringArray("hold_reference") instance=ExtResource("1_p671w")]
+gravity_scale = 0.0
+freeze = true
+script = ExtResource("2_5bksf")
+hold_reference = NodePath("GrabPoint")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("CapsuleShape3D_38slx")
+
+[node name="GrabPoint" type="Marker3D" parent="." index="1"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("CapsuleMesh_bfab0")

@@ -3,20 +3,21 @@ class_name MechbodyController
 extends XRInputProcessor
 
 
+@export_group("References")
 @export var body : MechBody
 @export var flight_effects : Node3D
 @export var flight_controller_pitch : FlightModule
 @export var flight_controller_yaw : FlightModule
 @export var pull_thruster : PullThruster
 @export var arm_aimer_hand_remote : Node3D
+# look rotation / movement is in relation to this node 
+@export var cockpit_headset_reference : Node3D
 
-@export_category("stick movement")
+@export_group("stick movement")
 @export var tranlation_mult = 0.5
 @export var rotation_mult = 0.5
 
-@export_category("headset tracking movement")
-# look rotation / movement is in relation to this node 
-@export var cockpit_headset_reference : Node3D
+@export_group("headset tracking movement")
 @export var look_rotation = true
 @export var look_pitch = PI/16
 @export var look_yaw = PI/16
@@ -232,5 +233,5 @@ func _set_xr_origin_to_headset_reference():
 	var displacement = headset.global_position - cockpit_headset_reference.global_position
 	XRPlayerGlobals.origin.global_position -= displacement
 	
-	var headset_rotation = headset.global_rotation.y
-	XRPlayerGlobals.origin.global_rotation.y -= headset_rotation
+	#var headset_rotation = headset.global_rotation.y
+	#XRPlayerGlobals.origin.global_rotation.y -= headset_rotation

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkw40t30g5351"]
+
+[ext_resource type="PackedScene" uid="uid://37qanjrxrmlx" path="res://my_xr_tools/my_xr_grabbable_pickup.tscn" id="1_4okhm"]
+[ext_resource type="Script" path="res://player/my_xr_grabbable_cockpit.gd" id="2_2rop7"]
+
+[node name="MyXrGrabbablePickup" instance=ExtResource("1_4okhm")]
+freeze = true
+script = ExtResource("2_2rop7")

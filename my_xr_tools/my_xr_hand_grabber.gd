@@ -4,6 +4,7 @@ extends Node3D
 
 @export var controller : XRController3D
 @export var grab_area : Area3D
+@export var hold_reference : Node3D
 
 
 var detected_grabbable : MyXRGrabbable = null
@@ -80,5 +81,5 @@ func _grab_detected_grabbable():
 
 func _drop_grabbable():
 	if grabbed_grabbable.ignore_drop: return
-	grabbed_grabbable.drop_me()
+	grabbed_grabbable.drop_me(self)
 	grabbed_grabbable = null

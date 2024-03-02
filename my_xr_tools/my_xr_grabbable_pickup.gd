@@ -25,8 +25,9 @@ func _physics_process(delta):
 			# (offsets pos from hand ref by distance to hold_ref)
 			var hold_inv = hold_reference.transform.affine_inverse()
 			
+			# composes transforms 
 			var target_transform = \
-				hand_grabber.hold_reference.global_transform + hold_inv
+				hand_grabber.hold_reference.global_transform * hold_inv
 			
 			global_transform = \
 			global_transform.interpolate_with(target_transform, lerp_weight)

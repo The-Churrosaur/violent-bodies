@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dsh7i4eks64gc"]
+[gd_scene load_steps=20 format=3 uid="uid://dsh7i4eks64gc"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_ifmva"]
 [ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="2_gumoi"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bak1wwgkoec2" path="res://gameplay/mechtools/beamfx2.tscn" id="6_nmrqg"]
 [ext_resource type="PackedScene" uid="uid://b6po2ax5njo4o" path="res://gameplay/mechtools/basic_mech_gun.tscn" id="9_srk0d"]
 [ext_resource type="PackedScene" uid="uid://cwn381pjcowiv" path="res://effects/wind_particles.tscn" id="9_t76ck"]
-[ext_resource type="PackedScene" uid="uid://d26k2y5i1upl1" path="res://gameplay/controls/seat_calibration.tscn" id="10_plbo3"]
 [ext_resource type="PackedScene" uid="uid://dfsksqu0ew2gv" path="res://gameplay/mechbody/pull_thruster.tscn" id="11_lhcv4"]
 [ext_resource type="PackedScene" uid="uid://ct1mqoq7ffeph" path="res://gameplay/controls/flight_module_panel.tscn" id="12_ut7dy"]
 [ext_resource type="PackedScene" uid="uid://dblov20n4ihk2" path="res://cockpit_test/arm_base.tscn" id="13_8cwlu"]
@@ -35,7 +34,7 @@ size = Vector3(5, 5, 5)
 height = 1.0
 radius = 2.78995
 
-[node name="Mechbody" type="RigidBody3D" node_paths=PackedStringArray("cockpit", "left_arm_targeter", "right_arm_targeter", "left_player_shoulder", "right_player_shoulder", "step_push_timer", "step_fall_timer")]
+[node name="Mechbody" type="RigidBody3D" node_paths=PackedStringArray("cockpit", "left_arm_targeter", "right_arm_targeter", "step_push_timer", "step_fall_timer")]
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_pfxel")
 gravity_scale = 0.0
@@ -45,13 +44,9 @@ linear_damp = 0.1
 angular_damp = 2.0
 script = ExtResource("1_ifmva")
 step_power = 200000.0
-step_push_time = null
-min_step_fall_time = null
 cockpit = NodePath("Cockpit")
 left_arm_targeter = NodePath("ArmTargeterLeft")
 right_arm_targeter = NodePath("ArmTargeterRight")
-left_player_shoulder = NodePath("Cockpit/PlayerShoulderLeft")
-right_player_shoulder = NodePath("Cockpit/PlayerShoulderRight")
 step_push_timer = NodePath("Step/StepPushTimer")
 step_fall_timer = NodePath("Step/StepFallTimer")
 
@@ -61,7 +56,7 @@ flight_controller_pitch = NodePath("../FlightModule")
 flight_controller_yaw = NodePath("../FlightModuleTail")
 pull_thruster = NodePath("../LeftHandRemote/PullThruster")
 arm_aimer_hand_remote = NodePath("../LeftHandRemote")
-cockpit_headset_reference = NodePath("../Cockpit/HeadsetReference")
+cockpit_headset_reference = NodePath("../Cockpit/PlayerBodyReferences/HeadsetReference")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.832651, 0)
@@ -70,23 +65,17 @@ mesh = SubResource("CylinderMesh_4co0s")
 
 [node name="ArmTargeterLeft" parent="." node_paths=PackedStringArray("player_shoulder", "player_yoke", "arm") instance=ExtResource("2_nvite")]
 scaling = 16
-player_shoulder = NodePath("../Cockpit/PlayerShoulderLeft")
-player_yoke = NodePath("../Cockpit/Handles/handlesLeft/YokePositionLeft")
+player_shoulder = NodePath("../Cockpit/PlayerBodyReferences/PlayerShoulderLeft")
+player_yoke = NodePath("../Cockpit/Handles/YokeGrabbableLeft")
 arm = NodePath("../ArmBaseLeft")
 
 [node name="ArmTargeterRight" parent="." node_paths=PackedStringArray("player_shoulder", "player_yoke", "arm") instance=ExtResource("2_nvite")]
 scaling = 16
-player_shoulder = NodePath("../Cockpit/PlayerShoulderRight")
-player_yoke = NodePath("../Cockpit/Handles/handlesRight/YokePositionRight")
+player_shoulder = NodePath("../Cockpit/PlayerBodyReferences/PlayerShoulderRight")
+player_yoke = NodePath("../Cockpit/Handles/YokeGrabbableRight")
 arm = NodePath("../ArmBaseRight")
 
 [node name="Cockpit" parent="." instance=ExtResource("2_gumoi")]
-
-[node name="InputManagerYokeLeft" parent="Cockpit/Handles" index="1" node_paths=PackedStringArray("mech_hand")]
-mech_hand = NodePath("../../../LeftHandRemote")
-
-[node name="InputManagerYokeRight" parent="Cockpit/Handles" index="3" node_paths=PackedStringArray("mech_hand")]
-mech_hand = NodePath("../../../RightHandRemote")
 
 [node name="ArmBaseLeft" parent="." instance=ExtResource("13_8cwlu")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.05972, 0.169736, 0.577723)
@@ -137,11 +126,6 @@ transform = Transform3D(0.244102, 0, 0, 0, 0.243389, 0.162944, 0, -0.0186379, 2.
 [node name="WindParticles" parent="." node_paths=PackedStringArray("body") instance=ExtResource("9_t76ck")]
 body = NodePath("..")
 
-[node name="seatcalibrator" parent="." instance=ExtResource("10_plbo3")]
-transform = Transform3D(0.767781, 0, 0.640713, 0, 1, 0, -0.640713, 0, 0.767781, 0.378891, 0.708426, 0.355719)
-cockpit = null
-disable_controller = null
-
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.563671, 1.02496)
 visible = false
@@ -170,5 +154,3 @@ one_shot = true
 [connection signal="timeout" from="Step/StepFallTimer" to="." method="_on_step_fall_timer_timeout"]
 
 [editable path="Cockpit"]
-[editable path="Cockpit/Handles/handlesLeft"]
-[editable path="Cockpit/Handles/handlesLeft/Handles"]

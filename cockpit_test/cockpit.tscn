@@ -1,12 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://11c031wphmm0"]
+[gd_scene load_steps=6 format=3 uid="uid://11c031wphmm0"]
 
 [ext_resource type="Script" path="res://cockpit_test/cockpit.gd" id="1_wnyec"]
 [ext_resource type="ArrayMesh" uid="uid://d33xgs6swlxjo" path="res://assets/cockpit.obj" id="2_by6e6"]
-[ext_resource type="PackedScene" uid="uid://cfm5v38inyif1" path="res://gameplay/controls/input_manager_yoke.tscn" id="3_bc6r6"]
-[ext_resource type="Script" path="res://cockpit_test/clavicle_mover.gd" id="3_wixsj"]
 [ext_resource type="PackedScene" uid="uid://c6mitjbba156w" path="res://cockpit_test/handles_ik.tscn" id="3_x8qfj"]
-[ext_resource type="PackedScene" uid="uid://brtq4qf8y08wa" path="res://kinematic_button_demo.tscn" id="6_ri087"]
-[ext_resource type="PackedScene" uid="uid://berwu0ktv5bjm" path="res://gameplay/controls/look_turn_button.tscn" id="7_aqtjj"]
+[ext_resource type="PackedScene" uid="uid://bwgffr50u1d7o" path="res://gameplay/cockpit_console/yoke_grabbable.tscn" id="5_8uayl"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1lqo6"]
 top_radius = 0.05
@@ -17,59 +14,39 @@ radial_segments = 6
 [node name="Cockpit" type="Node3D"]
 script = ExtResource("1_wnyec")
 
-[node name="Cockpit" type="MeshInstance3D" parent="."]
+[node name="CockpitModel" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.0175886, -0.0157744)
 mesh = ExtResource("2_by6e6")
 
-[node name="HeadsetReference" type="Node3D" parent="."]
+[node name="PlayerBodyReferences" type="Node3D" parent="."]
+
+[node name="HeadsetReference" type="Node3D" parent="PlayerBodyReferences"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11946, 0.109797)
 
-[node name="PlayerShoulderLeft" type="Node3D" parent="."]
+[node name="PlayerShoulderLeft" type="Node3D" parent="PlayerBodyReferences"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.98, 0.101)
-script = ExtResource("3_wixsj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerShoulderLeft"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerBodyReferences/PlayerShoulderLeft"]
 mesh = SubResource("CylinderMesh_1lqo6")
 
-[node name="Label3D" type="Label3D" parent="PlayerShoulderLeft"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145661, -0.25648)
-
-[node name="PlayerShoulderRight" type="Node3D" parent="."]
+[node name="PlayerShoulderRight" type="Node3D" parent="PlayerBodyReferences"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.98, 0.101)
-script = ExtResource("3_wixsj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerShoulderRight"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerBodyReferences/PlayerShoulderRight"]
 mesh = SubResource("CylinderMesh_1lqo6")
-
-[node name="Label3D" type="Label3D" parent="PlayerShoulderRight"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145661, -0.25648)
 
 [node name="Handles" type="Node3D" parent="."]
 
-[node name="handlesLeft" parent="Handles" node_paths=PackedStringArray("yoke_position_tracker") instance=ExtResource("3_x8qfj")]
+[node name="handlesIKLeft" parent="Handles" node_paths=PackedStringArray("handle") instance=ExtResource("3_x8qfj")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.374306, 0.818408, -0.986735)
-yoke_position_tracker = NodePath("YokePositionLeft")
+handle = NodePath("../YokeGrabbableLeft")
 
-[node name="YokePositionLeft" type="Node3D" parent="Handles/handlesLeft"]
+[node name="YokeGrabbableLeft" parent="Handles" instance=ExtResource("5_8uayl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.8, 0)
 
-[node name="InputManagerYokeLeft" parent="Handles" instance=ExtResource("3_bc6r6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499248, 0)
-active = true
-
-[node name="handlesRight" parent="Handles" node_paths=PackedStringArray("yoke_position_tracker") instance=ExtResource("3_x8qfj")]
+[node name="handlesIKRight" parent="Handles" node_paths=PackedStringArray("handle") instance=ExtResource("3_x8qfj")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.384, 0.81587, -0.994635)
-yoke_position_tracker = NodePath("YokePositionRight")
+handle = NodePath("../YokeGrabbableRight")
 
-[node name="YokePositionRight" type="Node3D" parent="Handles/handlesRight"]
-
-[node name="InputManagerYokeRight" parent="Handles" instance=ExtResource("3_bc6r6")]
-active = true
-
-[node name="FakeJointButton" parent="." instance=ExtResource("6_ri087")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.591137, -0.136743)
-
-[node name="LookTurnButton" parent="FakeJointButton" instance=ExtResource("7_aqtjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0885466, 0, 0)
-
-[editable path="Handles/handlesLeft"]
-[editable path="Handles/handlesLeft/Handles"]
+[node name="YokeGrabbableRight" parent="Handles" instance=ExtResource("5_8uayl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.8, 0)

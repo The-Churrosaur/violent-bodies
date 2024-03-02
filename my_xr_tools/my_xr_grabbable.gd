@@ -35,7 +35,7 @@ signal controller_vec2_changed(action, value)
 	set(val): set_collision_layer_value(XR_GRABBABLE_LAYER, grab_enabled) 
 
 ## flags to request custom behavior from the xr_hand_grabber grabbing this
-@export_category("Grabber Behavior Flags")
+@export_group("Grabber Behavior Flags")
 
 ## drop on button release? this is simply a flag for xr_hand_grabber
 @export var drop_on_release = true

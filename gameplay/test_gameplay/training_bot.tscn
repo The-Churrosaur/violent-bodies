@@ -92,7 +92,7 @@ visible = false
 mesh = SubResource("BoxMesh_w2qw1")
 
 [node name="enemygun" parent="." node_paths=PackedStringArray("launching_rigidbody") instance=ExtResource("8_62xk6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.64543)
 launching_rigidbody = NodePath("..")
 
 [node name="Label3D" type="Label3D" parent="."]

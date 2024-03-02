@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dglogyr3g15gb"]
-
-[ext_resource type="PackedScene" uid="uid://dxqrsjvj1edek" path="res://cockpit_test/handles.tscn" id="1_j5hfl"]
-
-[node name="seatmover" instance=ExtResource("1_j5hfl")]
-freeze_mode = 0
