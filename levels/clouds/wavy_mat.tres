@@ -3,21 +3,19 @@
 [ext_resource type="Shader" uid="uid://ldpwvtnmb4hs" path="res://levels/clouds/wavy.tres" id="1_pad3i"]
 
 [sub_resource type="Gradient" id="Gradient_5gxrc"]
-offsets = PackedFloat32Array(0.0835821, 0.310448, 1)
+offsets = PackedFloat32Array(0.0835821, 0.370149, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.104478, 0.104478, 0.104478, 1, 1, 1, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_o268b"]
 noise_type = 0
-seed = -1
-frequency = 0.007
+seed = 1
+frequency = 0.0196
 fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fuo23"]
-width = 1024
-height = 8
 in_3d_space = true
 seamless = true
-seamless_blend_skirt = 0.055
+seamless_blend_skirt = 0.139
 color_ramp = SubResource("Gradient_5gxrc")
 noise = SubResource("FastNoiseLite_o268b")
 
@@ -29,8 +27,10 @@ shader_parameter/wave_divide = 80.0
 shader_parameter/Albedo = Color(0.74902, 0.360784, 0.733333, 0.470588)
 shader_parameter/color_wave_brightness = 2.0
 shader_parameter/color_wave_divisor = 2.0
-shader_parameter/roll_movement_divisor = 10.0
-shader_parameter/y_movement_divisor = 5.0
-shader_parameter/alpha_override = 0.612
-shader_parameter/AlphaScissor = 0.629
+shader_parameter/roll_movement_divisor = 5.0
+shader_parameter/y_movement_divisor = 2.0
+shader_parameter/alpha_override = 0.42
+shader_parameter/y_stretch = 500.0
+shader_parameter/scale_or_something = 0.05
+shader_parameter/AlphaScissor = 0.178
 shader_parameter/noise = SubResource("NoiseTexture2D_fuo23")

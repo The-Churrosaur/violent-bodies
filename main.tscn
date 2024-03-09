@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://mktno0wfl5yk"]
+[gd_scene load_steps=26 format=3 uid="uid://mktno0wfl5yk"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_y613h"]
 [ext_resource type="ArrayMesh" uid="uid://chx0afiwsqpj" path="res://assets/cruiser.obj" id="3_bc1wl"]
@@ -11,6 +11,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cl7snahl1dxqk" path="res://assets/terrain_ex.obj" id="11_flred"]
 [ext_resource type="PackedScene" uid="uid://dapy8e8aqf5pt" path="res://gameplay/test_gameplay/terrain/geometry.tscn" id="11_hlgp2"]
 [ext_resource type="PackedScene" uid="uid://bwtsyqg37x6vq" path="res://gameplay/test_gameplay/mech_rigid_container.tscn" id="11_ybwbn"]
+[ext_resource type="PackedScene" uid="uid://bwg23bgh03qe6" path="res://levels/clouds/cloudsmesh.tscn" id="12_vany6"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wqfvj"]
 energy_multiplier = 2.88
@@ -226,4 +227,7 @@ skeleton = NodePath("../..")
 [node name="Geometry" parent="Base" instance=ExtResource("11_hlgp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -258.479, 0)
 
+[node name="Cloudsmesh" parent="." instance=ExtResource("12_vany6")]
+
 [editable path="MechRigidContainer"]
+[editable path="Cloudsmesh"]

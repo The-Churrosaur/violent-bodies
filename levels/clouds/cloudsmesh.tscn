@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://beh0nae26jnxk" path="res://levels/clouds/wavy_mat.tres" id="2_w167v"]
 
 [node name="Cloudsmesh" type="Node3D"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="Currents" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 6.03321, -141.819, 9.14228)

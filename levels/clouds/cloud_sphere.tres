@@ -189,7 +189,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-499.992, -87.0801)
 modes/depth_draw = 1
 flags/depth_prepass_alpha = true
 varyings/ParticleLifetime = "0,0"
