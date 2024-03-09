@@ -66,10 +66,6 @@ script = ExtResource("1_y613h")
 [node name="MechRigidContainer" parent="." instance=ExtResource("11_ybwbn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 183.148, -253.038, 0)
 
-[node name="Mechbody" parent="MechRigidContainer" index="0"]
-step_push_time = 0.2
-min_step_fall_time = 0.2
-
 [node name="Base" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Base"]

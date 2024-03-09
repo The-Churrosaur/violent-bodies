@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://byc7btdpq3g8k"]
+
+[ext_resource type="Shader" uid="uid://cl0rcvttsmvn" path="res://levels/clouds/cloud_sphere.tres" id="1_xgia0"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xgia0")
+shader_parameter/x_divide = null
+shader_parameter/wave_divide = null
+shader_parameter/Albedo = Color(0.74902, 0.360784, 0.733333, 0.247059)

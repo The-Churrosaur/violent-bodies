@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwg23bgh03qe6"]
+
+[ext_resource type="ArrayMesh" uid="uid://ikndn3rpaid3" path="res://currents.obj" id="1_0gycy"]
+[ext_resource type="Material" uid="uid://beh0nae26jnxk" path="res://levels/clouds/wavy_mat.tres" id="2_w167v"]
+
+[node name="Cloudsmesh" type="Node3D"]
+
+[node name="Currents" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 6.03321, -141.819, 9.14228)
+mesh = ExtResource("1_0gycy")
+surface_material_override/0 = ExtResource("2_w167v")
+surface_material_override/1 = ExtResource("2_w167v")
+surface_material_override/2 = ExtResource("2_w167v")
+surface_material_override/3 = ExtResource("2_w167v")
+surface_material_override/4 = ExtResource("2_w167v")
+surface_material_override/5 = ExtResource("2_w167v")
+surface_material_override/6 = ExtResource("2_w167v")
+surface_material_override/7 = ExtResource("2_w167v")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 38.6822, 0, 0)

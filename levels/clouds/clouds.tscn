@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cn02iqk0vaxbp"]
+
+[ext_resource type="Shader" uid="uid://deuypa3mfgm0q" path="res://levels/clouds/3d_cloud_noise.tres" id="1_hean0"]
+[ext_resource type="Material" uid="uid://byc7btdpq3g8k" path="res://levels/clouds/cloud_sphere_mat.tres" id="2_404bq"]
+
+[sub_resource type="Gradient" id="Gradient_045tk"]
+offsets = PackedFloat32Array(0.295455, 0.495455, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.45, 0.45, 0.45, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k1nm1"]
+noise_type = 3
+seed = 5
+frequency = 0.0291
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_j2rhs"]
+color_ramp = SubResource("Gradient_045tk")
+noise = SubResource("FastNoiseLite_k1nm1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fg3fd"]
+shader = ExtResource("1_hean0")
+shader_parameter/display_threwhold = 0.498
+shader_parameter/sizemult = 64
+shader_parameter/brightness_mult = 1.0
+shader_parameter/scale = 100
+shader_parameter/NoiseTex = SubResource("NoiseTexture3D_j2rhs")
+
+[sub_resource type="SphereMesh" id="SphereMesh_hb1t3"]
+material = ExtResource("2_404bq")
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 8
+
+[node name="Clouds" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -124.74, 0, 0)
+amount = 10001
+lifetime = 86.26
+process_material = SubResource("ShaderMaterial_fg3fd")
+draw_pass_1 = SubResource("SphereMesh_hb1t3")
