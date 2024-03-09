@@ -13,6 +13,8 @@ frequency = 0.0196
 fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fuo23"]
+width = 1024
+height = 1024
 in_3d_space = true
 seamless = true
 seamless_blend_skirt = 0.139
@@ -27,10 +29,10 @@ shader_parameter/wave_divide = 80.0
 shader_parameter/Albedo = Color(0.74902, 0.360784, 0.733333, 0.470588)
 shader_parameter/color_wave_brightness = 2.0
 shader_parameter/color_wave_divisor = 2.0
-shader_parameter/roll_movement_divisor = 5.0
-shader_parameter/y_movement_divisor = 2.0
-shader_parameter/alpha_override = 0.42
+shader_parameter/roll_movement_divisor = 10.0
+shader_parameter/y_movement_divisor = 1.0
+shader_parameter/alpha_override = 0.584
 shader_parameter/y_stretch = 500.0
 shader_parameter/scale_or_something = 0.05
-shader_parameter/AlphaScissor = 0.178
+shader_parameter/AlphaScissor = 0.604
 shader_parameter/noise = SubResource("NoiseTexture2D_fuo23")
