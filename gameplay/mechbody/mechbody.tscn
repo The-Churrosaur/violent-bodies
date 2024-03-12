@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dsh7i4eks64gc"]
+[gd_scene load_steps=23 format=3 uid="uid://dsh7i4eks64gc"]
 
 [ext_resource type="Script" path="res://gameplay/mechbody/mechbody.gd" id="1_ifmva"]
 [ext_resource type="PackedScene" uid="uid://11c031wphmm0" path="res://cockpit_test/cockpit.tscn" id="2_gumoi"]
@@ -6,12 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://bln8cdsrflypy" path="res://gameplay/mechbody/flight_module.tscn" id="4_wgapf"]
 [ext_resource type="ArrayMesh" uid="uid://bsrxmndxpa0gm" path="res://assets/gunmech_actual.obj" id="5_3oo3b"]
 [ext_resource type="PackedScene" uid="uid://doptv24orlqm0" path="res://cockpit_test/mech_hand.tscn" id="5_68b7c"]
+[ext_resource type="PackedScene" uid="uid://1t2q4b1xyydv" path="res://gameplay/cockpit_console/virtual/vhud_button_test.tscn" id="5_gxs6w"]
 [ext_resource type="PackedScene" uid="uid://dvg5e6hisacwi" path="res://mechbody_controller.tscn" id="6_gk30v"]
 [ext_resource type="Material" uid="uid://cr3o3nwa7xg1b" path="res://materials/generic_toon.tres" id="6_kxm6c"]
 [ext_resource type="PackedScene" uid="uid://bak1wwgkoec2" path="res://gameplay/mechtools/beamfx2.tscn" id="6_nmrqg"]
+[ext_resource type="PackedScene" uid="uid://bydqfltfgashh" path="res://gameplay/mechbody/mech_hand_tool_manager.tscn" id="9_fsaan"]
 [ext_resource type="PackedScene" uid="uid://b6po2ax5njo4o" path="res://gameplay/mechtools/basic_mech_gun.tscn" id="9_srk0d"]
 [ext_resource type="PackedScene" uid="uid://cwn381pjcowiv" path="res://effects/wind_particles.tscn" id="9_t76ck"]
 [ext_resource type="PackedScene" uid="uid://dfsksqu0ew2gv" path="res://gameplay/mechbody/pull_thruster.tscn" id="11_lhcv4"]
+[ext_resource type="PackedScene" uid="uid://cnlpm1f8k8x7h" path="res://gameplay/mechtools/shield.tscn" id="12_aybva"]
 [ext_resource type="PackedScene" uid="uid://ct1mqoq7ffeph" path="res://gameplay/controls/flight_module_panel.tscn" id="12_ut7dy"]
 [ext_resource type="PackedScene" uid="uid://dblov20n4ihk2" path="res://cockpit_test/arm_base.tscn" id="13_8cwlu"]
 
@@ -31,8 +34,8 @@ size = Vector3(0.1, 0.15, 0.2)
 size = Vector3(5, 5, 5)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g8pff"]
-height = 1.0
-radius = 2.78995
+height = 1.568
+radius = 2.0
 
 [node name="Mechbody" type="RigidBody3D" node_paths=PackedStringArray("cockpit", "left_arm_targeter", "right_arm_targeter", "step_push_timer", "step_fall_timer")]
 mass = 100.0
@@ -77,6 +80,18 @@ arm = NodePath("../ArmBaseRight")
 
 [node name="Cockpit" parent="." instance=ExtResource("2_gumoi")]
 
+[node name="CockpitAmbience" parent="Cockpit" index="4" node_paths=PackedStringArray("velocity_body")]
+stream_paused = false
+velocity_body = NodePath("../..")
+
+[node name="VHUDButtonGrabbable2" parent="Cockpit" node_paths=PackedStringArray("tool_manager") instance=ExtResource("5_gxs6w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149, 1, -0.214)
+tool_manager = NodePath("../../RightHandRemote/MechHandToolManager")
+
+[node name="VHUDButtonGrabbable3" parent="Cockpit" node_paths=PackedStringArray("tool_manager") instance=ExtResource("5_gxs6w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.149, 1, -0.214)
+tool_manager = NodePath("../../LeftHandRemote/MechHandToolManager")
+
 [node name="ArmBaseLeft" parent="." instance=ExtResource("13_8cwlu")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.05972, 0.169736, 0.577723)
 
@@ -88,6 +103,10 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2, 0.946095, -3.58666)
 current_tool = NodePath("beamfx2")
 arm = NodePath("../ArmBaseLeft")
 
+[node name="MechHandToolManager" parent="LeftHandRemote" node_paths=PackedStringArray("tools", "input_grabbable") instance=ExtResource("9_fsaan")]
+tools = [NodePath("../beamfx2"), NodePath("../BasicGun"), NodePath("../Shield")]
+input_grabbable = NodePath("../../Cockpit/Handles/YokeGrabbableLeft")
+
 [node name="PullThruster" parent="LeftHandRemote" instance=ExtResource("11_lhcv4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 thrust = 400
@@ -95,11 +114,29 @@ thrust = 400
 [node name="beamfx2" parent="LeftHandRemote" instance=ExtResource("6_nmrqg")]
 transform = Transform3D(3, 4.26326e-14, 3.81165e-20, -2.51965e-14, 1.77304, 2.41998, 3.439e-14, -2.41998, 1.77304, 9.53674e-07, -4.17233e-07, -0.665171)
 
+[node name="BasicGun" parent="LeftHandRemote" node_paths=PackedStringArray("launching_rigidbody") instance=ExtResource("9_srk0d")]
+trigger_action = "trigger_click"
+launching_rigidbody = NodePath("../..")
+
+[node name="Shield" parent="LeftHandRemote" instance=ExtResource("12_aybva")]
+transform = Transform3D(1.38021, -0.783165, -3.42332e-08, 0, -8.74228e-08, 2, -0.587374, -1.84029, -8.04415e-08, 0, 0, -0.701411)
+tool_name = "SHIELD"
+
 [node name="RightHandRemote" parent="." node_paths=PackedStringArray("arm") instance=ExtResource("5_68b7c")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.01847, 0.2794, -2.90604)
 arm = NodePath("../ArmBaseRight")
 
-[node name="BasicGun" parent="RightHandRemote" instance=ExtResource("9_srk0d")]
+[node name="MechHandToolManager" parent="RightHandRemote" node_paths=PackedStringArray("tools", "input_grabbable") instance=ExtResource("9_fsaan")]
+tools = [NodePath("../BasicGun"), NodePath("../beamfx")]
+input_grabbable = NodePath("../../Cockpit/Handles/YokeGrabbableRight")
+
+[node name="BasicGun" parent="RightHandRemote" node_paths=PackedStringArray("launching_rigidbody") instance=ExtResource("9_srk0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16523, -3.00979)
+trigger_action = "trigger_click"
+launching_rigidbody = NodePath("../..")
+
+[node name="beamfx" parent="RightHandRemote" instance=ExtResource("6_nmrqg")]
+transform = Transform3D(3, 0, 0, 0, 1.73272, 2.44902, 0, -2.44902, 1.73272, 0, 0, -0.951247)
 
 [node name="FlightModule" parent="." node_paths=PackedStringArray("mechbody") instance=ExtResource("4_wgapf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0422812, 0.942789, -1.45214)
@@ -108,6 +145,7 @@ coefficient = 4.0
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="FlightModule"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.214992)
+visible = false
 mesh = SubResource("BoxMesh_mniyf")
 skeleton = NodePath("../..")
 
@@ -138,7 +176,11 @@ mesh = ExtResource("5_3oo3b")
 surface_material_override/0 = ExtResource("6_kxm6c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.57412, 1.19041)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38919, 0.996926)
+shape = SubResource("CylinderShape3D_g8pff")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.22045, 0.996926)
 shape = SubResource("CylinderShape3D_g8pff")
 
 [node name="Step" type="Node3D" parent="."]

@@ -17,6 +17,3 @@ surface_material_override/4 = ExtResource("2_w167v")
 surface_material_override/5 = ExtResource("2_w167v")
 surface_material_override/6 = ExtResource("2_w167v")
 surface_material_override/7 = ExtResource("2_w167v")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 38.6822, 0, 0)

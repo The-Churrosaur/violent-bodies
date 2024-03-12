@@ -33,6 +33,7 @@ physics_material_override = SubResource("PhysicsMaterial_663pm")
 shape = SubResource("BoxShape3D_c072q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Hand"]
+visible = false
 mesh = SubResource("SphereMesh_wgu1x")
 
 [node name="LimbRotator" parent="Hand" node_paths=PackedStringArray("body", "target") instance=ExtResource("2_mnakk")]

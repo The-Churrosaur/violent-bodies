@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dih1kfao03ym8"]
+
+[ext_resource type="Shader" uid="uid://n7v0q80r088y" path="res://levels/clouds/skybox_shader.tres" id="1_3uoi1"]
+[ext_resource type="Texture2D" uid="uid://n0gqs0nok0en" path="res://levels/clouds/sky_base_noise.tres" id="2_s6ohq"]
+[ext_resource type="Texture2D" uid="uid://25tvi50u6su0" path="res://levels/clouds/sky_star_noise.tres" id="3_y23in"]
+
+[resource]
+shader = ExtResource("1_3uoi1")
+shader_parameter/inner_cutoff = 0.233
+shader_parameter/wave_height = 0.1
+shader_parameter/wave_speed = 10.0
+shader_parameter/rotation_speed = 0.001
+shader_parameter/albedo = Color(0.509804, 0.423529, 0.498039, 1)
+shader_parameter/inner_albedo = Color(0.658824, 0.560784, 0.67451, 1)
+shader_parameter/alpha_cutoff = 0.367
+shader_parameter/space_albedo = Color(0.282353, 0.282353, 0.282353, 1)
+shader_parameter/star_brightness = 1.0
+shader_parameter/star_color = Color(1, 1, 1, 1)
+shader_parameter/star_cutoff = 0.844
+shader_parameter/ambient_color = null
+shader_parameter/main_noise = ExtResource("2_s6ohq")
+shader_parameter/star_noise = ExtResource("3_y23in")

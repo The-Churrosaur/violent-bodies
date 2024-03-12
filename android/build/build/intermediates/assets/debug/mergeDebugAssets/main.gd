@@ -1,4 +1,8 @@
-extends Node3D
+extends Node
+
+
+@export var first_scene : PackedScene
+
 
 var xr_interface: XRInterface
 
@@ -31,6 +35,4 @@ func _ready():
 		print("OpenXR not initialized, please check if your headset is connected")
 		
 	
-	#get_tree().change_scene_to_file("res://small_main.tscn")
-	
-	LevelGlobals.level = self
+	get_tree().change_scene_to_packed(first_scene)

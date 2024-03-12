@@ -2,18 +2,51 @@
 class_name Sword
 extends MechTool
 
+
 @export var particles :Array[GPUParticles3D]
+@export var controller_action = "trigger_click"
+
+@onready var damage_area = $DamageArea
 
 var powered = false
 
-# Called when the node enters the scene tree for the first time.
+
+
+# CALLBACKS --------------------------------------------------------------------
+
+
+
 func _ready():
-	pass # Replace with function body.
+	_power_off()
 
 
-func trigger():
-	super.trigger()
-	toggle()
+func _physics_process(delta):
+	if powered and grabbable_controller is MyXRGrabbable:
+		grabbable_controller.controller.trigger_haptic_pulse("haptic", 1, 0.2, 0.2, 0)
+
+
+func on_controller_input_pressed(action):
+	super(action)
+	if action == controller_action: _power_on()
+
+
+func on_controller_input_released(action):
+	super(action)
+	if action == controller_action: _power_off()
+
+
+
+func _on_area_3d_area_entered(area):
+	if area.is_in_group("laser"):
+		if grabbable_controller is MyXRGrabbable: 
+			grabbable_controller.controller.trigger_haptic_pulse("haptic", 5, 0.4, 0.2, 0)
+	else:
+		if grabbable_controller is MyXRGrabbable: 
+			grabbable_controller.controller.trigger_haptic_pulse("haptic", 5, 0.4, 0.2, 0)
+
+
+
+# PUBLIC -----------------------------------------------------------------------
 
 
 
@@ -22,18 +55,22 @@ func toggle():
 	else: _power_on()
 
 
+
+# PRIVATE ----------------------------------------------------------------------
+
+
 func _power_on():
 	for particle in particles : particle.emitting = true
 	powered = true
+	damage_area.monitorable = true
+	
 
 
 func _power_off():
+	print("sword powering off")
 	for particle in particles : particle.emitting = false
 	powered = false
+	damage_area.monitorable = false
 
 
-func _on_area_3d_area_entered(area):
-	if area.is_in_group("laser"):
-		XRPlayerGlobals.lhand.trigger_haptic_pulse("haptic", 5, 0.4, 0.2, 0)
-	else:
-		XRPlayerGlobals.lhand.trigger_haptic_pulse("haptic", 5, 10, 0.4, 0)
+

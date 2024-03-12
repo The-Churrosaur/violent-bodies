@@ -20,19 +20,29 @@ const XR_GRABBABLE_LAYER = 2
 
 signal grabbed(grabber)
 signal dropped(grabber)
-signal hovered(grabber) # TODO
+signal hovered(grabber)
 
 signal controller_input_pressed(action)
 signal controller_input_released(action)
 signal controller_float_changed(action, value)
 signal controller_vec2_changed(action, value)
 
+
+## will respond to being grabbed
+@export var grabbable = true
+
+## will respond to being hovered
+@export var hoverable = true
+
 ## if true, will act as a relay for controller input from the hand grabbing this
 @export var get_controller_input = true
 
+## if true, will act as a controller input relay while being hovered
+@export var get_controller_input_while_hovered = false
+
 ## if set false, changes collision layer to be invisible to hand_grabber
-@export var grab_enabled = true:
-	set(val): set_collision_layer_value(XR_GRABBABLE_LAYER, grab_enabled) 
+@export var detectable_by_grabber = true:
+	set(val): set_collision_layer_value(XR_GRABBABLE_LAYER, detectable_by_grabber) 
 
 ## flags to request custom behavior from the xr_hand_grabber grabbing this
 @export_group("Grabber Behavior Flags")
@@ -44,6 +54,7 @@ signal controller_vec2_changed(action, value)
 @export var ignore_drop = false
 
 
+## note that this can be set active by hover
 var controller : XRController3D = null
 var hand_grabber : MyXRHandGrabber
 
@@ -91,7 +102,17 @@ func drop_me(grabber : MyXRHandGrabber):
 	_drop(grabber)
 
 
-# -- INPUT ENCAPSULATION FUNCTION
+## call this if you are a hovering xrhandgrabber
+func hover_me(grabber : MyXRHandGrabber):
+	_hover(grabber)
+
+
+## release hover
+func release_hover_me(grabber : MyXRHandGrabber):
+	_release_hover(grabber)
+
+
+# -- INPUT ENCAPSULATION FUNCTIONs
 
 
 func controller_get_float(action : String) -> float:
@@ -114,30 +135,46 @@ func controller_is_pressed(action : String) -> bool:
 
 
 
-func _setup_controller_input():
+func _setup_controller_input(controller):
 	controller.button_pressed.connect(_on_controller_button_pressed)
 	controller.button_released.connect(_on_controller_button_released)
 	controller.input_float_changed.connect(_on_controller_float_changed)
 	controller.input_vector2_changed.connect(_on_controller_vec2_changed)
 
 
-func _disconnect_controller_input():
+func _disconnect_controller_input(controller):
 	controller.button_pressed.disconnect(_on_controller_button_pressed)
 	controller.button_released.disconnect(_on_controller_button_released)
 	controller.input_float_changed.disconnect(_on_controller_float_changed)
 	controller.input_vector2_changed.disconnect(_on_controller_vec2_changed)
 
 
+func _hover(grabber):
+	if !hoverable: return
+	if get_controller_input_while_hovered:
+		controller = grabber.controller
+		_setup_controller_input(controller)
+
+
+func _release_hover(grabber):
+	if !hoverable: return
+	if get_controller_input_while_hovered and controller != null:
+		_disconnect_controller_input(controller)
+		controller = null
+
+
 func _grab(grabber):
+	if !grabbable: return
 	is_grabbed = true
 	hand_grabber = grabber
 	controller = grabber.controller
-	_setup_controller_input()
+	_setup_controller_input(controller)
 	grabbed.emit(grabber)
 
 
 func _drop(grabber):
-	_disconnect_controller_input()
+	if !grabbable: return
+	_disconnect_controller_input(controller)
 	controller = null
 	hand_grabber = null
 	is_grabbed = false

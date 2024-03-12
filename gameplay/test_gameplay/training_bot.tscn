@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c38fl22da0jew"]
+[gd_scene load_steps=16 format=3 uid="uid://c38fl22da0jew"]
 
 [ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="1_jp8id"]
 [ext_resource type="Script" path="res://gameplay/test_gameplay/training_bot.gd" id="1_qefqv"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dyycpms0kxsgm" path="res://gameplay/test_gameplay/health_module.tscn" id="8_27lgs"]
 [ext_resource type="PackedScene" uid="uid://bisjoacj4bgel" path="res://gameplay/mechtools/enemystupidgun.tscn" id="8_62xk6"]
 [ext_resource type="PackedScene" uid="uid://c8k6oppug00w8" path="res://gameplay/test_gameplay/damage_fx.tscn" id="9_s1n2a"]
+[ext_resource type="AudioStream" uid="uid://dyf21rgr305n2" path="res://assets/audio/cockpit_ambiance.wav" id="11_1r1kv"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2g2oc"]
 radius = 3.0
@@ -104,6 +105,13 @@ font_size = 200
 
 [node name="DamageFx" parent="." instance=ExtResource("9_s1n2a")]
 transform = Transform3D(0.000283132, 0.00794356, 0.999968, -0.00163949, 0.999967, -0.00794309, -0.999999, -0.00163718, 0.000296158, 0, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_1r1kv")
+unit_size = 24.43
+pitch_scale = 1.47
+autoplay = true
+doppler_tracking = 2
 
 [connection signal="explosion_ended" from="explosionFX" to="." method="_on_explosion_fx_explosion_ended"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

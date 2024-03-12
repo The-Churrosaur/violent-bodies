@@ -7,16 +7,14 @@ extends Node3D
 # FIELDS -----------------------------------------------------------------------
 
 
+## for HUD 
+@export var tool_name = "TOOL"
 
 ## for parsing control inputs
-var grabbable_controller : MyXRGrabbable :
-	get: return grabbable_controller
-	set(arg): return
+var grabbable_controller : MyXRGrabbable
 
 ## get is this tool active
-var tool_active = false :
-	get: return tool_active
-	set(arg): return
+var tool_active = false
 
 
 
@@ -56,10 +54,10 @@ func trigger():
 
 
 ## pass in a grabbable controller for this tool to parse input
-func activate(grabbable_controller : MyXRGrabbable):
+func activate(controller : MyXRGrabbable):
 	
 	tool_active = true
-	self.grabbable_controller = grabbable_controller
+	grabbable_controller = controller
 	_connect_controller(grabbable_controller)
 
 
@@ -68,6 +66,7 @@ func deactivate():
 	
 	tool_active = false
 	_disconnect_controller()
+	print("setting controller null")
 	grabbable_controller = null
 
 
@@ -77,10 +76,12 @@ func deactivate():
 
 
 func _connect_controller(grabbable : MyXRGrabbable):
+	print("tool connecting controller ", grabbable)
 	grabbable.controller_input_pressed.connect(on_controller_input_pressed)
 	grabbable.controller_input_released.connect(on_controller_input_released)
 
 
 func _disconnect_controller():
+	print("tool disconnecting controller ", grabbable_controller)
 	grabbable_controller.controller_input_pressed.disconnect(on_controller_input_pressed)
 	grabbable_controller.controller_input_released.disconnect(on_controller_input_released)

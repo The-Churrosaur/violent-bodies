@@ -12,6 +12,7 @@ bottom_radius = 0.25
 script = ExtResource("2_mbm85")
 gun = NodePath("stupidgun")
 trigger_action = "trigger"
+tool_name = "GUN"
 
 [node name="stupidgun" parent="." index="0" node_paths=PackedStringArray("muzzle") instance=ExtResource("3_j5572")]
 muzzle = NodePath("../muzzle")
@@ -22,3 +23,5 @@ mesh = SubResource("CylinderMesh_p0guc")
 
 [node name="muzzle" type="Node3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.57233)
+
+[connection signal="firing" from="stupidgun" to="." method="_on_stupidgun_firing"]

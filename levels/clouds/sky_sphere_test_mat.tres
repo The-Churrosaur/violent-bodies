@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://da84uy4q7mtdd"]
+
+[ext_resource type="Shader" uid="uid://bn2kngykwydna" path="res://levels/clouds/skybox_shader_spatial_test.tres" id="1_fpgtv"]
+[ext_resource type="Texture2D" uid="uid://n0gqs0nok0en" path="res://levels/clouds/sky_base_noise.tres" id="2_x33b7"]
+[ext_resource type="Texture2D" uid="uid://25tvi50u6su0" path="res://levels/clouds/sky_star_noise.tres" id="3_55gml"]
+
+[resource]
+render_priority = -4
+shader = ExtResource("1_fpgtv")
+shader_parameter/inner_cutoff2 = 0.45
+shader_parameter/wave_height2 = 0.05
+shader_parameter/wave_speed2 = 10.0
+shader_parameter/rotation_speed2 = 0.001
+shader_parameter/albedo2 = Color(0.509804, 0.423529, 0.498039, 1)
+shader_parameter/inner_albedo2 = Color(0.658824, 0.560784, 0.67451, 1)
+shader_parameter/alpha_cutoff2 = 0.593
+shader_parameter/space_albedo2 = Color(0.0745098, 0.0745098, 0.0745098, 1)
+shader_parameter/star_brightness2 = 2.0
+shader_parameter/star_color2 = Color(1, 1, 1, 1)
+shader_parameter/star_cutoff2 = 0.814
+shader_parameter/alpha = 0.98
+shader_parameter/main_noise2 = ExtResource("2_x33b7")
+shader_parameter/star_noise2 = ExtResource("3_55gml")

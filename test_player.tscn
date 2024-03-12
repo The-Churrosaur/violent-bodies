@@ -34,6 +34,7 @@ rhand = NodePath("XRController3DRight")
 headset = NodePath("XRCamera3D")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
+far = 12000.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XRCamera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.28403)

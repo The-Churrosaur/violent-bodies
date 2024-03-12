@@ -26,6 +26,6 @@ shader = ExtResource("1_uqbs4")
 shader_parameter/Fresnel = 0.6
 shader_parameter/CrackMovementSpeed = 0.1
 shader_parameter/CrackAlpha = 0.694
-shader_parameter/FresnelColor = Color(0.988235, 0.541176, 0.615686, 1)
+shader_parameter/FresnelColor = Color(0.831373, 0.698039, 0.847059, 1)
 shader_parameter/CrackNoise = SubResource("NoiseTexture2D_c6uiy")
 shader_parameter/Albedo = SubResource("GradientTexture1D_goj77")

@@ -1,0 +1,174 @@
+[gd_scene load_steps=20 format=3 uid="uid://mktno0wfl5yk"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_y613h"]
+[ext_resource type="ArrayMesh" uid="uid://chx0afiwsqpj" path="res://assets/cruiser.obj" id="3_bc1wl"]
+[ext_resource type="Material" uid="uid://t06cj015rp63" path="res://materials/ship_material.tres" id="4_5et6i"]
+[ext_resource type="Script" path="res://spinner.gd" id="4_jaagw"]
+[ext_resource type="PackedScene" uid="uid://prpquffa8bgi" path="res://effects/explosion_fx.tscn" id="6_hm7qd"]
+[ext_resource type="PackedScene" uid="uid://c38fl22da0jew" path="res://gameplay/test_gameplay/training_bot.tscn" id="9_2ppjb"]
+[ext_resource type="PackedScene" uid="uid://bdhc7mn7fx7jt" path="res://gameplay/test_gameplay/bot_spawner.tscn" id="10_4e2ph"]
+[ext_resource type="PackedScene" uid="uid://dapy8e8aqf5pt" path="res://gameplay/test_gameplay/terrain/geometry.tscn" id="11_hlgp2"]
+[ext_resource type="PackedScene" uid="uid://bwtsyqg37x6vq" path="res://gameplay/test_gameplay/mech_rigid_container.tscn" id="11_ybwbn"]
+[ext_resource type="PackedScene" uid="uid://cchgruq25tsm" path="res://levels/clouds/sky_dome.tscn" id="12_fufpb"]
+[ext_resource type="PackedScene" uid="uid://bwg23bgh03qe6" path="res://levels/clouds/cloudsmesh.tscn" id="12_vany6"]
+
+[sub_resource type="Sky" id="Sky_74yib"]
+
+[sub_resource type="Environment" id="Environment_t3im3"]
+background_mode = 2
+background_energy_multiplier = 1.06
+sky = SubResource("Sky_74yib")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nfpfe"]
+radius = 1.43949
+height = 10.3948
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qthmw"]
+top_radius = 5.0
+bottom_radius = 5.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfxq6"]
+radius = 3.0
+height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqrxo"]
+albedo_color = Color(1, 0.301961, 0.294118, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tfvo3"]
+material = SubResource("StandardMaterial3D_tqrxo")
+radius = 3.0
+height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2il4"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_y613h")
+
+[node name="MechRigidContainer" parent="." instance=ExtResource("11_ybwbn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 183.148, -253.038, 0)
+
+[node name="Base" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Base"]
+environment = SubResource("Environment_t3im3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Base"]
+transform = Transform3D(-0.0602297, -0.587268, 0.807149, 0, 0.808617, 0.588336, -0.998185, 0.0354353, -0.0487027, 0, 0, 0)
+light_color = Color(0.890196, 0.933333, 0.964706, 1)
+light_energy = 2.663
+light_indirect_energy = 2.247
+light_volumetric_fog_energy = 0.377
+
+[node name="Cruiser2" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(-6.40465, 0, 39.4955, 0, 40.0114, 0, -39.4955, 0, -6.40465, -1634.32, 222.346, -671.572)
+mesh = ExtResource("3_bc1wl")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_5et6i")
+script = ExtResource("4_jaagw")
+
+[node name="explosionFX" parent="Base/Cruiser2" instance=ExtResource("6_hm7qd")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Base/Cruiser2"]
+transform = Transform3D(1, 0, 4.47035e-08, 0, 1, 0, -4.47035e-08, 0, 1, 0.0135689, 0, -0.0103493)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cruiser2/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
+shape = SubResource("CapsuleShape3D_nfpfe")
+
+[node name="Cruiser3" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(33.6361, 8.13637, -20.083, -6.9859, 39.1754, 4.17105, 20.5115, 0, 34.3539, 387.291, 69.6044, 387.702)
+mesh = ExtResource("3_bc1wl")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_5et6i")
+
+[node name="explosionFX" parent="Base/Cruiser3" instance=ExtResource("6_hm7qd")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Base/Cruiser3"]
+transform = Transform3D(1, -3.37184e-08, 0, 4.98324e-08, 1, -1.63672e-08, -1.19209e-07, 8.91762e-10, 1, -0.0164242, -0.00251722, -0.00387049)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cruiser3/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
+shape = SubResource("CapsuleShape3D_nfpfe")
+
+[node name="Cruiser4" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(37.3364, -6.24781, -12.9563, 6.47425, 39.4823, -0.382201, 12.8447, -1.73981, 37.8537, -374.522, -230.039, 703.847)
+mesh = ExtResource("3_bc1wl")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_5et6i")
+
+[node name="explosionFX" parent="Base/Cruiser4" instance=ExtResource("6_hm7qd")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Base/Cruiser4"]
+transform = Transform3D(1, 4.28408e-08, 0, -1.39698e-08, 1, -3.72529e-09, -5.96046e-08, 0, 1, -0.0153184, 0.00244188, -0.00710106)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Cruiser4/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.24138, -0.00151437, 0)
+shape = SubResource("CapsuleShape3D_nfpfe")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -752.567, -233.102, 291.001)
+mesh = SubResource("CylinderMesh_qthmw")
+skeleton = NodePath("../..")
+
+[node name="bag" type="RigidBody3D" parent="Base/MeshInstance3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.86813, 0)
+collision_layer = 9
+collision_mask = 9
+mass = 100.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/MeshInstance3D4/bag"]
+shape = SubResource("CapsuleShape3D_sfxq6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base/MeshInstance3D4/bag"]
+mesh = SubResource("CapsuleMesh_tfvo3")
+
+[node name="bag2" type="RigidBody3D" parent="Base/MeshInstance3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.86813, 19.7594)
+collision_layer = 9
+collision_mask = 9
+mass = 10.0
+sleeping = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/MeshInstance3D4/bag2"]
+shape = SubResource("CapsuleShape3D_sfxq6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base/MeshInstance3D4/bag2"]
+mesh = SubResource("CapsuleMesh_tfvo3")
+surface_material_override/0 = SubResource("StandardMaterial3D_u2il4")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Base/MeshInstance3D4"]
+node_a = NodePath("../bag")
+
+[node name="TrainingBot6" parent="Base" node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 179.109, 1.24913, -17.79)
+player = NodePath("../../MechRigidContainer/Mechbody")
+
+[node name="TrainingBot7" parent="Base" node_paths=PackedStringArray("player") instance=ExtResource("9_2ppjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 10, -250.361)
+player = NodePath("../../MechRigidContainer/Mechbody")
+
+[node name="BotSpawner" parent="Base" node_paths=PackedStringArray("bot_target") instance=ExtResource("10_4e2ph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7019, -25.8647, -403.568)
+bot_target = NodePath("../../MechRigidContainer/Mechbody")
+enabled = false
+
+[node name="Geometry" parent="Base" instance=ExtResource("11_hlgp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -258.479, 0)
+
+[node name="Cloudsmesh" parent="." instance=ExtResource("12_vany6")]
+
+[node name="Cloudsmesh2" parent="." instance=ExtResource("12_vany6")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 603.5, -25.8127, 330.089)
+
+[node name="SkyDome" parent="." node_paths=PackedStringArray("player_target") instance=ExtResource("12_fufpb")]
+player_target = NodePath("../MechRigidContainer/Mechbody")
+
+[editable path="MechRigidContainer"]
+[editable path="Cloudsmesh"]
+[editable path="Cloudsmesh2"]

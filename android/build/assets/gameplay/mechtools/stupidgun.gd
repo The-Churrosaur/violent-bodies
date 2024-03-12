@@ -8,6 +8,8 @@ class_name StupidGun
 extends Node3D
 
 
+signal firing()
+
 enum GUN_STATE {CYCLING, BATTERY, OUT_BATTERY}
 
 @export var bullet_scene : PackedScene
@@ -88,6 +90,7 @@ func cycle():
 # internally fires the weapon. if automatic, starts cycling the gun
 func _fire():
 	_set_projectile()
+	firing.emit()
 	current_state = GUN_STATE.OUT_BATTERY
 	if is_automatic: cycle()
 

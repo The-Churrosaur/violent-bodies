@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://1plhfefk2i6o"]
+
+[ext_resource type="Shader" uid="uid://d4a6o5o5dc5q3" path="res://gameplay/mechtools/shield_shader.tres" id="1_bsrk0"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_23qne"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ddnhd"]
+noise = SubResource("FastNoiseLite_23qne")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_bsrk0")
+shader_parameter/brightness_mult = 0.2
+shader_parameter/brightness_wave_speed = 50.0
+shader_parameter/brightness_cutoff = 0.43
+shader_parameter/albedo = Color(0.937255, 0.807843, 0.980392, 1)
+shader_parameter/base_alpha = 0.229
+shader_parameter/secondary_alpha = 0.121
+shader_parameter/alpha_cutoff = 0.328
+shader_parameter/wave_speed = 1.0
+shader_parameter/wave_height = 0.257
+shader_parameter/noise = SubResource("NoiseTexture2D_ddnhd")

@@ -106,12 +106,13 @@ func _physics_process(delta):
 		if abs(y) > look_yaw:
 			body.yaw_input -= y * look_mult
 		
+		# pitch
 		# don't pitch while walking or standing
 		if !body.is_landed and !body.walk:
 			if abs(x) > look_pitch:
 				body.pitch_input -= x * look_mult
 		
-		# LEAN ROLL
+		# LEAN ROLL / pitch
 		
 		if !body.is_landed:
 			
@@ -119,8 +120,12 @@ func _physics_process(delta):
 			var headset_xz = Vector2(headset_pos.x, -headset_pos.z)
 			
 			if headset_xz.length_squared() > lean_deadzone * lean_deadzone:
-				body.roll_input += (headset_xz.x ) * lean_roll_mult
-				body.pitch_input += headset_xz.y * lean_pitch_mult
+				body.roll_input += headset_xz.x * lean_roll_mult
+				
+				# dont pitch with forward lean
+				var h_y = headset_xz.y
+				h_y= clamp(h_y, -1, 0)
+				body.pitch_input += h_y * lean_pitch_mult
 	
 	# GROUND MOVEMENT
 	

@@ -48,7 +48,8 @@ height = 6.0
 
 [node name="beamfx" type="Node3D" node_paths=PackedStringArray("particles")]
 script = ExtResource("1_5g7rs")
-particles = [NodePath("MeshInstance3D/GPUParticles3D"), NodePath("MeshInstance3D/GPUParticles3D2"), NodePath("MeshInstance3D/GPUParticles3D3")]
+particles = [NodePath("MeshInstance3D/GPUParticles3D"), NodePath("MeshInstance3D/GPUParticles3D2")]
+tool_name = "BEAM"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = ExtResource("2_p8msy")
@@ -62,26 +63,19 @@ local_coords = true
 process_material = ExtResource("3_7rwda")
 draw_pass_1 = SubResource("SphereMesh_3yuae")
 
-[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="MeshInstance3D/GPUParticles3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.1123, 0)
-strength = 80.61
-attenuation = 0.143587
-directionality = 1.0
-size = Vector3(2, 2, 4)
-
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00837994, 2.71952, -0.0131158)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_um86i")
 draw_pass_1 = SubResource("SphereMesh_6mowl")
 
-[node name="GPUParticles3D3" type="GPUParticles3D" parent="MeshInstance3D"]
-
 [node name="Label3D" type="Label3D" parent="."]
 visible = false
 
 [node name="DamageArea" type="Area3D" parent="." groups=["laser"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.77433, 0)
+monitoring = false
+monitorable = false
 script = ExtResource("4_rf3xd")
 damage = 5
 

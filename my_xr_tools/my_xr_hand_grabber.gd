@@ -61,11 +61,16 @@ func _on_controller_button_released(action):
 func _on_grab_area_body_entered(body):
 	if grabbed_grabbable != null: return
 	if (body is MyXRGrabbable) and (detected_grabbable == null):
+		print("grabbable entered: ", body)
 		detected_grabbable = body
+		detected_grabbable.hover_me(self)
 
 
 func _on_grab_area_body_exited(body):
-	if body == detected_grabbable: detected_grabbable == null
+	if body == detected_grabbable: 
+		print("grabbable left: ", body)
+		detected_grabbable.release_hover_me(self)
+		detected_grabbable = null
 
 
 

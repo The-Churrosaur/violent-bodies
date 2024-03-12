@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://11c031wphmm0"]
+[gd_scene load_steps=9 format=3 uid="uid://11c031wphmm0"]
 
 [ext_resource type="Script" path="res://cockpit_test/cockpit.gd" id="1_wnyec"]
 [ext_resource type="ArrayMesh" uid="uid://d33xgs6swlxjo" path="res://assets/cockpit.obj" id="2_by6e6"]
 [ext_resource type="PackedScene" uid="uid://c6mitjbba156w" path="res://cockpit_test/handles_ik.tscn" id="3_x8qfj"]
 [ext_resource type="PackedScene" uid="uid://bwgffr50u1d7o" path="res://gameplay/cockpit_console/yoke_grabbable.tscn" id="5_8uayl"]
+[ext_resource type="PackedScene" uid="uid://bg5r8w6ybgfc5" path="res://gameplay/cockpit_console/virtual/vhud_button_grabbable.tscn" id="5_idxkk"]
+[ext_resource type="AudioStream" uid="uid://dyf21rgr305n2" path="res://assets/audio/cockpit_ambiance.wav" id="6_blmy0"]
+[ext_resource type="Script" path="res://cockpit_test/cockpit_ambiance.gd" id="7_m65vc"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1lqo6"]
 top_radius = 0.05
@@ -50,3 +53,13 @@ handle = NodePath("../YokeGrabbableRight")
 
 [node name="YokeGrabbableRight" parent="Handles" instance=ExtResource("5_8uayl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.8, 0)
+
+[node name="VHUDButtonGrabbable" parent="." instance=ExtResource("5_idxkk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.844577, 0)
+
+[node name="CockpitAmbience" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.98378, 0.173638)
+stream = ExtResource("6_blmy0")
+autoplay = true
+stream_paused = true
+script = ExtResource("7_m65vc")

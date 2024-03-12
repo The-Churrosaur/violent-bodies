@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://1t2q4b1xyydv"]
+
+[ext_resource type="PackedScene" uid="uid://bg5r8w6ybgfc5" path="res://gameplay/cockpit_console/virtual/vhud_button_grabbable.tscn" id="1_0vvgy"]
+[ext_resource type="Script" path="res://gameplay/cockpit_console/virtual/vhud_button_test.gd" id="2_eruhf"]
+[ext_resource type="FontFile" uid="uid://cnyb68a32apyf" path="res://assets/fonts/B612_Mono/B612Mono-Regular.ttf" id="3_u12xo"]
+
+[node name="VHUDButtonGrabbable" node_paths=PackedStringArray("weapon_label") instance=ExtResource("1_0vvgy")]
+script = ExtResource("2_eruhf")
+weapon_label = NodePath("MeshInstance3D/WeaponNameLabel")
+drop_on_release = true
+
+[node name="Label3D" parent="MeshInstance3D" index="0"]
+text = "WEP TOGGLE"
+
+[node name="WeaponNameLabel" type="Label3D" parent="MeshInstance3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0264483, 0)
+pixel_size = 0.0002
+modulate = Color(0, 1, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "NONE"
+font = ExtResource("3_u12xo")
+font_size = 100
+
+[connection signal="button_clicked" from="." to="." method="_on_button_clicked"]

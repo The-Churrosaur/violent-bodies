@@ -20,9 +20,11 @@ lean_input_mult = 1
 lean_pitch_mult = 1.0
 
 [node name="ArmCenter" type="Node3D" parent="." index="0"]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ArmCenter" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.214992)
+visible = false
 mesh = SubResource("BoxMesh_pcilt")
 skeleton = NodePath("../..")
 

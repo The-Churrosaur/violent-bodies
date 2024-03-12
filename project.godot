@@ -37,12 +37,18 @@ import/fbx/enabled=false
 [physics]
 
 3d/physics_engine="JoltPhysics3D"
+3d/default_gravity=0.0
 jolt_3d/collisions/areas_detect_static_bodies=true
 
 [rendering]
 
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+reflections/sky_reflections/roughness_layers=2
+reflections/sky_reflections/texture_array_reflections=false
+reflections/sky_reflections/ggx_samples=8
+reflections/sky_reflections/ggx_samples.mobile=4
+reflections/reflection_atlas/reflection_count=2
 
 [shader_globals]
 

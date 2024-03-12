@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cwy4f8hnji8jb"]
+[gd_scene load_steps=30 format=3 uid="uid://cwy4f8hnji8jb"]
 
 [ext_resource type="Script" path="res://effects/explosion_fx.gd" id="1_0bkck"]
 [ext_resource type="Material" uid="uid://btsqufydjsfjp" path="res://effects/explosion_web_mat.tres" id="2_tugvy"]
@@ -156,6 +156,8 @@ material = ExtResource("5_idydg")
 radius = 20.0
 height = 40.0
 
+[sub_resource type="BoxMesh" id="BoxMesh_kret6"]
+
 [node name="explosionFX" type="Node3D" node_paths=PackedStringArray("nova")]
 script = ExtResource("1_0bkck")
 nova = NodePath("nova")
@@ -194,9 +196,9 @@ randomness = 0.05
 process_material = SubResource("ParticleProcessMaterial_fp2cs")
 draw_pass_1 = SubResource("SphereMesh_pg8aa")
 
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="nova"]
-strength = 0.2
-radius = 22.63
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.7304, 0, 0)
+mesh = SubResource("BoxMesh_kret6")
 
 [connection signal="finished" from="web" to="." method="_on_bubbling_finished"]
 [connection signal="finished" from="launched" to="." method="_on_bubbling_finished"]
